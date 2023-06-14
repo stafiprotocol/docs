@@ -1,0 +1,85 @@
+# rToken
+
+This document is intended for users and developers who want to learn more about rToken or integrate rToken.
+
+## What is rToken
+
+rTokens are a type of token that represents staked assets. They are issued by the StaFi Protocol and can be used for trading, borrowing, or lending on various platforms.
+
+When a user stakes their native token using the Staking Contract, they will receive a certain amount of rTokens based on the amount of native tokens staked at the current exchange rate for the rToken. The exchange rate for the rToken is determined by supply and demand, and it can fluctuate over time.
+
+As the staking rewards for the native token accumulate, the exchange rate for the rToken will increase, and the amount of native tokens that can be redeemed will also increase.
+
+To date, StaFi has released 10 liquid staking tokens, including **rETH, rMATIC, rBNB, rATOM, rSOL, rDOT** and more.
+
+## What is rToken used for
+
+rTokens can be used for a variety of purposes, including:
+- **Earning staking rewards**: rTokens allow users to earn staking rewards on their tokens without having to lock them up. This means that users can still use their tokens in DeFi protocols, such as lending and borrowing, while still earning staking rewards.
+- **Liquidity**: rTokens can be used to provide liquidity to DeFi protocols. This can help to improve the liquidity of these protocols and make them more attractive to users.
+- **Collateral**: rTokens can be used as collateral in DeFi protocols. This allows users to borrow funds against their rTokens, which can be used to invest in other assets or to meet financial obligations.
+- **Staking derivatives**: rTokens can be used to create staking derivatives. These derivatives allow users to bet on the price of staking rewards, which can be a way to generate profits from the staking market.
+
+Overall, rTokens offer a number of benefits for users. They allow users to earn staking rewards on their tokens without having to lock them up, which provides them with more flexibility. They can also be used to provide liquidity to DeFi protocols and to create staking derivatives. As a result, rTokens are a valuable tool for users who want to participate in the staking market.
+
+## How to get rToken 
+
+There are two primary ways to get rTokens.
+
+### Use StaFi staking contract or StaFi rToken App
+
+You can stake your token through interacting with the StaFi staking contract directly or use the [StaFi rToken App](https://app.stafi.io).
+
+Upon staking your native tokens, rTokens will be minted and sent to your designated wallet address based on the amount of native tokens staked ( $Q_s$ ) and the current exchange rate for rTokens ( $C_r$ ).
+
+$Q_r=Q_s/C_r$
+
+For example, if you stake 1.05 ETH and the current exchange rate for rETH ( $C_r$ ) is 1.05, you will receive 1 rETH.
+
+import { Callout } from 'nextra-theme-docs'
+
+<Callout type="info">
+The exchange rate for rTokens ( $C_r$ ) is always greater than 1, because it represents a staked amount of token that earns rewards.
+</Callout>
+
+### Swap rTokens on Uniswap or other DEXs
+
+rTokens can be swaped for native tokens at market exchange rates on decentralized exchanges that interate rTokens.
+
+<Callout type="info">
+If arbitrage and risk-free market-making decrease, it could lead to users receiving an exchange price for rTokens that is lower than their inherent value in DEXs.
+</Callout>
+
+## rToken exchange rate
+The rToken exchange rate ( $Cr$ ) is determined by a number of factors, including:
+- The total amount of native token staked in the Staking Contract: $Q_{tsk}$
+- The total amount of redeemed native token: $Q_{red}$
+- The amount of staking rewards: $Q_{rew}$
+- The amount of slash: $Q_{slh}$
+- The amount of penalty: $Q_{pey}$
+- The commission ratio: $R_{com}$
+- The total amount of rToken minted: $M$
+- The total amount of rToken burned: $N$
+
+In general, the exchange rate is positively correlated with the staking income, which is influenced by these variables. The exact formula for calculating the rToken exchange rate is as follows:
+
+$C_{i}={[\left(Q_{stk}-Q_{red}\right)+\left(Q_{rew}-Q_{slh}-Q_{pey}\right) *\left(1-R_{com}\right)]}/{(M-N)}$
+
+The rToken exchange rate will be determined and announced by the system based on the status of Staking Reward Claims and the occurrence of Slash events on the original blockchain. This ensures that the rToken exchange rate accurately reflects the current state and activity of the underlying network.
+
+| rToken | Exchange Rate Update Frequency |
+| --- | --- |
+| rETH | 8 Hours |
+| rMATIC | 24 Hours |
+| rATOM | 24 Hours |
+| rBNB | 24 Hours |
+| rSOL | 66 Hours |
+| rFIS | 6 Hours |
+| rDOT | 24 Hours |
+| rKSM | 6 Hours |
+
+## Risks
+
+- **Slashing risk**: StaFi validators are required to stake a portion of their own funds as collateral, which helps to minimize the risk of loss to delegators in the event of a validator slashing event.
+- **Price risk**: StaFi's withdrawal restrictions make arbitrage and risk-free market-making impossible, which could lead to users receiving an exchange price for rTokens that is lower than their inherent value. The StaFi core team and community are committed to mitigating the risks associated with using StaFi and eliminating them entirely to the extent possible.
+- **Contract Security**: StaFi's staking contract code is open-sourced and audited, which helps to reduce the risk of contract failure.

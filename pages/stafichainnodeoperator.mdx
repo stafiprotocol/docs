@@ -1,0 +1,303 @@
+# StaFi Chain Validator
+
+import { Callout } from 'nextra-theme-docs'
+
+## Overview
+
+### Introduction
+
+A validator is an essential role in StaFi network who is responsible for important tasks including block production and transaction confirmation. A validator needs to maintain a high communication response capability to ensure seamless operation of StaFi network. In addition, it is necessary for them to establish a good reputation in the community in order to attract more nominators who nominate their FIS to improve the security of the system.
+
+In order to establish and maintain a good reputation, validators need to pledge their FIS as a collatoral. When a validator does evil, such as double signing, it will be slashed and that FIS will also be deducted. When a validator obey the rules of the system, they will be rewarded in the form of transaction fees when they are packaging transactions, and the commission during nomination. In StaFi network, validators can set their own charging standard, ranging from 0-100%.
+
+Based on network affordability and security considerations, validator seats will be gradually opened after the mainnet goes live, starting from 60 to 80. There are currently 120 validators and more seats will be opened in the future.
+
+### To become a Validator in StaFi
+
+#### FIS balance
+
+As long as you are in hold of FIS (used to pay for the configuration operation fee), you are able to become a validator of the StaFi network. However, the elected validators need to obtain a certain number of FIS nominations, and the system will select validators according to the ranking of FIS balances. 
+
+#### System requirements
+
+A validator usually deploys nodes on cloud servers. You can choose your preferred VPS service provider and operating system. We recommend Ubuntu 18.04.
+
+**Hardware requirements**
+
+StaFi will provide a basic configuration for reference, which guarantees that all blocks can be processed in time. If the hardware is inferior to that, there will be malfunctions.
+
+**Basic configuration**
+- System: Linux or Macos, Ubuntu 18.04 is recommended
+- CPU: at least 2 cores, Intel Core
+- Memory: at least 8G
+- Hard disk: at least 300G, regularly evaluated
+
+**Recommended configuration**
+- System: Linux or Macos, Ubuntu18.04
+- CPU: 4 cores, Intel Core
+- Memory: 8G
+- Hard Disk: 500G
+
+### Validator election mechanism
+
+Note: 1 epoch=1 hour, 6 epoch=1 era
+
+#### The election process
+
+In an era, the StaFi network will lock the data in the last 15 minutes of the fifth epoch. Then, the nominators will not be able to nominate. When the sixth epoch begins, the system will rank the validators’ nominated FIS and select top validators for the next era. Those who successfully nominated to selected validators will be rewarded in the next era.
+
+#### Withdrawal
+
+Withdrawal refers to the behavior of removing a validator from the incumbent ones in the next NPoS cycle.
+
+Withdrawal means to withdraw from the incumbent validators and no longer produce blocks or confirm transactions. Those who nominated them will not be rewarded.
+
+There are two cases of withdrawal
+- Voluntary withdrawal by the validator. For example, there is some problems with the validator's server hosting provider, so the validator may choose to withdraw to avoid being slashed. When the request is submitted, it will take effect in the next epoch and the validator will become inactive then. However, the FIS nominated for the validator is still there.
+- When the validator does some actions that harm the operation of the system, they will be ‘expeled’ as a punishment. It will take effect immediately in the current epoch. The FIS nominated to the validator will be automatically distributed to other validators.
+
+### Validator reward distribution mechanism
+
+In StaFi network, the system records the rewards of each validator in an epoch cycle, and issues rewards in an Era cycle. A validator can claim rewards when an Era ends. 
+
+When a validator claims the rewards, part of them will be distributed to their nominator(s) according to the protocol by the ratio set in advance. 
+
+Note: If the reward is not claimed within 84 Era (21 days), it will be destroyed. So please do not forget to claim!
+
+Suppose the collective reward for validators is 10 FIS. If a validator set commission `validator_payment = 40%`, it will receive 4 FIS and the remaining 6 FIS will be distributed to nominators by the amount of FIS they used to nominate. If the validator itself pledged FIS, it will also get a portion from that 6 FIS. That can be understood as the validator nominated itself. The reward can be sent to the Stash account or Controller. A validator can choose to continue to pledge their rewards back or not.
+
+### Slash Mechanism
+
+#### Offline/not responding
+
+If the validator does not produce any block or send an online signal in an Era, then it will be regarded as offline/not responding. When there are certain number of offline/unresponsive nodes, the system will begin to confiscate part of the pledged FIS in the verification pool of the bad-behaving validator in order to ensure the normal operation of the network. Some of the FIS in that pool are from nominators.
+
+StaFi currently sets the following formula:
+
+`min((3*(k-（n/10+1)))/n, 1)*0.07`
+
+n is the number of validators, k is the number of offline validators. Please note that when `k-(n / 10 + 1) <0`, the penalty amount is 0. Suppose there are 100 validators,
+Assuming n=100,
+
+- When `k=1~11`, the ratio of slash is `0`;
+- When `k=12`, the ratio of slash is `0.03 * 0.07 = 0.0021`;
+- When `k=21`, the ratio of slash is `0.3 * 0.07 = 0.021`;
+- When `k=31`, the ratio of slash is `0.6 * 0.07 = 0.042`;
+- When `k=41`, the ratio of slash is `0.9 * 0.07 = 0.063`;
+- When `k=51`, the ratio of slash is `1*0.07=0.07`;
+
+In general, the minimum ratio of slash is 0 and the maximum is 7%. When less than 10% of all nodes are offline, a node will not be slashed if it is offline or unresponsive. When 1/3 of the nodes are offline at the same time, slash ratio is close to 5%
+
+#### Double signature
+
+In the block-production stage (Babe consensus) and voting stage (Grandpa consensus), voting on different chains in a single round, or generating two new blocks at the same height will be deemed evil to protect systemic security. The formula is as follows: `min((3k/n)^2`, 1)
+`n` is the number of validators, and `k` is the number of validators who abusively or invalidly vote in an Era.
+Assuming `n=100`
+- When `k=1`, the ratio of slash is `0.03 * 0.03 = 0.0009`;
+- When `k=10`, the ratio of slash is `0.09`;
+- When `k=21`, the ratio of slash is `0.3969`;
+- When `k=31`, the ratio of slash is `0.81`;
+- When `k=41`, the ratio of slash is `1`;
+- When `k=51`, the ratio of slash is `1`;
+
+In general, the penalty for double signature is much more serious than offline. The largest slash ratio is 1, which means that the validator may be fined all of their stake.
+Validators can run their nodes on multiple computers to ensure that they can still perform verification work if one of their nodes fails. It should be noted that if those terminals do not coordinate well, double-signature may happen accidentally.
+
+If validators are found any kind of bad behavior, they will be removed from the incumbent validator list thus losing their rewards for the current period. They will be immediately deemed inactive and will lose their nominators. They need to reapply to become candidate validators and obtain nominators again.
+A nominator can nominate multiple validators, but may also be slashed because of the improper behavior of any validator nominated. Before slash, staking FIS could be reused in every epoch. If a nominator uses a certain amount of FIS to nominate a validator for some epochs, that amount will all be deducted if that validator misbehaved. 
+When a validator is found multiple bad behaviors, we will implement the highest slash amount instead of the sum to save some room for principal of that validator. A Validator who is found to have bad behavior will be withdrawn to prevent vindictive attacks or deliberate harm by other validators who are punished.
+
+## Run a node
+
+We recommend not using the root user to run the node. You can add a user on your server. For example: `adduser stafi` and if you need to add sudo permission for using stafi. You can modify `/etc/sudoers` and add `stafi ALL=(ALL:ALL) ALL`.
+
+In addition, you should run the node in the background. Maybe you can create a systemd service or use some commands like screen or nohup, or some other tools. If you need more information about these commands, please google it.
+
+### Running from Source
+
+#### Download the source
+```shell copy
+git clone https://github.com/stafiprotocol/stafi-node.git
+cd stafi-node
+git checkout <latest-release-tag>
+```
+
+#### Install system dependencies if you haven't done it yet(Recommend ubuntu)
+
+```shell copy
+./scripts/init.sh
+```
+
+> You can add export `PATH="$HOME/.cargo/bin:$PATH"` in the `~/.bashrc` and restart the terminal or run source `~/.cargo/env` to update the environment temporarily.
+
+#### Build StaFi
+
+```shell copy
+cargo build --release
+```
+It may take 30m - 1h, which depends on your machine.
+
+You may encounter CMAKE_PROJECT_VERSION error. Please scroll to the bottom and follow the instructions to fix it. Or if there is any compile error, please try these commands
+
+```shell copy
+rustup install 1.59.0
+rustup default 1.59.0
+rustup default nightly-2022-01-06
+rustup target add wasm32-unknown-unknown --toolchain nightly
+```
+
+#### Run node
+
+**Validator node**
+
+```shell copy
+./target/release/stafi --validator --name='your name' --execution=NativeElseWasm
+```
+
+Note: By default, validator nodes are in archive mode. If you've already synced the chain not in archive mode, you must first remove the database with stafi purge-chain and then ensure that you run Stafi with the --pruning=archive option. The --pruning=archive flag is implied by the --validator and --sentry flags, so it is only required explicitly if you start your node without one of these two options. And if you just want to run a simple sync node, only the state of the past 256 blocks will be kept.
+
+You can see your node on [telemetry](https://telemetry.polkadot.io/#list/0x91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3).
+
+**More flags when run the node**
+
+```shell copy
+./target/release/stafi \
+  --base-path ~ \
+  --chain=mainnet \
+  --port 30333 \
+  --ws-port 9944 \
+  --rpc-port 9933 \
+  --validator \
+  --name 'your name' \
+  --execution=NativeElseWasm
+```
+
+Flags in detail
+
+| Flags        | Descriptions |
+| :------------ | :--------- |
+| --base-path   | Specifies a directory where Substrate should store all the data related to this chain. If the directory does not exist it will be created for you. |
+|--chain mainnet | Specifies which chain specification to use. [default: mainnet] |
+|--port 30333 | Specifies the port that your node will listen for p2p traffic on. 30333 is the default and this flag can be omitted if you're happy with the default. If run multiple nodes on the same physical system, you will need to explicitly specify a different port for it. |
+|--ws-port 9944 | Specifies the port that your node will listen for incoming web socket traffic on. 9944 is the default, so it can also be omitted. |
+|--rpc-port 9933 | Specifies the port that your node will listen for incoming RPC traffic on. 9933 is the default, so it can also be omitted. ｜
+|--validator | Means that we want to participate in block production and finalization rather than just sync the network. ｜
+|--name | human-readable name in the telemetry UI ｜
+|--execution | The execution strategy that should be used by all execution contexts [possible values: Native, Wasm, Both, NativeElseWasm] ｜
+|--rpc-methods | RPC methods to expose. [default: Auto] [possible values: Auto, Safe, Unsafe] ｜
+|--rpc-cors | Specify browser Origins allowed to access the HTTP & WS RPC servers ｜
+|--ws-external | Listen to all Websocket interfaces ｜
+
+#### Upgrade
+
+Make sure you are on the right branch. And there is no need to shut down your node when recompiling.
+
+```shell copy
+cargo build --release
+```
+Please restart your node after the compiling.
+
+#### Clean
+
+If you need to start from the beginning. You should clean your db.
+
+```shell copy
+### Mainnet
+./target/release/stafi purge-chain --chain=mainnet
+
+### Testnet
+./target/release/stafi purge-chain --chain=testnet
+```
+## Become a Validator
+
+<Callout type="info">
+You need to have some FIS tokens to continue.
+</Callout>
+You should select Stafi Mainnet(hosted by Foundation) in StaFiapp first.
+
+![Validator](/image/becomeavalidator_1.png)
+
+![Validator](/image/becomeavalidator_2.webp)
+
+## Validator Registration
+
+### Bond FIS tokens
+
+It is highly recommended that you make your controller and stash accounts be two separate accounts. For this, you will create two accounts by StaFiapp and make sure each of them have at least enough funds to pay the fees for making transactions. Keep most of your funds in the stash account since it is meant to be the custodian of your staking funds.
+
+Make sure not to bond all your FIS balance since you will be unable to pay transaction fees from your bonded balance.
+
+It is now time to set up our validator. We will do the following:
+
+- **Bond the FIS tokens of the Stash account**. These FIS tokens will be put at stake for the security of the network and can be slashed.
+- **Select the Controller**. This is the account that will decide when to start or stop validating.
+
+First, open StaFiapp, go to the Staking section. Click on "Account Actions", and then the "+ Stash" button.
+
+- Stash account - Select your Stash account. In this example, we will bond 10 FIS tokens - make sure that your Stash account contains at least this much. You can, of course, stake more than this.
+- Controller account - Select the Controller account created earlier. This account will also need a small amount of FIS tokens in order to start and stop validating.
+- Value bonded - How much FIS tokens from the Stash account you want to bond/stake. Note that you do not need to bond all of the tokens in that account. Also note that you can always bond more tokens later. However, withdrawing any bonded amount requires the duration of the unbonding period. On Stafi testnet Sitara, the unbonding period is 21 hours. On Stafi mainnet, the planned unbonding period is 14 days.
+- Payment destination - The account where the rewards from validating are sent.
+
+Once everything is filled in properly, click Bond and sign the transaction with your Stash account.
+
+After a few seconds, you should see an "ExtrinsicSuccess" message. You should now see a new card with all your accounts (note: you may need to refresh the screen). The bonded amount on the right corresponds to the funds bonded by the Stash account.
+
+**Set Session Keys**
+
+Once your node is fully synced, you can set the session keys. Just make sure you are running the node in validator mode.
+
+**Generating the Session Keys**
+
+On your node server, it is easier to run this command (while the node is running with the default HTTP RPC port configured):
+
+``` shell copy
+curl -H "Content-Type: application/json" -d '{"id":1, "jsonrpc":"2.0", "method": "author_rotateKeys", "params":[]}' http://localhost:9933
+```
+
+The output will have a hex-encoded "result" field. The result is the concatenation of the four public keys. Save this result for a later step.
+
+**Submitting the setKeys Transaction**
+
+You need to tell the chain your Session keys by signing and submitting an extrinsic. This is what associates your validator with your Controller account.
+
+Go to **Staking > Account Actions**, and click "Set Session Key" on the bonding account you generated earlier. Enter the output from author_rotateKeys in the field and click "Set Session Key".
+
+![Validator](/image/becomeavalidator_4.png)
+
+Submit this extrinsic and you are now ready to start validating.
+Validate
+
+To verify that your node is live and synchronized, head to Telemetry and find your node. Note that this will show all nodes on the Stafi network, which is why it is important to select a unique name!
+
+If everything looks good, go ahead and click on "Validate" in Stafi-apps.
+
+Payment preferences - You can specify the percentage of the rewards that will get paid to you. The remaining will be split among your nominators.
+
+Click "Validate".
+
+If you go to the "Staking" tab, you will see a list of active validators currently running on the network. At the top of the page, it shows the number of validator slots that are available as well as the number of nodes that have signaled their intention to be a validator. You can go to the "Waiting" tab to double check to see whether your node is listed there.
+
+The validator set is refreshed every era. In the next era, if there is a slot available and your node is selected to join the validator set, your node will become an active validator. Until then, it will remain in the waiting queue. If your validator is not selected to become part of the validator set, it will remain in the waiting queue until it is. There is no need to re-start if you are not selected for the validator set in a particular era. However, it may be necessary to increase the number of FIS tokens staked or seek out nominators for your validator in order to join the validator set.
+
+Congratulations! If you have followed all of these steps, and been selected to be a part of the validator set, you are now running a Stafi validator!
+
+## Register an identity
+
+Stafi provides a naming system that allows participants to add personal information to their on-chain account.
+
+You should select Stafi Mainnet(hosted by Foundation) in StaFiapp first.
+
+Set an Identity
+
+Users can register some default fields like legal name, display name, website, Twitter handle, Riot handle, etc. along with extra, custom fields for which they would like attestations. Users must reserve funds in a bond to store their information on chain - 10 FIS per identity, and 2.5 FIS per each field beyond the legal name. These funds are locked, not spent - they are returned when the identity is cleared. Each field can store up to 32 bytes of information, so the data must be less than that. When inputting the data manually through the Extrinsics UI, a UTF8 to bytes converter can help.
+
+The easiest way to add the built-in fields is to click the gear icon next to one's account and select "Set on-chain identity".
+
+![Validator](/image/becomeavalidator_5.webp)
+
+A popup will appear, offering the default fields.
+
+![Validator](/image/becomeavalidator_6.png)
+
+You can set the legal name as your name on telemetry.

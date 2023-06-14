@@ -1,0 +1,68 @@
+{
+  "index": "Introduction",
+  "whitepaper":"Whitepaper",
+  "tokenomics":"Tokenomics",
+  "rtoken":"rToken",
+  "product":"Product",
+  "-- Chain": {
+    "type": "separator",
+    "title": "Multi Chain"
+  },
+  "overview":"Overview",
+  "stafichain":"StaFi Chain",
+  "stafihub":"StaFi Hub",
+  "evm":"EVM Compitiable",
+  "-- User": {
+    "type": "separator",
+    "title": "User Staking Guides"
+  },
+  "stakingeth":"Staking ETH with StaFi",
+  "stakingmatic":"Staking MATIC with StaFi",
+  "stakingbnb":"Staking BNB with StaFi",
+  "stakingatom":"Staking ATOM with StaFi",
+  "stakingiris": "Staking IRIS with StaFi",
+  "stakingswth":"Staking SWTH with StaFi",
+  "stakinghuahua":"Staking HUAHUA with StaFi",
+  "stakingdot":"Staking DOT with StaFi",
+  "stakingfis":"Staking FIS with StaFi",
+  "stakingksm":"Staking KSM with StaFi",
+  "stakingsol":"Staking SOL with StaFi",
+
+  "-- Validator": {
+    "type": "separator",
+    "title": "Validator Guides"
+  },
+  "stafirouter":"StaFi Router",
+  "stafichainnodeoperator":"StaFi Chain Validator",
+  "stafichainnominator":"StaFi Chain Nominator",
+  "stafihubvalidator":"StaFi Hub Validator",
+  "-- Developer": {
+    "type": "separator",
+    "title": "Developer Guides"
+  },
+  "cosmosintegration":"COSMOS rToken Integration",
+  "-- Security": {
+    "type": "separator",
+    "title": "Security"
+  },
+  "contract":"Contract",
+  "audit":"Audit",
+  "-- Updates": {
+    "type": "separator",
+    "title": "Protocol Updates"
+  },
+  "roadmap":"Roadmap",
+  "changelog":"Change Log",
+  "website": {
+    "title": "Website ↗",
+    "type": "page",
+    "href": "https://www.stafi.io/",
+    "newWindow": true
+  },
+  "App": {
+    "title": "Launch App ↗",
+    "type": "page",
+    "href": "https://app.stafi.io/",
+    "newWindow": true
+  }
+}
