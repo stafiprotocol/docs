@@ -41,6 +41,7 @@
     "title": "Developer Guides"
   },
   "cosmosintegration":"COSMOS rToken Integration",
+  "ethintegration":"rETH Integration",
   "-- Security": {
     "type": "separator",
     "title": "Security"
