@@ -1,0 +1,43 @@
+# Concepts
+
+## Denom and Metadata
+
+Assets in the Cosmos SDK are represented via a Coins type that consists of an amount and a denom, where the amount can be any arbitrarily large or small value, module bank keeps track of metadata per denom in order to help clients, wallet providers, and explorers improve their UX and remove the requirement for making any assumptions on the unit of denomination.
+
+To avoid upgrading the chain when adding a new rToken, module sudo provider an interface to add a new denom and its metadata, this action can only be operated by the admin account which is initialized in the genesis file.
+
+## rToken Concepts
+
+### Target chain
+
+Compared with StaFiHub, we call other projects as the target chain, such as Cosmos, IRISnet, etc.
+
+### Pool Account
+
+A pool is an interchain account or a multisig account of target chain to gather origin token(such as ATOM/IRIS) and invoke staking related calls such as Delegate, Undelegate and Withdraw reward on the target chain to earn more tokens. 
+
+As a multisig account, it has no private key but an address and several sub-accounts and a threshold. 
+
+As an Interchain Account, it is a module account which has no private key too and can only be created and controlled by the controller chain(such as StaFiHub).
+
+There might be several pools for a rToken.
+
+### Relay service
+
+The rToken relay service plays a role as cross chain bridge to connect StaFiHub and target chains.
+
+### Relayer
+
+A relayer is a member to run a rToken relay service. Each relay service requires a relayer to send proposals to StaFiHub. And if we use a multisig account as a pool, the relayer should be a sub-account of the multisig account.
+
+### Era
+
+Era was introduced as a concept of period to solve problems like when the pool should invoke delegate and undelegate call. Pools invoke all the necessary calls on the target chain once and only once for each Era. The epoch of era on the mainnet will be one day.
+
+### Exchange Rate
+
+The exchange rate of rToken is used to calculate how many rToken to mint or burn.
+
+### rValidator
+
+An rValidator is a validator of the target chain.

@@ -1,5 +1,12 @@
 # Tokenomics V1
 
+import { Callout } from 'nextra-theme-docs'
+import { Steps } from 'nextra-theme-docs'
+
+<Callout type="info">
+Tokenomics has been updated to V2. You can find more information on the updated Tokenomics by visiting the [link](/tokenomics).
+</Callout>
+
 ## Background
 
 Proof of Stake (PoS) has doubtlessly grown into an indispensable consensus mechanism to date. It is widely acknowledged in the crypto world. In 8 arduous years since 2012, a number of teams has devoted themselves into addressing technical problems, such as Nothing at Stake, Long-range Attack, etc. Till 2018, PoS is nearly a sophisticated mechanism, and in the later half of this year, a string of PoS (or PoS-like) projects, with EOS and Tezos at the center, has been launched, marking the application of a new generation of consensus. The following 2 years saw the rapid development of PoS projects, exemplified by cutting-edge public chains, such as Polkadot, Near, Solana, Celo, and so forth, that all adopted PoS as its consensus mechanism. 
@@ -218,14 +225,185 @@ Of which:
 
 $I_{NPoS}=I_{SV}+I_{SSV}$
  
-is system consensus rewards. In Stafi, it means both rewards for SV and for SSV. Slash's FIS and transaction fee's FIS, some will be distributed to the reporter, and some will be added to Protocol Treasury.
+$I_{NPoS}$ is system consensus rewards. In Stafi, it means both rewards for SV and for SSV. Slash's FIS and transaction fee's FIS, some will be distributed to the reporter, and some will be added to Protocol Treasury.
 
-is effected by Staking rate. If we put other factors aside, the higher the Staking rate is, the more secure a system will be, and vice versa. The higher the Staking ratio, the lower the liquidity of the token. In FIS design, the inflation rate will dynamically be adjusted to the proportion of Stake. When the proportion of Stake increases, the system will reduce motivation. Otherwise, the motivation will increase. During the repeated adjustments, Stafi protocol explored an ideal Stake ratio of 50%, that is, when the Stake ratio exceeds 50%, the incentive will no longer increase,and  is between 2.5% and 10%. The motivation curve is as follows. The further issuance ratio is 10% in the first year. If the staking rate is below ideal, the excess rewards will be transferred to Protocol Treasury.
+$I_{SV}$ is effected by Staking rate. If we put other factors aside, the higher the Staking rate is, the more secure a system will be, and vice versa. The higher the Staking ratio, the lower the liquidity of the token. In FIS design, the inflation rate will dynamically be adjusted to the proportion of Stake. When the proportion of Stake increases, the system will reduce motivation. Otherwise, the motivation will increase. During the repeated adjustments, Stafi protocol explored an ideal Stake ratio of 50%, that is, when the Stake ratio exceeds 50%, the incentive will no longer increase,and  is between 2.5% and 10%. The motivation curve is as follows. The further issuance ratio is 10% in the first year. If the staking rate is below ideal, the excess rewards will be transferred to Protocol Treasury.
 
-is related to service call, including the call for multi-signature service and RPC. During the Staking process, these 2 services need to be called for multiple times. To pay for the services, the system will motivate each call. In the initial setting, the Protocol stipulates a fixed increase of x% as a reward for service calls, and the initial range of x is [1,2].
+![StaFi Chain Tokenomics](/image/tokenomics_1.png)
+
+$I_{SSV}$  is related to service call, including the call for multi-signature service and RPC. During the Staking process, these 2 services need to be called for multiple times. To pay for the services, the system will motivate each call. In the initial setting, the Protocol stipulates a fixed increase of x% as a reward for service calls, and the initial range of x is [1,2].
 
 The rewards for each call will be added up once in a Era. If the calling reward exceeds the system's additional issuance in the Era, the FIS reward for multiple-unit-calls will be reduced accordingly. This strategy will be flexible in the first year after after the mainnet is launched, and then be determined by the community through online governance.
 
-inflation is not a exact number. Under the premise that most people are honest, Stafi Protocol should not Slash a lot, and the chance of serious accidents is relatively small. In the existing PoS project, there have been several double-signing accidents, but most of them were caused by mistakes of the validator, so  has little effect on the overall inflation rate.
+$I_{Slash}$ inflation is not a exact number. Under the premise that most people are honest, Stafi Protocol should not Slash a lot, and the chance of serious accidents is relatively small. In the existing PoS project, there have been several double-signing accidents, but most of them were caused by mistakes of the validator, so $I_{Slash}$ has little effect on the overall inflation rate.
 
-inflation is not a definite figure either. It depends on the usage of Stafi network, especially that of rToken. At the current stage, it cannot be evaluated, it will to some degree, reduce inflation along with the development of rToken.
+$I_{Tx-fee}$  inflation is not a definite figure either. It depends on the usage of Stafi network, especially that of rToken. At the current stage, it cannot be evaluated, it will to some degree, reduce inflation along with the development of rToken.
+
+## Tokens
+
+### FIS
+
+FIS is the native token for Stafi Protocol, the initial issuance is 100 million, and there will be further issuance each year ahead. FIS to Stafi is similar to Dot to Polkadot, preventing system abuse and value capture. In Stafi, the specific functions that FIS acts as are as follows:
+
+- Staking: Validators in Stafi consensus need staking FIS to join the consensus network, and the nominator who want to obtain motivation also needs Staking FIS to nominate.
+- Tx Fee: In order to avoid system abuse, the initiator of a transaction has to pay FIS to get computing resources. In this way, invalid transactions will be eradicated.
+- On-chain governance: FIS holders can participate in the tinkering of Stafi Protocol parameters, vote for Protocol upgrade and determine development courses. Anyone can hand in proposals to the Protocol, but only holders of FIS can vote for or against a proposal, 1 FIS account for 1 ballot. 
+
+### rToken(reward-Token)
+
+rToken is a alternative token obtained by Staker through Staking contract, If you Staking XTZ, you can get rXTZ, Staking Atom, users can get rAtom. rToken and Staking Token are in a ratio 1:1. Holding rToken can get incentives from token staked. At the same time, rToken can be traded in the market instead of staked token. After the transaction, Staking contract will modify the reward and redemption rights.
+
+There is no limit on the number of rTokens. Theoretically, it is equal to the total number of tokens that are integrated in PoS projects. When rTokens are redeemed, there is a burning mechanism, which basically maintains the unity with Staking Token.
+
+**Roles**
+
+In Stafi protocol, the specific roles of rToken are:
+- Obtaining Staking Rewards: rToken is the mapping of Staking Token, and the Staking rewards obtained by Staking Token will be sent to the holders of rToken. During the redemption period, rToken will be locked and its rights obtain reward will be lost temporarily.
+- Trade: rToken can be traded. After the transaction, the corresponding motivation and redemption rights will be transferred accordingly. The Stafi Protocol will promote the listing of rToken and corresponding Staking Token trading pairs on centralized and decentralized exchanges to provide rToken with higher trading liquidity.
+- Redemption: rToken is the only redemption medium for Staking Token. rToken holders can initiate a redemption to the Staking contract. During the redemption process, the holder no longer has the motivation rights, and rToken will be locked. After the Staking token is unlocked on the original chain, it will be sent back to the user’s Account.
+
+**Distribution**
+
+rToken holders can obtain the yields of Staking Token, and also bear the risk of Staking Token being slashed by the original chain. Staking Contract monitors the reward and Slash situation of Staking Token. When it is found that the validator sends a reward or is Slashed, it will automatically correct the recording.
+
+The transfer of rToken is not constrained, which will suffer from the lag of cross-chain communication when it comes to the reward and Slash correction. The correction record may not correspond to the number of rewards on the original chain, especially for some Staking Tokens that that need to send rewards off-chain. In that situation, Staking Contracts cannot accurately record the distribution of rewards from time to time. Similarly, it will happen to Slash. But Staking Contract handles Slash more cautiously due to it is Staking Token itself that is Slashed.
+
+For the distribution of rights corresponding to rToken, according to the current research results, we tend to handle it in a more simple and understandable way. And  maximize the benefits by bearing risk priorities jointly. In the future, Stafi will access more staking projects, and explore the distribution method more similar to the original chain through data monitoring. 
+
+In addition, the introduction of external "help" may help the entire system better buffer risks, such as the introduction of Slash insurance. Stakers who purchased Slash insurance can avoid property damage when Slash occurs.
+
+In the future, we will continue to explore the reward distribution mechanism and Slash mechanism for different projects. Also, we will tailor various types of projects as a milestone to our development. At this stage, the design of various PoS projects tends to be the same, which makes it possible to design a unified distribution mechanism. 
+
+### Fee
+
+**Tx Fee**
+
+In order to prevent resource abuse, the Protocol sets a tx fee for each transaction. The transaction initiator needs to have enough, though a small amount of, FIS in the account to initiate the transaction. The calculation of tx fee is rather complicated, which involves calculation of CPU, bandwidth and storage. At the same time, due to the use of transactions and the rapid development of technology, it is extremely important to design a mechanism that can dynamically adjust the tx fee.
+
+In the model of Ethereum and other projects, the Gas/Gas Fee model is widely used. The Gas Fee is calculated by gauging the computing work that is need in each transaction as well as the bandwidth storage. In Stafi Protocol, GasFee settles by FIS. But the calculation is different to that of bandwidth and storage. A transaction needs to be stored in the block for a long period of time, but the calculation of computing work and bandwidth will be cleared at the time of sending. Therefore, in the specific calculation, the computing And bandwidth only need to calculate the size of 1 CPU instruction and the transaction sent online (i.e. bandwidth in bytes), you can figure out the Gas consumed by the current transaction (only computing and bandwidth)
+
+$$ Gas_{tx}=numberOfCPUinstructions(tx)+a*lengthOf(tx) $$
+
+Of which α refers to the relationship between a CPU instruction and bandwidth, and is generally set to a constant.
+
+For developers or users, it is very important to be able to calculate Gas usage before sending a transaction or executing a contract. In the Gas model, it is generally judged by two parameters:
+
+- Gaslimit: the maximum Gas that can be used within one block
+- Gasused: the real Gas usage in a block
+
+If Gasused is nearly equivalent to GasLimit, then it is necessary to increase Gaslimit properly. And accordingly, the computing made by validator as well as other resources must also be enhanced. Therefore, much motivation will be needed. That reflects in the field design in:
+
+$$GasFee_{tx}^{'}=Gas_{tx}*β$$
+
+Of which β is a flexible parameter of GasFee, generally set as a constant. It is used to adjust the appropriateness of motivation.
+
+In the Stafi protocol, the calculation of tx is not the same as the Gas model, they share similar logic. The transaction fee is calculated by gauging the following transaction parameters:
+- Length: the size of a transaction in bytes
+- Time: Time required to process data storage
+- Memory: Memory size used to process transactions
+- State: State storage size
+
+Taking the above into calculations, we can get the tx fee required to process a transaction. To simplify, we define Weight as duration and state, then we have:
+
+$$Fee_{tx}=c_{traffic}*(basefee+type(x)*lengthOf(tx)+weight(tx))$$
+
+Of which $$ c_{traffic} $$ is the parameters dynamically adjusted according to the network transaction situation, and tpye(tx) is the parameter dynamically adjusted according to the transaction type.
+
+In general, tx fee involves many issues, including user experience, developer friendliness, resource utilization, and validator compensation, etc. The adjustment of dynamic parameters needs to take into account the network situation. The adjustment frequency is the period of producing one blocks. We  borrowed this idea from BTC where miners vote to determine the settings of some important parameters, such as block size. 
+
+In addition, the Stafi protocol classified the transaction, so it can mark the priority of different transaction types. Each block will reserve space for transactions of higher priority to ensure that important transaction types can be packaged into the block. As for common transaction types such as transfer, you need to "compete" the block space by setting the tx fee higher. In general, transactions with higher tx fees are preferred.
+
+All transaction fees obtained from the Protocol will be distributed to the validators (SV) and the treasury (Protocol Treasury) through a certain proportion, which can be modified through online governance. How the treasury uses this transaction fee income will be detailed in the next part. 
+
+**Liquidity Fee**
+
+Staker conducts staking through Staking Contracts to obtain rToken. When one holds rToken, he will get the annualized percentage of motivation provided by the original chain. The size of motivation for different original chains are different, but they take similar approaches. rToken represents the possibility of liquid collateral assets. Staker can choose to hold rToken to obtain income, or choose to trade rToken. Once transferred, rToken's attributed  functions/rights will be transferred to the buyer, which also means that the original rToken holders obtain the liquidity provided by Stafi. At this time, the Stafi Protocol will charge fee for the rewards generated during the rToken's holding period to maintain the network operation. 
+
+When rToken is transferred or used to redeem the original asset, the system will charge fee, which is proportionate to the reward received during staking:
+
+$$ Fee_{liquidity}=α*payout_{stakingreward} $$
+
+Of which α is the percentage parameter of tx fee, which can be adjusted dynamically through on-chain governance. At the primary stage of protocol develpoment, the foundation will lead the fee adjustment until the system is stable and ready to be handed over to community governance.
+
+The tx fee can be paid through Staking Token or FIS. All handling fees will be allocated to a public pool. The transaction fee income paid to in the pool has a variety of functions. Most of them will be used to buy-back and burn FIS. A small fraction of them will be distributed to the Foundation. Part of it will also be allocated to the team in the early stage to support the development of early Staking Contracts.
+
+In the early stages of the project, it is reasonable to destroy less than inflation, because during the development phase, money is needed to polish the product. When the product is perfected and the product is accessed by a wide range of users, Stafi can create revenue for Staker, and can capture the value of the liquidity provided by Stakers who use Stafi. In this way, Protocol gaining will be increasingly higher.
+
+### Protocol Treasury
+
+For the sustainable development and decentralization of Stafi Protocol. Stafi designed Protocol Treasury to motivate individuals or teams who made their contributions to the project. The access to Protocol Treasury must be approved by online governance. Developers can initiate proposals to the public and get motivated by Protocol Treasury if that is voted through.
+
+In the primary phase of the project, the motivation from Protocol Treasury is mainly given to work made in following aspects.
+
+- Developing new Staking Contracts, e.g. integrate new Staking Contracts for Stafi
+- Developing new Protocols, e.g. developing other types of pledge composite tokens
+- Developing rToken derivatives, e.g. developing Staking node products that are based on rToken
+
+Protocol Treasury are mostly collected from 4  transaction fee income below.
+
+$$ protocolReward_{t}=protocolPct*(fee_{liquidity+tx}+reward_{inflation}+slash) $$
+
+- A fraction of circulation tx fee: when a user enjoy liquidity through rTokens, part of tx fees charged will be stored in Protocol Treasury.
+- A fraction of transaction tx fee: Transaction tx fee will be partly rewarded to validators and partly stored in Protocol Treasury.
+- A fraction of Slash forfeits: Forfeits slashed from SVs and SSVs will partly be given to reporters and partly goes to Protocol Treasury.
+- A fraction of Staking rewards: when the staking ratio is short from an ideal 50%, the extra rewards of inflation will go to Protocol Treasury.
+
+### Future Works
+
+Tokenomics of Stafi mainly introduces the motivation, punishment and the way to capture values under Stafi Protocol. Of them, the motivation and punishment of SSVs are independent from Substrate mechanism. Ideally, we need a rather good estimation of the application of projects, which is hard to deliver at current stage. So we took a prudent way, which is not very intellient by far. In the future, we will optimize our mechanism design through vast data and operation experience.
+
+Meanwhile, value capture is an essential mechanism for Stafi Protocol. By providing liquidity, we charge tx fee for transactions, which will be returned return values that the Protocol created back to the system participants who have contributed valuable resourances.
+
+As a derivative of Stafi Protocol, rToken plays various roles apart from a liquidity medium. First of all, through Stafi Protocol, most Staking tokens can be transferred into other ecosystems. Second, as a new asset, it is highly possible to be re-derived. Finally, rToken can be integrated in existing ecosystems as a pledge or be used in loans. Of course, we have to admit that the re-derivation may lead to new challenges to, say the stability of pegging, the structural risks of intertwined Defi projects, etc. We will put our effort into that, too. 
+
+Another issue about rToken is the distribution of rights. It‘s mainly about reward distribution and Slash risk sharing. The mechanism of reward distribution are different for various PoS projects, and there is a lag for Staking Contracts to communicate with outer chains, which leads to the inconsistency from the original chain when it comes to right distribution. There are even some projects that adopts off-chain distribution. Taking all those factors into account, it is highly difficult to make clear each and every right for Staking Contracts. Therefore, in the current stage, we choose to let everyone share the risk appetite. It is a practical way, but not ideal indeed. With the development of the project, we will spend more time and energy on that issue. 
+
+In the future, Stafi be devoted to forge itself into a platform and achieve our milestone of the re-derivation of locked assets. Of course, in addition to Staking assets, any locked assets can be circulated through Stafi’s Staking Contracts. The new Token may be different from rToken, but Stafi will be a platform for derived assets after developing a set of SDKs. 
+
+Please stay tuned!
+
+
+
+### NOTICE AND DISCLAIMER
+
+PLEASE READ THE ENTIRETY OF THIS "NOTICE AND DISCLAIMER" SECTION CAREFULLY. NOTHING HEREIN CONSTITUTES LEGAL, FINANCIAL, BUSINESS OR TAX ADVICE AND YOU SHOULD CONSULT YOUR OWN LEGAL, FINANCIAL, TAX OR OTHER PROFESSIONAL ADVISOR(S) BEFORE ENGAGING IN ANY ACTIVITY IN CONNECTION HEREWITH. NEITHER STAFI TECHNOLOGY LTD (THE FOUNDATION), ANY OF THE PROJECT TEAM MEMBERS (THE STAFI TEAM) WHO HAVE WORKED ON THE STAFI PROTOCOL (AS DEFINED HEREIN) OR PROJECT TO DEVELOP THE STAFI PROTOCOL IN ANY WAY WHATSOEVER, ANY DISTRIBUTOR/VENDOR OF FIS TOKENS (THE DISTRIBUTOR), NOR ANY SERVICE PROVIDER SHALL BE LIABLE FOR ANY KIND OF DIRECT OR INDIRECT DAMAGE OR LOSS WHATSOEVER WHICH YOU MAY SUFFER IN CONNECTION WITH ACCESSING THIS WHITEPAPER, THE WEBSITE AT HTTPS://WWW.STAFI.IO/ (THE WEBSITE) OR ANY OTHER WEBSITES OR MATERIALS PUBLISHED BY THE FOUNDATION.
+
+Nature of the Whitepaper: The Whitepaper and the Website are intended for general informational purposes only and do not constitute a prospectus, an offer document, an offer of securities, a solicitation for investment, or any offer to sell any product, item or asset (whether digital or otherwise). The information herein may not be exhaustive and does not imply any element of a contractual relationship. There is no assurance as to the accuracy or completeness of such information and no representation, warranty or undertaking is or purported to be provided as to the accuracy or completeness of such information. Where the Whitepaper or the Website includes information that has been obtained from third party sources, the Foundation, the Distributor, their respective affiliates and/or the Stafi team have not independently verified the accuracy or completion of such information. Further, you acknowledge that circumstances may change and that the Whitepaper or the Website may become outdated as a result; and neither the Foundation nor the Distributor is under any obligation to update or correct this document in connection therewith.
+
+Token Documentation: Nothing in the Whitepaper or the Website constitutes any offer by the Foundation, the Distributor or the Stafi team to sell any FIS (as defined herein) nor shall it or any part of it nor the fact of its presentation form the basis of, or be relied upon in connection with, any contract or investment decision. Nothing contained in the Whitepaper or the Website is or may be relied upon as a promise, representation or undertaking as to the future performance of the Stafi protocol. The agreement between the Distributor (or any third party) and you, in relation to any sale, purchase, or other distribution or transfer of FIS, is to be governed only by the separate terms and conditions of such agreement.
+
+The information set out in the Whitepaper and the Website is for community discussion only and is not legally binding. No person is bound to enter into any contract or binding legal commitment in relation to the acquisition of FIS, and no virtual currency or other form of payment is to be accepted on the basis of the Whitepaper or the Website. The agreement for sale and purchase of FIS and/or continued holding of FIS shall be governed by a separate set of Terms and Conditions or Token Purchase Agreement (as the case may be) setting out the terms of such purchase and/or continued holding of FIS (the Terms and Conditions), which shall be separately provided to you or made available on the Website. The Terms and Conditions Documentation must be read together with the Whitepaper. In the event of any inconsistencies between the Terms and Conditions and the Whitepaper or the Website, the Terms and Conditions shall prevail.
+Deemed Representations and Warranties: By accessing the Whitepaper or the Website (or any part thereof), you shall be deemed to represent and warrant to the Foundation, the Distributor, their respective affiliates, and the Stafi team as follows:
+
+- in any decision to purchase any FIS, you have shall not rely on any statement set out in the Whitepaper or the Website;
+- you will and shall at your own expense ensure compliance with all laws, regulatory requirements and restrictions applicable to you (as the case may be);
+- you acknowledge, understand and agree that FIS may have no value, there is no guarantee or representation of value or liquidity for FIS, and FIS is not an investment product including for any speculative investment;
+- none of the Foundation, the Distributor, their respective affiliates, and/or the Stafi team members shall be responsible for or liable for the value of FIS, the transferability and/or liquidity of FIS and/or the availability of any market for FIS through third parties or otherwise; and
+- you acknowledge, understand and agree that you are not eligible to purchase any FIS if you are a citizen, national, resident (tax or otherwise), domiciliary and/or green card holder of a geographic area or country (i) where it is likely that the sale of FIS would be construed as the sale of a security (howsoever named), financial service or investment product and/or (ii) where participation in token sales is prohibited by applicable law, decree, regulation, treaty, or administrative act (including without limitation the United States of America, Canada, New Zealand, People's Republic of China (but not including the special administrative regions of Hong Kong and Macau, and the territory of Taiwan), Thailand, and the Socialist Republic of Vietnam); and to this effect you agree to provide all such identify verification document when requested in order for the relevant checks to be carried out.
+
+The Foundation, the Distributor and the Stafi team do not and do not purport to make, and hereby disclaims, all representations, warranties or undertaking to any entity or person (including without limitation warranties as to the accuracy, completeness, timeliness or reliability of the contents of the Whitepaper or the Website, or any other materials published by the Foundation or the Distributor). To the maximum extent permitted by law, the Foundation, the Distributor, their respective affiliates and service providers shall not be liable for any indirect, special, incidental, consequential or other losses of any kind, in tort, contract or otherwise (including, without limitation, any liability arising from default or negligence on the part of any of them, or any loss of revenue, income or profits, and loss of use or data) arising from the use of the Whitepaper or the Website, or any other materials published, or its contents (including without limitation any errors or omissions) or otherwise arising in connection with the same. Prospective purchasers of FIS should carefully consider and evaluate all risks and uncertainties (including financial and legal risks and uncertainties) associated with the FIS token sale, the Foundation, the Distributor and the Stafi team.
+
+Token features: It is highlighted that FIS:
+- does not have any tangible or physical manifestation, and does not have any intrinsic value (nor does any person make any representation or give any commitment as to its value);
+- is non-refundable and cannot be exchanged for cash (or its equivalent value in any other virtual currency) or any payment obligation by the Foundation, the Distributor or any of their respective affiliates;
+- does not represent or confer on the token holder any right of any form with respect to the Foundation, the Distributor (or any of their respective affiliates), or its revenues or assets, including without limitation any right to receive future dividends, revenue, shares, ownership right or stake, share or security, any voting, distribution, redemption, liquidation, proprietary (including all forms of intellectual property or licence rights), right to receive accounts, financial statements or other financial data, the right to requisition or participate in shareholder meetings, the right to nominate a director, or other financial or legal rights or equivalent rights, or intellectual property rights or any other form of participation in or relating to the Stafi protocol, the Foundation, the Distributor and/or their service providers;
+- is not intended to represent any rights under a contract for differences or under any other contract the purpose or pretended purpose of which is to secure a profit or avoid a loss;
+- is not intended to be a representation of money (including electronic money), security, commodity, bond, debt instrument, unit in a collective investment scheme or any other kind of financial instrument or investment;
+- is not a loan to the Foundation, the Distributor or any of their respective affiliates, is not intended to represent a debt owed by the Foundation, the Distributor or any of their respective affiliates, and there is no expectation of profit; and
+- does not provide the token holder with any ownership or other interest in the Foundation, the Distributor or any of their respective affiliates.
+
+The contributions in the token sale will be held by the Distributor (or their respective affiliate) after the token sale, and contributors will have no economic or legal right over or beneficial interest in these contributions or the assets of that entity after the token sale.
+
+To the extent a secondary market or exchange for trading FIS does develop, it would be run and operated wholly independently of the Foundation, the Distributor, the sale of FIS and the Stafi protocol. Neither the Foundation nor the Distributor will create such secondary markets nor will either entity act as an exchange for FIS.
+
+Informational purposes only: The information set out herein is only conceptual, and describes the future development goals for the Stafi protocol to be developed. In particular, the project roadmap in the Whitepaper is being shared in order to outline some of the plans of the Stafi team, and is provided solely for INFORMATIONAL PURPOSES and does not constitute any binding commitment. Please do not rely on this information in making purchasing decisions because ultimately, the development, release, and timing of any products, features or functionality remains at the sole discretion of the Foundation, the Distributor or their respective affiliates, and is subject to change. Further, the Whitepaper or the Website may be amended or replaced from time to time. There are no obligations to update the Whitepaper or the Website, or to provide recipients with access to any information beyond what is provided herein.
+
+Regulatory approval: No regulatory authority has examined or approved, whether formally or informally, of any of the information set out in the Whitepaper or the Website. No such action or assurance has been or will be taken under the laws, regulatory requirements or rules of any jurisdiction. The publication, distribution or dissemination of the Whitepaper or the Website does not imply that the applicable laws, regulatory requirements or rules have been complied with.
+
+Cautionary Note on forward-looking statements: All statements contained herein, statements made in press releases or in any place accessible by the public and oral statements that may be made by the Foundation, the Distributor and/or the Stafi team, may constitute forward-looking statements (including statements regarding intent, belief or current expectations with respect to market conditions, business strategy and plans, financial condition, specific provisions and risk management practices). You are cautioned not to place undue reliance on these forward-looking statements given that these statements involve known and unknown risks, uncertainties and other factors that may cause the actual future results to be materially different from that described by such forward-looking statements, and no independent third party has reviewed the reasonableness of any such statements or assumptions. These forward-looking statements are applicable only as of the date indicated in the Whitepaper, and the Foundation, the Distributor as well as the Stafi team expressly disclaim any responsibility (whether express or implied) to release any revisions to these forward-looking statements to reflect events after such date.
+
+References to companies and platforms: The use of any company and/or platform names or trademarks herein (save for those which relate to the Foundation, the Distributor or their respective affiliates) does not imply any affiliation with, or endorsement by, any third party. References in the Whitepaper or the Website to specific companies and platforms are for illustrative purposes only.
+
+English language: The Whitepaper and the Website may be translated into a language other than English for reference purpose only and in the event of conflict or ambiguity between the English language version and translated versions of the Whitepaper or the Website, the English language versions shall prevail. You acknowledge that you have read and understood the English language version of the Whitepaper and the Website.
+
+No Distribution: No part of the Whitepaper or the Website is to be copied, reproduced, distributed or disseminated in any way without the prior written consent of the Foundation or the Distributor. By attending any presentation on this Whitepaper or by accepting any hard or soft copy of the Whitepaper, you agree to be bound by the foregoing limitations.

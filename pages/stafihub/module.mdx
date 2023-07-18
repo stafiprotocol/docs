@@ -1,0 +1,278 @@
+# Cli Client
+
+## Introduction
+
+stafihubd is a command line client for StaFiHub. StaFiHub users can use stafihubd to send transactions and query the blockchain data.
+
+The default working directory for the stafihubd is $HOME/.stafihub, which is mainly used to save configuration files and data. The StaFiHub key data is saved in the working directory of stafihub. You can also specify the stafihub working directory by --home.
+
+The stafihub node provides a RPC interface, transactions and query requests are sent to the process listening to it. The default rpc address the stafihub is connected to is tcp://localhost:26657, it can also be specified by --node.
+
+## Global Flags
+
+### GET Commands
+
+All GET commands has the following global flags:
+
+| Name,shortland  | Type | Required | Default Value | Description |
+| :------------ | :--------- |:--------- |:--------- |:--------- |
+| --chain-id  | string | | | Chain ID of tendermint node |
+| --home | string |  | $HOME/.stafihub | Directory for config and data |
+| --trace | string | | | Print out full stack trace on errors |
+
+### POST Commands
+
+All POST commands have the following global flags:
+
+| Name,shortland  | Type | Required | Default Value | Description |
+| :------------ | :--------- |:--------- |:--------- |:--------- |
+| --account-number  | int | | 0 | AccountNumber to sign the tx |
+| --broadcast-mode | string |  | sync | Transaction broadcasting mode (sync | async | block) |
+| --dry-run | bool | | false | Ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it |
+| --fee-account | string | |  | Fee account pays fees for the transaction instead of deducting from the signer |
+| --fees | string | |  | Fees to pay along with transaction |
+| --from | string | |  | Name of private key with which to sign |
+| --gas | string | | 200000 | Gas limit to set per-transaction; set to "simulate" to calculate required gas automatically |
+| --gas-adjustment | | |  1 | Ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it |
+| --gas-prices | string | |  | Gas prices in decimal format to determine the transaction fee |
+| --generate-only | bool | | false | Build an unsigned transaction and write it to STDOUT |
+| --help, -h | string | |  | Print help message |
+| --keyring-backend | string | | os | Select keyring's backend |
+| --keyring-dir | string | |  | The client Keyring directory; if omitted, the default 'home' directory will be used |
+| --ledger | bool | |  | Note to add a description to the transaction (previously --memo) |
+| --node | string | | tcp://localhost:26657 | : to tendermint rpc interface for this chain |
+| --note | string | |  | Note to add a description to the transaction (previously --memo) |
+| --offline | string | | false | Offline mode (does not allow any online functionality) |
+| -o, --output | string | | json | Output format (text) |
+| --sequence| uint | | 0 | The sequence number of the signing account (offline mode only)|
+| --sign-mode | string | |  | Choose sign mode (direct | amino-json), this is an advanced feature |
+| --timeout-height | bool | |  | Set a block timeout height to prevent the tx from being committed past a certain height |
+| --yes | bool | | true | Skip tx broadcasting prompt confirmation |
+| --chain-id | string | |  | Chain ID of tendermint node |
+| --home | string | |  | Directory for config and data (default "$HOME/.stafihubd") |
+| --trace | string | |  | Print out full stack trace on errors |
+
+
+## Bank
+
+Bank module allows you to manage assets in your local accounts.
+
+### Available Commands
+
+| Name | Description | 
+| :------------ | :--------- |
+| balances  | Query for account balances by address |
+| total  | Query the total supply of coins of the chain |
+| send  | Create and/or sign and broadcast a MsgSend transaction |
+
+### stafihubd query bank balances
+
+``` shell copy
+stafihubd query bank balances [address] [flags]
+```
+
+Flags:
+- `-h, --help`: Help for coin-type.
+- `--denom`: The specific balance denomination to query for.
+- `--count-total`: Count total number of records in all balances to query for.
+
+### stafihubd query bank total
+
+``` shell copy
+stafihubd query bank total [flags]
+```
+
+Flags:
+- `-h, --help`: Help for coin-type.
+- `--denom`: The specific balance denomination to query for.
+
+### stafihubd tx bank send
+
+
+``` shell copy
+stafihubd tx bank send [from_key_or_address] [to_address] [amount] [flags]
+```
+
+Flags:
+- `-h, --help`: Help for coin-type.
+
+## Debug
+
+A tool for simple debugging.
+
+### Available Commands
+
+| Name | Description | 
+| :------------ | :--------- |
+| addr  | Convert an address between hex and bech32 |
+| pubkey  | Decode a pubkey from proto JSON |
+| raw-bytes  | Convert raw bytes output (eg. [10 21 13 127]) to hex |
+
+### stafihubd debug addr
+
+``` shell copy
+stafihubd debug addr stafi1m3uxpmweefjdj9kcy3aserws5ggkjsyv50rsh4
+```
+returns
+
+``` shell copy
+Address: [220 120 96 237 217 202 100 217 22 216 36 123 12 141 208 162 17 105 64 140]
+Address (hex): DC7860EDD9CA64D916D8247B0C8DD0A21169408C
+Bech32 Acc: stafi1m3uxpmweefjdj9kcy3aserws5ggkjsyv50rsh4
+Bech32 Val: stafivaloper1m3uxpmweefjdj9kcy3aserws5ggkjsyvv5uecu
+```
+### stafihubd debug addr
+
+``` shell copy
+stafihubd debug addr stafi1m3uxpmweefjdj9kcy3aserws5ggkjsyv50rsh4
+```
+returns
+
+``` shell copy
+Address: [220 120 96 237 217 202 100 217 22 216 36 123 12 141 208 162 17 105 64 140]
+Address (hex): DC7860EDD9CA64D916D8247B0C8DD0A21169408C
+Bech32 Acc: stafi1m3uxpmweefjdj9kcy3aserws5ggkjsyv50rsh4
+Bech32 Val: stafivaloper1m3uxpmweefjdj9kcy3aserws5ggkjsyvv5uecu
+```
+
+### stafihubd debug addr
+
+``` shell copy
+stafihubd debug addr stafi1m3uxpmweefjdj9kcy3aserws5ggkjsyv50rsh4
+```
+returns
+
+``` shell copy
+Address: [220 120 96 237 217 202 100 217 22 216 36 123 12 141 208 162 17 105 64 140]
+Address (hex): DC7860EDD9CA64D916D8247B0C8DD0A21169408C
+Bech32 Acc: stafi1m3uxpmweefjdj9kcy3aserws5ggkjsyv50rsh4
+Bech32 Val: stafivaloper1m3uxpmweefjdj9kcy3aserws5ggkjsyvv5uecu
+```
+### stafihubd debug pubkey
+
+``` shell copy
+stafihubd debug pubkey '{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"AurroA7jvfPd1AadmmOvWM2rJSwipXfRf8yD6pLbA2DJ"}'
+```
+
+returns
+
+``` shell copy
+Address: 620B7D22188F8BDBA267DAF89A857081092A6A6C
+PubKey Hex: 02eaeba00ee3bdf3ddd4069d9a63af58cdab252c22a577d17fcc83ea92db0360c9
+```
+
+### stafihubd debug raw-bytes
+
+``` shell copy
+stafihubd debug raw-bytes '[72 101 108 108 111 44 32 112 108 97 121 103 114 111 117 110 100]'
+```
+
+returns
+
+``` shell copy
+48656C6C6F2C20706C617967726F756E64
+```
+
+## Keys
+
+Keys allows you to manage your local tendermint keystore (wallets) for StaFiHub.
+
+### Available Commands
+
+| Name | Description | 
+| :------------ | :--------- |
+| add  | Add an encrypted private key (either newly generated or recovered), encrypt it, and save to disk |
+| delete  | Delete the given key |
+| export  | Export private keys |
+| import  | Import private keys into the local keybase |
+| list  | List all keys |
+| migrate  | Migrate keys from the legacy (db-based) Keybase |
+| mnemonic  | Compute the bip39 mnemonic for some input entropy |
+| parse  | Parse address from hex to bech32 and vice versa |
+| show  | Retrieve key information by name or address |
+
+### stafihubd keys add
+
+Derive a new private key and encrypt to disk.
+
+``` shell copy
+stafihubd keys add <key-name> [flags]
+```
+
+Flags:
+- `--multisig`: Construct and store a multisig public key.
+- `--multisig-threshold`: K out of N required signatures.
+- `--nosort`: Keys passed to `--multisig` are taken in the order they're supplied.
+- `--pubkey`: Parse a public key in bech32 format and save it to disk.
+- `--interactive`: Interactively prompt user for BIP39 passphrase and mnemonic.
+- `--ledger`: Store a local reference to a private key on a Ledger device.
+- `--recover`: Provide seed phrase to recover existing key instead of creating.
+- `--no-backup`: Don't print out seed phrase (if others are watching the terminal) .
+- `--dry-run`: Perform action, but don't add key to local keystore.
+- `--hd-path`: Manual HD Path derivation (overrides BIP44 config).
+- `--coin-type`: coin type number for HD derivation.
+- `--account`: Account number for HD derivation.
+- `--index`: Address index number for HD derivation.
+- `--algo`: Key signing algorithm to generate keys.
+
+### Create a new key
+
+```shell copy
+stafihubd keys add MyKey
+```
+
+Enter and repeat the password, at least 8 characters, then you will get a new key.
+
+warning: write the seed phrase in a safe place! It is the only way to recover your account if you ever forget your password.
+
+### Recover an existing key from seed phrase
+
+If you forget your password or lose your key, or you wanna use your key in another place, you can recover your key by your seed phrase.
+
+```shell copy
+stafihubd keys add MyKey --recover
+```
+
+You'll be asked to enter and repeat the new password for your key, and enter the seed phrase. Then you get your key back.
+
+```shell copy
+Enter a passphrase for your key:
+Repeat the passphrase:
+Enter your recovery seed phrase:
+```
+
+### Create a multisig key
+
+The following example creates a multisig key with 3 sub-keys, and specify the minimum number of signatures as 2. The tx could be broadcast only when the number of signatures is greater than or equal to 2.
+
+```shell copy
+stafihubd keys add <multisig-keyname> --multisig-threshold=2 --multisig=<signer-keyname-1>,<signer-keyname-2>,<signer-keyname-3>
+```
+
+tip `<signer-keyname>` can be the type of`local/offline/ledger`, but not `multi` type.
+
+
+If you don't have all the permission of sub-keys, you can ask for the pubkeys to create the offline keys first, then you will be able to create the multisig key.
+
+Offline key can be created by `stafihubd keys add --pubkey`.
+
+How to use multisig key to sign and broadcast a transaction, please refer to multisign.
+
+### stafihubd keys delete
+
+Delete a local key by the given name.
+
+```shell copy
+stafihubd keys delete <key-name> [flags]
+```
+Flags:
+- `--force, -f`: Remove the key unconditionally without asking for the passphrase.
+- `--yes, -y`: Skip confirmation prompt when deleting offline or ledger key references.
+
+### Delete a local key
+
+```shell copy
+stafihubd keys delete MyKey
+```
+
+## Gov
