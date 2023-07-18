@@ -1,11 +1,7 @@
 # StaFi Chain
-
-This document is intended for users and developers who want to learn more about StaFi Chain.
-
-StaFi Chain is a blockchain built on the Substrate framework
+StaFi Chain is a blockchain built on the Substrate framework, this document is intended for users and developers who want to learn more about StaFi Chain.
 - Explorer: https://apps.stafi.io/
 - Subscan: https://stafi.subscan.io/ 
-
 
 ## Mainnet
 
@@ -32,8 +28,32 @@ Some parameters of the Mainnet are set as follows
 | SECS_PER_BLOCK | Block Time | 6s | The time required to produce a block |
 | EPOCH_DURATION_IN_BLOCKS | Epoch Time | 1h | 1Epoch=1hour |
 | // | Era Time | 6s | The time required to produce a block |
-| SECS_PER_BLOCK | Block Time | 6s | The time required to produce a block |
-| SECS_PER_BLOCK | Block Time | 6s | The time required to produce a block |
-| SECS_PER_BLOCK | Block Time | 6s | The time required to produce a block |
-| SECS_PER_BLOCK | Block Time | 6s | The time required to produce a block |
-| SECS_PER_BLOCK | Block Time | 6s | The time required to produce a block |
+| BondingDuration | Unbond Time | 14d | The time required to unbond stake |
+| min_inflation | Min inflation | 2.50% | // |
+| max_inflation | Max inflation | 10% | // |
+| ideal_stake | Ideal-stake | 75% | // |
+
+## Token Distribution
+
+import { Callout } from 'nextra-theme-docs'
+
+<Callout type="info">
+All tokens have been unlocked up to date.
+</Callout>
+
+The total supply of FIS token is 100,000,000, and has an initial circulating supply of 3,791,657. The inflation rate in the first year is 10%.
+
+| Type  | Amount | Initial Lock | Distribution Schedule |
+| :------------ | :--------- | :--------- | :--------- |
+| Seed  | 5.71% | 75% | 25% released at Mainnet launches, and remaining distributed daily for 8 months from day 31 |
+| Private1  | 2.44% | 75% | 25% released at Mainnet launches, and remaining distributed daily for 8 months from day 31|
+| Private2  | 3.64% | 75% | 25% released at Mainnet launches, and remaining distributed daily for 8 months from day 31 |
+| Auction  | 0.85% | 0% | 100% released at listing |
+| Community Reward  | 0% | 75% | 10% released at day 30, remaining is used for StakingDrop, DevDrop and IPO( initial parachain offering) |
+| Ecosystem Grow  | 5% | 40% | 40% released on Mainnet Launch, remaining utilized only when new partnerships are established to incentivize liquidity of FIS and rToken. |
+| Foundation  | 21.37% | 0% | 10% released after 6 months post Mainnet, then distributed daily for 12 months. |
+| Team  | 15% | 0% | 10% released after 9 months post Mainnet, and remaining distributed daily for 9 months. |
+| Advisor  | 6% | 0% | 10% released after 3 months post Mainnet, and remaining distributed daily for 6 months. |
+
+![StaFi Chain](/image/stafichain_1.png)
+
