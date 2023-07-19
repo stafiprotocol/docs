@@ -275,4 +275,449 @@ Flags:
 stafihubd keys delete MyKey
 ```
 
+### stafihubd keys export
+
+Export the keystore of a key to a json file
+
+```shell copy
+stafihubd keys export <key-name> [flags]
+```
+
+### Export keystore
+
+```shell copy
+stafihubd keys export Mykey --output-file=<path-to-keystore>
+```
+
+### stafihubd keys import
+
+```shell copy
+stafihubd keys import <name> <keyfile> [flags]
+```
+
+### stafihubd keys list
+
+```shell copy
+stafihubd keys list
+```
+
+### stafihubd keys migrate
+
+```shell copy
+stafihubd keys migrate [flags]
+```
+
+### stafihubd keys mnemonic
+
+Create a bip39 mnemonic, sometimes called a seed phrase, by reading from the system entropy. To pass your own entropy, use `unsafe-entropy` mode.
+
+```shell copy
+stafihubd keys mnemonic [flags]
+```
+Create a bip39 mnemonic
+
+```shell copy
+stafihubd keys mnemonic
+```
+
+You'll get a bip39 mnemonic with 24 words, e.g.:
+
+```shell copy
+beauty entire blue tape ordinary fix rotate learn smart tiger dolphin cycle cigar dish alcohol slab bachelor vital design consider paper panther mad eternal
+```
+
+### stafihubd keys parse
+
+Convert and print to stdout key addresses and fingerprints from hexadecimal into bech32 cosmos prefixed format and vice versa.
+
+Convert and print to stdout key addresses and fingerprints
+
+```shell copy
+stafihubd keys parse <hex-or-bech32-address> [flags]
+```
+
+### stafihubd keys show
+
+Get details of a local key.
+
+```shell copy
+stafihubd keys show <key-name> [flags]
+```
+
+Get details of a local key
+
+```shell copy
+stafihubd keys show MyKey
+```
+
+The following infos will be shown:
+
+```shell copy
+- name: Mykey
+  type: local
+  address: iaa1tulwx2hwz4dv8te6cflhda64dn0984harlzegw
+  pubkey: iap1addwnpepq24rufap6u0sysqcpgsfzqhw3x8nfkhqhtmpgqt0369rlyqcg0vkgwzc4k0
+  mnemonic: ""
+  threshold: 0
+  pubkeys: []
+```
+Get validator operator address
+
+If an address has been bonded to be a validator operator (which the address you used to create a validator), then you can use --bech val to get the operator's address prefixed by iva and the pubkey prefixed by `ivp`:
+
+```shell copy
+stafihubd keys show MyKey --bech val
+```
+
+Example Output:
+
+```shell copy
+- name: Mykey
+  type: local
+  address: iva1tulwx2hwz4dv8te6cflhda64dn0984hakwgk4f
+  pubkey: ivp1addwnpepq24rufap6u0sysqcpgsfzqhw3x8nfkhqhtmpgqt0369rlyqcg0vkgd8e6zy
+  mnemonic: ""
+  threshold: 0
+  pubkeys: []
+```
+
 ## Gov
+
+This module provides the basic functionalities for Governance.
+
+| Name | Description | 
+| :------------ | :--------- |
+| proposal  | Query details of a single proposal |
+| proposals  | Query proposals with optional filter |
+| vote  | Query details of a single vote |
+| votes  | Query votes on a proposal |
+| deposit  | Query details of a deposit |
+| deposits  | Query deposits on a proposal |
+| tally  | Get the tally of a proposal vote |
+| param  | Query the parameters (voting) |
+| params  | Query the parameters of the governance process |
+| proposer  | Query which address proposed a proposal with a given ID. |
+| submit-proposal  | Submit a proposal along with an initial deposit |
+| vote  | Vote for an active proposal, options: yes/no/no_with_veto/abstain |
+
+### stafihubd query gov proposal
+
+Query details of a proposal.
+
+```shell copy
+stafihubd query gov proposal [proposal-id] [flags]
+```
+
+### Query a proposal
+
+```shell copy
+stafihubd query gov proposal <proposal-id>
+```
+
+### stafihubd query gov proposals
+
+Query proposals with optional filter.
+
+```shell copy
+stafihubd query gov proposals [flags]
+```
+
+### Query all proposals
+
+```shell copy
+stafihubd query gov proposals
+```
+
+### Query proposals by conditions
+
+```shell copy
+stafihubd query gov proposals --limit=3 --status=Passed --depositor=<iaa...>
+```
+
+### stafihubd query gov vote
+
+Query details of a single vote.
+
+```shell copy
+stafihubd query gov vote [proposal-id] [voter-addr] [flags]
+```
+
+### stafihubd query gov vote
+
+Query details of a single vote.
+
+```shell copy
+stafihubd query gov vote [proposal-id] [voter-addr] [flags]
+```
+
+### stafihubd query gov deposit
+
+Query details for a single proposal deposit on a proposal by its identifier.
+
+```shell copy
+stafihubd query gov deposit [proposal-id] [depositer-addr] [flags]
+```
+
+### Query a deposit of a proposal
+
+```shell copy
+stafihubd query gov deposit <proposal-id> <iaa...>
+```
+
+## Ledger
+
+Ledger module allow users to liquidity stake/unstake rTokens and rToken relayers to send proposals.
+
+### Way to Stake/Unstake rToken
+
+- Stake: Take rATOM as an example, only a common transfer on Cosmos Hub is needed to get rATOM. By sending an amount of ATOM to the given pool accounts of rATOM, rToken relayers will receive the corresponding event and send an execute-bond-proposal to StafiHub which will mint rATOM for the from account.
+- Unstake: liquidity-unbond is the rpc interface for rToken holders to redeem their origin tokens.
+
+### Available Query Commands
+
+| Name | Description | 
+| :------------ | :--------- |
+| account-unbond  | Query AccountUnbond |
+| bond-record  | Query BondRecord |
+| bond-pools  | Query bonded-pools |
+| chain-era  | Query getChainEra |
+| era-exchange-rate  | Query EraExchangeRate by a given denom and era |
+| era-exchange-rates  | Query EraExchangeRatesByDenom |
+| era-unbond-limit  | Query getEraUnbondLimit |
+| exchange-rate  | Show ExchangeRate for a given denom |
+| exchange-rate-list  | List all ExchangeRate |
+| pool-detail  | Query subaccounts and threshold of a pool |
+| pool-unbond  | Query unbonds by a given pool |
+| protocol-fee-receiver  | Query protocol fee receiver |
+| relay-fee-receiver  | Query relay fee receiver |
+| staking-reward-commission  | Query staking reward commission |
+| total-protocol-fee  | Query total protocol fee |
+| unbond-commission  | Query getUnbondCommission |
+| unbond-relay-fee  | Query getUnbondRelayFee |
+
+### stafihubd query ledger account-unbond
+
+```shell copy
+stafihubd query ledger account-unbond [denom] [unbonder] [flags]
+```
+
+### stafihubd query ledger bond-record
+
+```shell copy
+stafihubd query ledger bond-record [denom] [txhash] [flags]
+```
+
+### stafihubd query ledger bonded-pools
+
+```shell copy
+stafihubd query ledger bonded-pools [denom] [flags]
+```
+
+### stafihubd query ledger chain-era
+
+```shell copy
+stafihubd query ledger chain-era [denom] [flags]
+```
+
+### stafihubd query ledger era-exchange-rate
+
+```shell copy
+stafihubd query ledger era-exchange-rate [denom] [era] [flags]
+```
+
+### stafihubd query ledger era-exchange-rates
+
+```shell copy
+stafihubd query ledger era-exchange-rates [denom] [flags]
+```
+
+### stafihubd query ledger era-unbond-limit
+
+```shell copy
+stafihubd query ledger era-unbond-limit [denom] [flags]
+```
+
+### stafihubd query ledger exchange-rate
+
+```shell copy
+stafihubd query ledger exchange-rate [denom] [flags]
+```
+
+### stafihubd query ledger exchange-rate-list
+
+```shell copy
+stafihubd query ledger exchange-rate-list [flags]
+```
+
+### stafihubd query ledger pool-detail
+
+```shell copy
+stafihubd query ledger pool-detail [denom] [pool] [flags]
+```
+
+### stafihubd query ledger pool-unbond
+
+```shell copy
+stafihubd query ledger pool-unbond [denom] [pool] [era] [flags]
+```
+
+### stafihubd query ledger protocol-fee-receiver
+
+```shell copy
+stafihubd query ledger protocol-fee-receiver [flags]
+```
+
+### stafihubd query ledger relay-fee-receiver
+
+```shell copy
+stafihubd query ledger relay-fee-receiver [denom] [flags]
+```
+
+### stafihubd query ledger staking-reward-commission
+
+```shell copy
+stafihubd query ledger staking-reward-commission [denom] [flags]
+```
+
+### stafihubd query ledger total-protocol-fee
+
+```shell copy
+stafihubd query ledger total-protocol-fee [flags]
+```
+
+### stafihubd query ledger unbond-commission
+
+```shell copy
+stafihubd query ledger unbond-commission [denom] [flags]
+```
+
+### stafihubd query ledger unbond-relay-fee
+
+```shell copy
+stafihubd query ledger unbond-relay-fee [denom] [flags]
+```
+
+## rBank
+
+rBank module allows admin to add new denom and its metadata and address-prefix.
+
+### Available Commands
+
+| Name | Description | 
+| :------------ | :--------- |
+| address-prefix  | Query address prefix of denom |
+| params  | Query BondRecord |
+| add-denom  | Add metadata and addressPrefix |
+
+### stafihubd query rbank address-prefix
+
+Query the address-prefix of a specific denomination.
+
+```shell copy
+stafihubd query rbank address-prefix [denom] [flags]
+```
+
+### stafihubd query rbank params
+
+Query the genesis params of rbank module.
+
+```shell copy
+stafihubd query rbank params [flags]
+```
+
+### stafihubd tx rbank add-denom
+
+Add a new denom, and its metadata and address-prefix.
+
+```shell copy
+stafihubd tx rbank add-denom [address-prefix] [metadata-path] [flags]
+```
+
+## Relayers
+
+Relayers module manager kinds of relayers.
+
+### Available Commands
+
+| Name | Description | 
+| :------------ | :--------- |
+| relayers  | Query relayers |
+| threshold  | Query threshold|
+| add-relayers  | Add new relayers |
+| delete-relayers  | Delete a relayer |
+| set-threshold  | Set threshold |
+
+### stafihubd query relayers relayers
+
+Query the relayers of a specific denomination and arena.
+
+```shell copy
+stafihubd query relayers relayers [arena] [denom] [flags]
+```
+
+### stafihubd query relayers threshold
+
+Query the threshold of a specific denomination and arena.
+
+```shell copy
+stafihubd query relayers threshold [arena] [denom] [flags]
+```
+
+### stafihubd tx relayers add-relayers
+
+Add relayers for a specific denomination and arena.
+
+```shell copy
+stafihubd tx relayers add-relayers [arena] [denom] [addresses] [flags]
+```
+
+### stafihubd tx relayers delete-relayer
+
+Delete a relayer for a specific denomination and arena.
+
+```shell copy
+stafihubd tx relayers delete-relayer [arena] [denom] [address] [flags]
+```
+
+### stafihubd tx relayers set-threshold
+
+Set the threshold for a specific denomination and arena, the default value is 0 if unset.
+
+```shell copy
+stafihubd tx relayers set-threshold [arena] [denom] [value] [flags]
+```
+
+## rVote
+
+### Available Commands
+
+| Name | Description | 
+| :------------ | :--------- |
+| proposal  | Query Proposal |
+| proposal-life  | Query ProposalLife|
+| set-proposal-life  | Set ProposalLife |
+
+### stafihubd query rvote proposal
+
+Query the proposal of a specific prop-id.
+
+```shell copy
+stafihubd query rvote proposal [prop-id] [flags]
+```
+
+### stafihubd query rvote proposal-life
+
+Query ProposalLife, ProposalLife indicates how long a proposal can be voted on.
+
+```shell copy
+stafihubd query rvote proposal-life [flags]
+```
+
+### stafihubd tx rvote set-proposal-life
+
+Add a new denom, and its metadata and address-prefix.
+
+```shell copy
+stafihubd tx rvote set-proposal-life [proposal-life] [flags]
+```
+

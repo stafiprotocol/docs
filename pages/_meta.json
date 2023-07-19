@@ -31,7 +31,7 @@
     "type": "separator",
     "title": "Validator Guides"
   },
-  "stafirouter":"StaFi Router",
+  "ethvalidator":"ETH Staking Validator",
   "stafichainnodeoperator":"StaFi Chain Validator",
   "stafichainnominator":"StaFi Chain Nominator",
   "stafihubvalidator":"StaFi Hub Validator",
