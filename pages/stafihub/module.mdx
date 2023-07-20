@@ -721,3 +721,301 @@ Add a new denom, and its metadata and address-prefix.
 stafihubd tx rvote set-proposal-life [proposal-life] [flags]
 ```
 
+## staking
+
+Staking module provides a set of subcommands to query staking state and send staking transactions.
+
+### Available Commands
+
+| Name | Description | 
+| :------------ | :--------- |
+| validator  | Query a validator |
+| validators  | Query for all validators|
+| delegations  | Query a delegation based on address and validator address |
+| delegations-to  | Query all delegations to one validator|
+| unbonding-delegation  | Query an unbonding-delegation record based on delegator and validator address|
+| unbonding-delegations  | Query all unbonding-delegations records for one delegator |
+| unbonding-delegations-from  | | unbonding-delegations  | Query all unbonding-delegations records for one delegator |
+| redelegation-from  | Query all outgoing redelegatations from a validator |
+| redelegation  | Query a redelegation record based on delegator and a source and destination validator address |
+| redelegations  | Query all redelegations records for one delegator |
+| pool  | Query the current staking pool values |
+| params  | Query the current staking parameters information |
+| historical-info  | Query historical info at given height |
+| create-validator  | Create new validator initialized with a self-delegation to it |
+| edit-validator  | Edit existing validator account |
+| delegate  | Delegate liquid tokens to an validator |
+| unbond  | Unbond shares from a validator |
+| redelegate  | Redelegate illiquid tokens from one validator to another |
+
+### stafihubd query staking validator
+
+Query a validator by validator address
+
+```shell copy
+stafihubd query staking validator <iva...>
+```
+
+### stafihubd query staking validators
+
+Query all validators
+
+```shell copy
+stafihubd query staking validators
+```
+
+### stafihubd query staking delegation
+
+Query a delegation based on delegator address and validator address.
+
+```shell copy
+stafihubd query staking delegation [delegator-addr] [validator-addr]
+```
+
+Query a delegation
+
+```shell copy
+stafihubd query staking delegation <iaa...> <iva...>
+```
+
+Example Output:
+
+```shell copy
+Delegation:
+  Delegator:  iaa13lcwnxpyn2ea3skzmek64vvnp97jsk8qrcezvm
+  Validator:  iva15grv3xg3ekxh9xrf79zd0w077krgv5xfzzunhs
+  Shares:     1.0000000000000000000000000000
+  Height:     26
+```
+
+### stafihubd query staking delegations
+
+Query all delegations delegated from one delegator.
+
+```shell copy
+stafihubd query staking delegations [delegator-address] [flags]
+```
+
+Query all delegations of a delegator
+
+```shell copy
+stafihubd query staking delegations <iaa...>
+``` 
+
+### stafihubd query staking delegations-to
+
+Query all delegations to one validator.
+
+```shell copy
+stafihubd query staking delegations-to [validator-address] [flags]
+```
+
+Query all delegations to one validator
+
+```shell copy
+stafihubd query staking delegations-to <iva...>
+```
+
+
+Example Output:
+
+```shell copy
+Delegation:
+  Delegator:  iaa13lcwnxpyn2ea3skzmek64vvnp97jsk8qrcezvm
+  Validator:  iva1yclscskdtqu9rgufgws293wxp3njsesxxlnhmh
+  Shares:     100.0000000000000000000000000000
+  Height:     0
+Delegation:
+  Delegator:  iaa1td4xnefkthfs6jg469x33shzf578fed6n7k7ua
+  Validator:  iva1yclscskdtqu9rgufgws293wxp3njsesxxlnhmh
+  Shares:     1.0000000000000000000000000000
+  Height:     26
+```
+
+### stafihubd query staking unbonding-delegation
+
+Query an unbonding-delegation record based on delegator and validator address.
+
+```shell copy
+stafihubd query staking unbonding-delegation [delegator-addr] [validator-addr] [flags]
+```
+
+### Query an unbonding delegation record
+
+```shell copy
+stafihubd query staking unbonding-delegation <iaa...> <iva...>
+```
+
+### stafihubd query staking unbonding-delegations
+
+Query all unbonding delegations records of a delegator
+
+```shell copy
+stafihubd query staking unbonding-delegations <iaa...>
+```
+
+### stafihubd query staking unbonding-delegations-from
+
+Query all unbonding delegations from a validator
+
+```shell copy
+stafihubd query staking unbonding-delegations-from <iva...>
+```
+
+### stafihubd query staking redelegations-from
+
+Query all outgoing redelegations of a validator
+
+```shell copy
+stafihubd query staking redelegations-from [validator-address] [flags]
+```
+
+Query all outgoing redelegatations of a validator
+
+```shell copy
+stafihubd query staking redelegations-from <iva...>
+```
+
+### stafihubd query staking redelegation
+
+Query a redelegation record based on delegator and source validator address and destination validator address.
+
+```shell copy
+stafihubd query staking redelegation [delegator-addr] [src-validator-addr] [dst-validator-addr] [flags]
+```
+
+Query a redelegation record
+
+```shell copy
+stafihubd query staking redelegation <iaa...> <iva...> <iva...>
+```
+
+### stafihubd query staking redelegations
+
+Query all redelegations records of a delegator
+
+```shell copy
+stafihubd query staking redelegations <iaa...>
+```
+
+### stafihubd query staking pool
+
+Query the current staking pool values
+
+```shell copy
+stafihubd query staking pool
+```
+
+Example Output:
+
+```shell copy
+Pool:
+  Loose Tokens:   1409493892.759816067399143966
+  Bonded Tokens:  590526409.65743521209068061
+  Token Supply:   2000020302.417251279489824576
+  Bonded Ratio:   0.2952602076
+```
+
+### stafihubd query staking params
+
+Query the current staking parameters information
+
+```shell copy
+stafihubd query staking params
+```
+
+### stafihubd query staking historical-info
+
+Query historical info at given height
+
+```shell copy
+stafihubd query staking historical-info <height>
+```
+
+### stafihubd tx staking create-validator
+
+Send a transaction to apply to be a validator and delegate a certain amount of fis to it.
+
+```shell copy
+stafihubd tx staking create-validator [flags]
+```
+
+### Create a validator
+
+```shell copy
+stafihubd tx staking create-validator --chain-id=stafihub --from=<key-name> --fees=0.3fis --pubkey=<validator-pubKey> --commission-rate=0.1 --amount=100fis --moniker=<validator-name>
+```
+
+### stafihubd tx staking edit-validator
+
+Edit an existing validator's settings, such as commission rate, name, etc.
+
+```shell copy
+stafihubd tx staking edit-validator [flags]
+```
+
+Flags:
+- `--amount`: Required, amount of coins to bond.
+- `--commission-rate`: Required, the initial commission rate percentage.
+- `--commission-max-rate`: The maximum commission rate percentage.
+- `--commission-max-change-rate`: The maximum commission change rate percentage (per day).
+- `--min-self-delegation`: The minimum self delegation required on the validator.
+- `--details`: Optional details.
+- `--genesis-format`: Export the transaction in gen-tx format; it implies --generate-only.
+- `--identity`: Optional identity signature (ex. UPort or Keybase).
+- `--ip`: Node's public IP. It takes effect only when used in combination with.
+- `--node-id`: The node's ID.
+- `--moniker`: Validator name.
+- `--pubkey`: Go-Amino encoded hex PubKey of the validator. For Ed25519 the go-amino prepend hex is 1624de6220.
+- `--website`: Optional website.
+- `--security-contact`: The validator's (optional) security contact email.
+
+
+### Edit validator information
+
+```shell copy
+stafihubd tx staking edit-validator --from=<key-name> --chain-id=stafihub --fees=0.3fis --commission-rate=0.10 --moniker=<validator-name>
+```
+
+### Upload validator avatar
+
+Please refer to How to upload my validator's logo to the Explorers
+
+```shell copy
+stafihubd tx staking delegate
+```
+
+### Delegate tokens to a validator.
+
+```shell copy
+stafihubd tx staking delegate [validator-addr] [amount] [flags]
+stafihubd tx staking delegate <iva...> <amount> --chain-id=stafihub --from=<key-name> --fees=0.3fis
+```
+
+### stafihubd tx staking unbond
+
+Unbond tokens from a validator.
+
+```shell copy
+stafihubd tx staking unbond [validator-addr] [amount] [flags]
+```
+
+Unbond some tokens from a validator
+
+```shell copy
+stafihubd tx staking unbond <iva...> 10fis --from=<key-name> --chain-id=stafihub --fees=0.3fis
+```
+### stafihubd tx staking redelegate
+
+Transfer delegation from one validator to another.
+
+tips: There is no unbonding time during the redelegation, so you will not miss the rewards. But you can only redelegate once per validator, until a period (= unbonding time) exceed.
+
+```shell copy
+stafihubd tx staking redelegate [src-validator-addr] [dst-validator-addr] [amount] [flags]
+```
+### Redelegate some tokens to another validator
+
+```shell copy
+stafihubd tx staking redelegate <iva...> <iva...> 10fis --chain-id=stafihub --from=<key-name> --fees=0.3fis
+```
