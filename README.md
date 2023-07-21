@@ -110,6 +110,28 @@ Docs is an open-source project, and anyone can contribute to it.
 - Submit a pull request.
 - Review and merge the pull request.
 
+Welcome to the docs wiki!
+
+## Beginner Friendly
+
+### Find the file you want to modify
+
+![clickedit](https://i.imgur.com/n4kDOa3.png)
+
+### Click the edit button
+
+![edit content](https://i.imgur.com/FOV3KWQ.png)
+
+### Commit the change
+
+![commit](https://i.imgur.com/CnTCGzQ.png)
+
+## Familiar with Git
+
+- Fork the repository to create your own copy of the codebase.
+- Make the changes or modifications you want to make to the relevant files.
+- Create a pull request to submit your changes to the original repository, so that they can be reviewed and potentially merged into the main codebase.
+
 # License
 
 This project is licensed under the MIT License.

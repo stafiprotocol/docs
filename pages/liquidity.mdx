@@ -80,3 +80,130 @@ After confirming the transaction information, the corresponding amount of FIS is
 </Steps>
 
 ## StaFi Hub
+
+This guide takes rATOM/ATOM pair as an example to demonstrate how to add liquidity, remove liquidity and swap between rToken and original token (StaFiHub chain). The rTokens should be on the StaFiHub chain.
+
+Before testing, please make sure that you have installed Keplr wallet. If not, please download/install and follow the instructions to import your StaFi account. 
+
+### Transfer Tokens From CosmosHub to StaFiHub
+
+Before trading on rDEX V2, please make sure that your tokens are on StaFiHub chain. If not, please swap your tokens from CosmosHub to StaFiHub. For now, there are 2 ways for it: 
+- rBridge Swap(IBC) on StaFiHub rToken App: https://app.stafihub.io/rBridge
+- IBC transfer on Kelpr wallet
+
+Similarly, if you want to swap tokens from StaFiHub to CosmosHub, these two ways are also applicable.
+
+<Callout type="info">
+The receiving address added in the progress must be StaFiHub address, and it should be the same one as rATOM address for the convenience of adding liquidity on rDEX.
+</Callout>
+
+### IBC Transfer on Kelpr Wallet
+
+<Steps>
+
+### Go to wallet
+
+Click “Transfer” and "Select Chain".
+
+![rDEX](/image/liquidity_9.png)
+
+### Select parameter
+
+Confirm the selection:
+
+- Destination Chain: stafihub 
+- ChannelID: channel-369, Click "Save" .
+
+Then add your StaFiHub address.
+
+Please note: Transferring small amounts is recommended on Keplr.
+
+![rDEX](/image/liquidity_10.png)
+
+### Input amount and confirm
+
+Add the amount that will be transferred and click “Submit”.
+
+Click “Approve”, then the ATOM on CosmosHub is sent to your StaFiHub address. 
+
+![rDEX](/image/liquidity_11.png)
+
+</Steps>
+
+### Add Liquidity for rATOM/ATOM Pair
+
+<Steps>
+
+### Go to rDEX App
+
+Enter the [rDEX App](https://app.rdex.finance/stafihub/liquidity), click "Keplr" to connect rDEX on StaFiHub.
+
+![rDEX](/image/liquidity_12.png)
+
+### Select token pair
+
+Select rATOM/ATOM trading pair to add liquidity.
+
+![rDEX](/image/liquidity_13.png)
+
+### Input token amount
+
+Enter the amount of rATOM and ATOM, and then click “Supply”.
+
+![rDEX](/image/liquidity_14.png)
+
+### Wait for confirmation
+
+After confirming the transaction, the total liquidity that you have provided is shown below.
+
+![rDEX](/image/liquidity_15.png)
+
+</Steps>
+
+### Remove the Liquidity
+
+<Steps>
+
+### Select token pair
+
+Slide the progress bar to select the liquidity ratio and the ratio of rATOM and ATOM to be removed. The amount of rATOM and ATOM is displayed below.
+
+Click “Remove”.
+
+![rDEX](/image/liquidity_16.png)
+
+### Select token pair
+
+Select rATOM/ATOM trading pair to add liquidity.
+
+![rDEX](/image/liquidity_17.png)
+
+### Wait for confirmation
+
+After confirming the transaction information, the corresponding amount of rATOM and ATOM is sent to the current StaFiHub address. You can view the transaction in the notification bar.
+
+![rDEX](/image/liquidity_20.png)
+
+</Steps>
+
+### Swap rATOM to ATOM
+
+<Steps>
+
+### Select token pair
+
+Select the token to be swapped in the “Swap” page. rDEX supports mutual swapping between rATOM and ATOM. Here we select rATOM to demonstrate the operation process of Swap in this guide.
+
+Enter the amount of rATOM to be swapped, and rDEX will calculate the amount of ATOM based on the real time exchange rate of rATOM and ATOM.
+
+Click the setting to modify the slippage tolerance.
+
+![rDEX](/image/liquidity_18.png)
+
+### Select token pair
+
+After confirming the transaction information, the corresponding amount of ATOM is sent to the current StaFiHub address. You can view the transaction in the notification bar.
+
+![rDEX](/image/liquidity_19.png)
+
+</Steps>
