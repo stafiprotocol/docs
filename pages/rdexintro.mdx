@@ -1,0 +1,47 @@
+# rDEX Introduction
+
+## Overview
+
+rDEX V1 is a DEX developed by StaFi that seeks to solve the problems associated with rToken liquidity. It will provide decentralized transaction services for all rTokens based on the StaFi Chain. Being an important part of the StaFi rToken ecosystem, rDEX V1 will be deployed on the StaFi chain. Native rTokens minted by users can directly be traded through the DEX for better liquidity. 
+This will eliminate the need for cross-chain to Ethereum or other ecosystems.rDEX V1 has the following features:
+- Low slippage in small and medium-sized transactions, which is realized through the AMM CLP market maker model.
+- FIS as the basic trading asset for all rToken trading pairs to promote liquidity.
+- Impermanence loss protection, whereby the loss incurred by Liquidity Provider will be compensated by FIS token.
+- Liquidity can be provided by any single currency or a dual-currency model with different ratios.
+
+## Liquidity Pool Model
+
+StaFi rDEX V1 will be developed with reference to Thorchain's Continuous Liquidity Pools (CLP) model. We have chosen this as this offers the following advantages compared to Uniswap's AMM model:
+- Slippage protection mechanism. When the user's transaction scale is relatively low compared to the pool liquidity scale, the slippage is lower. On the contrary, if the transaction scale is relatively high compared to the pool liquidity scale, the transaction slippage will be rather high. As a result, whales will not be able to drain the liquidity of rToken.
+- Promote liquidity. Since each trading pair needs to use FIS as the basic transaction asset, each pool can establish considerable liquidity through FIS. Every pool can use FIS as a medium to realize the exchange between different rToken assets, or rToken assets with Native Tokens.
+- Support the liquidity of any single currency or any ratio of dual token deposit. Users can deposit a single token type or two different kinds of tokens in any ratio, in order to support the liquidity of the transaction. There is no need to deposit two assets at the same time at a ratio of 50%-50%, like in the case of Uniswap.
+
+ ### AMM CLP Model
+
+ The market maker formula for user transactions under the AMM CLP Model is as follows:
+
+ $$ $$
+
+ Where: 
+- 𝒙:Input amount of Token A
+- 𝒚:Output amount of Token B
+- 𝑋:Balance of Token A in the input side of the pool before swap
+- 𝑌:Balance of Token B in the input side of the pool before swap
+
+By Delphi Digital’s research, the slippage is lower under the CLP market maker model when compared with the Uniswap AMM model. This is when the transaction is of a small or medium-sized scale, and vice versa. The comparison of transaction slippage between CLP model and AMM model is shown in the figure below:
+
+
+
+## FIS Utility
+
+rDEX V1 will drastically promote FIS Utility through the following aspects:
+- The basic transaction assets of rToken in rDEX V1 are all FIS, which will become an important medium to promote the liquidity of rToken.
+- Since rDEX V1 is directly deployed on the StaFi chain, users need to pay FIS as a gas fee when using rDEX V1.
+- FIS will be used for Impermanent Loss Protection Fund Reserve to motivate Liquidity Providers.
+- FIS will be used for rDEX V1 liquidity mining incentives.
+- FIS will be used by community members to vote for the liquidity mining weight of each rToken pool.
+- The transaction fee income of rDEX V1 will be collected by the Treasury and used for the Buyback and burning of FIS.
+
+## Future Work
+
+rDEX V1 will not be the end of the story, just like rSwap V1 wasn’t. On the contrary, it is just the prelude of the StaFi team building liquidity for rToken Holders. After rDEX V1 is rolled out, the core StaFi team members will continue exploring the following areas:1) Support Native Token cross-chain to StaFi Chain, and build Native Token/FIS trading pairs. On that basis, users can trade between rTokens and Native Tokens.2) Explore the IDO of new rToken assets, so that when a new rToken is listed in the future, users of rDEX V1 can directly use Native Tokens to purchase rToken assets at a certain discount.3) Establish a FIS liquidity mining reward pool to encourage users to vote by FIS for the distribution of the FIS liquidity pool among different rToken pools.

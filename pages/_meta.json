@@ -10,7 +10,7 @@
   "overview":"Overview",
   "stafichain":"StaFi Chain",
   "stafihub":"StaFi Hub",
-  "evm":"EVM Compitiable",
+  "evm":"EVM Network",
   "-- User": {
     "type": "separator",
     "title": "User Staking Guides"
@@ -41,6 +41,12 @@
   },
   "cosmosintegration":"COSMOS rToken Integration",
   "ethintegration":"rETH Integration",
+  "-- rDEX": {
+    "type": "separator",
+    "title": "rDEX Guides"
+  },
+  "rdexintro":"Introduction",
+  "liquidity":"Liquidity",
   "-- Security": {
     "type": "separator",
     "title": "Security"

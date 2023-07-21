@@ -3,6 +3,5 @@
   "tokenomics":"Tokenomics V1",
   "polkajs":"Polka JS Library",
   "account":"Account",
-  "nomination":"Nomination",
-  "rewards":"Claim Rewards"
+  "nomination":"Nomination"
 }
