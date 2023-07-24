@@ -180,3 +180,41 @@ Ensuring security is always our top priority. StaFi is working on bringing on bo
 - **Conduct regular security audits**: StaFi works with reputable security auditors to conduct regular security audits.
 - **Have a security incident response plan**: StaFi has a security incident response plan in place to quickly and effectively respond to security incidents.
 - **Governance**: Governance decision are made by the community and core team.
+
+export function FAQBox({ title, children }) {
+  return (
+    <details
+      open
+      className="last-of-type:mb-0 rounded-lg bg-neutral-50 dark:bg-neutral-800 p-2 mt-4"
+    >
+      <summary>
+        <strong className="text-lg">{title}</strong>
+      </summary>
+      <div className="nx-p-2">{children}</div>
+    </details>
+  )
+}
+
+## FAQ
+
+<FAQBox title="How does StaFi work">
+  StaFi is a multi-chain protocol that liquid staking protocol that unlocks the liquidity of staked assets.Its offering includes:
+  - For EVM LSD: rETH issued on Ethereum, rBNB issued on BSC, rMATIC issued on Polygon
+  - For Polkadot LSD: rDOT,rKusama,rFIS issued on StaFi Chain 
+  - For Cosmos LSD: rATOM, rHUAHUA, rSWTH, rIRIS issued on StaFi Hub
+  - For Solana LSD: rSOL issued on Solana
+  
+Users can stake their tokens with StaFi and receive rTokens in return. To stake these tokens, StaFi batches them and routes the staking packages to chain staking contracts through validators. When users choose to unstake, the rTokens will be burned, and the user will receive their original stake tokens and rewards in return. This process ensures that users can stake and unstake their tokens seamlessly without the need for extensive technical knowledge or infrastructure.
+</FAQBox>
+
+<FAQBox title="What fee is applied by protocol">
+  The protocol applies a 10% commission fee on staking rewards.
+</FAQBox>
+
+<FAQBox title="Is it safe to work with StaFi">
+  To enhance the security of the StaFi, the following measures have been implemented:
+  - All code is open-source, making it transparent and subject to community scrutiny.
+  - Decisions related to governance and risk management are made through a DAO (decentralized autonomous organization).
+  - The platform has been audited by reputable firms such as Certik, PeacShield, Block Sec, and Zellic. For more detailed information, please visit [here](/audit).
+  - A committee of elected, best-in-class validators has been established to minimize staking risks and ensure the integrity of the network.
+</FAQBox>
