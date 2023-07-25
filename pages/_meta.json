@@ -16,17 +16,10 @@
     "type": "separator",
     "title": "User Staking Guides"
   },
-  "stakingeth":"Staking ETH with StaFi",
-  "stakingmatic":"Staking MATIC with StaFi",
-  "stakingbnb":"Staking BNB with StaFi",
-  "stakingatom":"Staking ATOM with StaFi",
-  "stakingiris": "Staking IRIS with StaFi",
-  "stakingswth":"Staking SWTH with StaFi",
-  "stakinghuahua":"Staking HUAHUA with StaFi",
-  "stakingdot":"Staking DOT with StaFi",
-  "stakingfis":"Staking FIS with StaFi",
-  "stakingksm":"Staking KSM with StaFi",
-  "stakingsol":"Staking SOL with StaFi",
+  "stakingevm":"EVM",
+  "stakingcosmos":"Cosmos",
+  "stakingpolkadot":"Polkadot",
+  "stakingsolana":"Solana",
 
   "-- Validator": {
     "type": "separator",
