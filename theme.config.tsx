@@ -38,7 +38,7 @@ const config: DocsThemeConfig = {
     const socialCard =
       route === '/' || !title
         ? 'https://docs.stafi.io/og.png'
-        : `https://docs.stafi.io/api/og?title=${title}`
+        : `https://docs.stafi.io/og.png`
 
     return (
       <>
