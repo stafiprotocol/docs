@@ -157,12 +157,12 @@ Before each election Era for SSV begins, the system will select by the registrat
 
 There are two types of SSV rotation--regular rotation and emergency rotation. Both are designed to meet the security needs of assets. Regular rotation is to ensure the dynamity of SSV, and at the same time, to allow the reward to cover the SSV in the candidate pool as fairly as possible. Whereas the emergency rotation usually occurs when the number of signers is close to the limit. Let’s say each round, N out of M signers are needed, but the actual number of signers S is close to or equal to (M-N), the system will urgently replace incumbent SSVs that do not provide signatures. Through this, the activity of the number of signers is guaranteed. Whether it is a regular rotation or an emergency rotation, both will need new SSVs, and the ex-SSVs will take a rest, waiting for the next round of elections. SSVs that are resting will not be able to get any rewards. Due to the requirement of flexibility, SSV's election cycle takes 1 Era as one round. We are still exploring a more appropriate cycle. If found, we can use online governance parameters.
  
-### Withdrawl
+### Withdrawal
 
 Within 1 Era, elected SSVs will perform signing, but when a SSV cannot meet the demand required, it will be withdrawn and banned the right to participate in next round’s election. The conditions for a withdrawal are as follows:
 
-- When a SSV does evil, it will be Slashed by the system, and it will be withdrawn automatically. It cannot participate in the next round of election.
-- When a SSV wrongly or do not sign to a certain degree during an Era, it will be withdrawn. 
+- When a SSV engages in wrongdoing, it will be Slashed by the system, and it will be withdrawn automatically. It cannot participate in the next round of election.
+- When a SSV fails or does not sign to a certain degree during an Era, it will be withdrawn. 
 - When a SSV is withdrawn, SSV signature that haven’t be rotated cannot generate any reward. 
 
 ### Reward
@@ -249,7 +249,7 @@ FIS is the native token for Stafi Protocol, the initial issuance is 100 million,
 - Tx Fee: In order to avoid system abuse, the initiator of a transaction has to pay FIS to get computing resources. In this way, invalid transactions will be eradicated.
 - On-chain governance: FIS holders can participate in the tinkering of Stafi Protocol parameters, vote for Protocol upgrade and determine development courses. Anyone can hand in proposals to the Protocol, but only holders of FIS can vote for or against a proposal, 1 FIS account for 1 ballot. 
 
-### rToken(reward-Token)
+### rToken (reward-Token)
 
 rToken is a alternative token obtained by Staker through Staking contract, If you Staking XTZ, you can get rXTZ, Staking Atom, users can get rAtom. rToken and Staking Token are in a ratio 1:1. Holding rToken can get incentives from token staked. At the same time, rToken can be traded in the market instead of staked token. After the transaction, Staking contract will modify the reward and redemption rights.
 
