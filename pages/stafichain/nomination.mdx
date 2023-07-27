@@ -5,10 +5,10 @@
 import { Callout } from 'nextra-theme-docs'
 import { Steps } from 'nextra-theme-docs'
 
-There are 2 ways to nominate validator, bond FIS and then nominate validator, or combine bond and nominate operations together. It is recommended to follow the 2nd way.
+There are 2 methods to nominate validator, bond FIS and then nominate validator, or combine bond and nominate operations together. It is recommended to follow the 2nd method.
 
 <Callout type="info">
-Differences: Operational Fee will be charged form Stash account in the 2nd way, while fee charge is separated in the 1st way. Bond fee will be charged from your Stash account , and a nominate fee will be charged from Controller account. You can read notes when you are nominating.
+Differences: Operational Fee will be charged form Stash account by following the 2nd method, while fees charged are separated on the 1st method. Bond fees will be charged from your Stash account, and a nominate fee will be charged from the Controller account. You will be notified of these fees when you are nominating.
 </Callout>
 
 
@@ -24,9 +24,9 @@ Differences: Operational Fee will be charged form Stash account in the 2nd way, 
 
 | Select list  | Explanation |
 | :------------ | :--------- |
-| Stash account (increase the amount at stake):  | Continue to nominate the validator after the reward is successfully claimed |
-| Stash account (do not increase the amount at stake) | After the reward is received, the balance of the Stash account will be added |
-| Controller account | The rewards is distributed to the Controller account | 
+| Stash account (increase the amount at stake):  | Rewards received will be compounded towards nominating the validator|
+| Stash account (do not increase the amount at stake) | Rewards received will add towards the balance of the Stash account |
+| Controller account | The rewards are distributed to the Controller account | 
 
 3.You can select up to 16 validators. Validators can be selected through addresses, names or click them directly in validator list. When you finish selecting, click Nominate
 
@@ -34,7 +34,7 @@ Differences: Operational Fee will be charged form Stash account in the 2nd way, 
 
 4.Confirm the transaction fee, fill in  password, then click Sign and Submit to submit info.
 
-![StaFi Chain Nomination](/image/nomination_4.png)
+![StaFi Chain Nomination](/image/nomination_5.png)
 
 5.The red box below shows that the nomination is successfully completed.
 
@@ -52,9 +52,9 @@ Differences: Operational Fee will be charged form Stash account in the 2nd way, 
 
 | Select list  | Explanation |
 | :------------ | :--------- |
-| Stash account (increase the amount at stake):  | Continue to nominate the validator after the reward is successfully claimed |
-| Stash account (do not increase the amount at stake) | After the reward is received, the balance of the Stash account will be added |
-| Controller account | The rewards is distributed to the Controller account | 
+| Stash account (increase the amount at stake):  | Rewards received will be compounded towards nominating the validator |
+| Stash account (do not increase the amount at stake) | Rewards received will add towards the balance of the Stash account |
+| Controller account | The rewards are distributed to the Controller account | 
 
 3. Confirm all info, then click Sign and Submit.
 
@@ -82,9 +82,11 @@ Note: The transaction fee will be deducted from the Stash account for the Bond o
 
 ### Stash and Controller
 
-The Stash account and Controller account can be set to the same, but for security concerns, it is recommended to set 2 different accounts respectively.
+The Stash account and Controller account can be the same account, however, for security concerns, it is recommended to set 2 different accounts respectively.
 
-When the Stash account and the Controller account are set to different accounts, the Controller account balance cannot be 0, and a small amount of FIS must be sent to the Controller account in advance as a fee for the nomination cost. Otherwise the nomination transaction will fail.Note
+<Callout type="info">
+Note: When the Stash account and the Controller account are set to different accounts, the Controller account balance cannot be 0, and a small amount of FIS must be sent to the Controller account in advance as a fee for the nomination cost. Otherwise the nomination transaction will fail.
+</Callout>
 
 ### When does nomination take effect
 
