@@ -16,6 +16,7 @@
     "type": "separator",
     "title": "User Staking Guides"
   },
+  "stakingoverview":"Overview",
   "stakingeth":"Staking ETH with StaFi",
   "stakingmatic":"Staking MATIC with StaFi",
   "stakingbnb":"Staking BNB with StaFi",
