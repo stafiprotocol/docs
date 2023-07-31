@@ -120,11 +120,7 @@ Stafi is a decentralized and open-source protocol. The Staking Contracts develop
 
 StaFi’s Staking process is explained in this section. Firstly, a user interacts with the SC followed by the SC interacting with the original chain. To simplify user inputs, SC’s are designed to interact with the Original Chain multiple times. It is vital that StaFi’s SC verifies that assets have been successfully staked before distributing rTokens to users. The following sequence diagram shows the overall process of issuing rTokens.
 
-![Sequence Diagram 1](image/Sequence-diagram1.png "Sequence Diagram 1")
-
 Users may receive the assets staked on the original chain by redeeming the rTokens they hold at any time. SC’s will require the signature of the SSV’s during redemption, due to the record relationship/mapping of the assets made initially on the SC. During redemption, the SC triggers a signature request. After SSV’s executes the signature, the SC interacts with the original chain and submits an Unbond/Unstake request. Subsequently, SSV’s verify ownership on the original chain. When conditions are met, rTokens redeemed will be destroyed.
-
-![Sequence Diagram 2](image/Sequence-diagram2.png "Sequence Diagram 2")
 
 ## Upper-layer Applications
 
@@ -208,8 +204,6 @@ Given that the FIS in the Protocol Treasury is not utilized within a certain per
 The Staking Drop Program is a mechanism designed by StaFi to stimulate the early adoption of the platform and increase the overall value of StaFi through the expansion of staking contracts (SCs). It is a long-term campaign that will be held annually, with different airdrop periods tailored to specific projects based on their lock-up periods. A single project may be eligible for multiple airdrops, however the scale may decrease over time. The initial incentive is set at a high level to encourage more token holders to engage in staking.
 
 Participation in the Staking Drop program is open to all users who hold FIS and stake their tokens through Staking Contracts. The amount of reward received is directly proportional to the total value of staked tokens and the amount of work performed. These rewards are distributed in the form of community incentives, which are paid in FIS.
-
-![FIS Distribution](image/distribution-curve-FIS.png "FIS Ditribution")
 
 For more about the Tokenomics of StaFi, please checkout StaFi Tokenomics Whitepaper.
 
