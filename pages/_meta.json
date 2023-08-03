@@ -28,7 +28,6 @@
   "stakingfis":"Staking FIS with StaFi",
   "stakingksm":"Staking KSM with StaFi",
   "stakingsol":"Staking SOL with StaFi",
-
   "-- Validator": {
     "type": "separator",
     "title": "Validator Guides"
@@ -49,6 +48,11 @@
   },
   "rdexintro":"Introduction",
   "liquidity":"Liquidity",
+  "-- Governance": {
+    "type": "separator",
+    "title": "Governance"
+  },
+  "proposal": "Proposal",
   "-- Security": {
     "type": "separator",
     "title": "Security"
@@ -60,7 +64,7 @@
     "title": "Protocol Updates"
   },
   "roadmap":"Roadmap",
-  "changelog":"Change Log",
+  "changelog":"Changelog",
   "website": {
     "title": "Website ↗",
     "type": "page",
