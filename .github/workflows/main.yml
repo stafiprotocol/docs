@@ -40,7 +40,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       # 执行构建步骤
-      - name: 构建
+      - name: Build
         run: |
           pnpm run build
 
