@@ -30,7 +30,7 @@ In the future, StaFi will introduce DVT (Decentralized Validator Tool), which wi
 
 ## How to stake ETH with StaFi
 
-import { Card, Cards } from 'nextra-theme-docs'
+import { Card, Cards, Callout } from 'nextra-theme-docs'
 
 Check out the How to stake ETH with StaFi section for more information:
 
@@ -68,6 +68,12 @@ The following are the addresses where rETH has been issued on different chains:
 
 Additionally, rETH holders can participate in liquidity mining. To learn more about this opportunity, please [visit this page](/stakingeth/liquidity).
 
+<Callout type="info">
+Mining rETH is currently only supported on Ethereum Layer1. If you wish to participate in liquidity mining or other on-chain activities on layer2, you will need to bridge your rETH from Layer1 to Layer2.
+</Callout>
+
+![StaFi rPool](/image/stakingoverview_1.png)
+
 ## Unstake
 
 Check out the Unstake section for more information:
@@ -98,3 +104,34 @@ Check out the Unstake section for more information:
 ## Commission Fee
 
 As part of the staking rewards distribution, 5% will be allocated to the StaFi DAO, 5% will be allocated to validators, while the remaining portion will be allocated to users.
+
+## Staking via DEX
+
+Users have the option to swap their ETH to rETH using decentralized exchanges other than the StaFi rToken App. However, it's important to pay close attention to the exchange rate.
+
+When users stake or unstake rETH through a DEX, the exchange rate is determined by the pool balance and may not be the same as the rate on the chain. Prior to the ETH Shanghai upgrade, users were unable to withdraw ETH from the deposit contract, which meant that when unstaking rETH, they could only swap rETH to ETH on the DEX. This caused the rETH/ETH rate on the DEX to be lower than the rate on the chain. Similarly, when staking ETH, the rETH/ETH exchange rate on the DEX might be lower than the rate on the chain. **In this situation, it would be more advantageous to swap ETH to rETH on the DEX, resulting in receiving more rETH than staking ETH on the StaFi app**. This swap would also cause the rETH/ETH exchange rate on the DEX to increase, further contributing to the non-linear nature of the exchange rate graph.
+
+It's worth noting that now, StaFi ETH staking supports ETH withdrawal with a limit of 100 ETH per day. If a user wants to unstake rETH and receive an amount of ETH greater than 100 in one transaction, this is not supported on the StaFi rToken app. However, they could swap rETH to ETH on the DEX in one transaction. This would result in the user receiving an amount of ETH less than on the StaFi rToken app and cause the rETH/ETH rate on the DEX to be lower than the rate on the chain.
+
+## Liquidity Mining
+
+<Card
+  icon={
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="h-6 w-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"
+      />
+    </svg>
+  }
+  title="Liquidity Mining"
+  href="/stakingeth/liquidity/"
+/>
