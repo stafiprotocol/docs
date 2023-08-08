@@ -1,6 +1,6 @@
 Welcome to the StaFi LSD Documentation repository. 
 
-## Requirement
+## Getting Started
 
 Before you begin, ensure that you have Node.js installed on your system. If you don't have it installed, you can download it from the [official Node.js website](https://nodejs.org/).
 
