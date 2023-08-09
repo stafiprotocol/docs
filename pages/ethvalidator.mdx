@@ -218,3 +218,58 @@ Assuming you are using Prysm, voluntarily exiting your validator from the Ethere
 - Confirm your understanding of the consequences of exiting your validator by typing Exit my validator when prompted.
 
 More details please follow this [exit doc](https://docs.prylabs.network/docs/wallet/exiting-a-validator).
+
+### **StaFi Validator Ejection Guide**
+
+For ETH validators operating via the StaFi protocol, it's essential to run this client. This client actively listens for events that signal the need for validators to exit. When such an event is detected, the client will automatically initiate an exit transaction.
+
+**Prerequisites**
+
+- **Go 1.19+**: You can download and install it from **[here](https://golang.org/dl/)**. Installation steps are as follows:
+
+```bash
+cd $HOME
+wget -O go1.19.2.linux-amd64.tar.gz https://go.dev/dl/go1.19.2.linux-amd64.tar.gz
+rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.2.linux-amd64.tar.gz && rm go1.19.2.linux-amd64.tar.gz
+echo 'export GOROOT=/usr/local/go' >> $HOME/.bashrc
+echo 'export GOPATH=$HOME/go' >> $HOME/.bashrc
+echo 'export GO111MODULE=on' >> $HOME/.bashrc
+echo 'export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin' >> $HOME/.bashrc && . $HOME/.bashrc
+go version
+```
+
+- **Keystores**: These should be generated using the **[eth2.0-deposit-cli](https://github.com/stafiprotocol/eth2.0-deposit-cli)**.
+- **Execution Node RPC Endpoint**
+- **Consensus Node RPC Endpoint**
+
+**Configuration via Environment Variables**
+
+Settings can be adjusted using the following environment variables:
+
+| Variable | Mandatory | Sample Value | Description |
+| --- | --- | --- | --- |
+| execution_endpoint | Yes | http://127.0.0.1:8545/ | Endpoint for the Ethereum Execution Node |
+| consensus_endpoint | Yes | http://127.0.0.1:5051/ | Endpoint for the Ethereum Consensus Node |
+| keys_dir | Yes | ~/validator_keys | Absolute path to the validator keys directory. This directory should contain keystore-m_*.json files, which can be generated at https://github.com/stafiprotocol/eth2.0-deposit-cli. |
+
+**Execution Instructions**
+
+To run the client, follow these steps:
+
+```bash
+git clone https://github.com/stafiprotocol/eth-ejector.git
+cd eth-ejector
+git checkout <latest-release-tag>
+make build
+./build/eth-ejector start --keys_dir <PATH_TO_YOUR_KEYS_DIRECTORY> --consensus_endpoint <CONSENSUS_ENDPOINT_URL> --execution_endpoint <EXECUTION_ENDPOINT_URL>
+```
+
+**Example**:
+
+```bash
+git clone https://github.com/stafiprotocol/eth-ejector.git
+cd eth-ejector
+git checkout v0.3.2
+make build
+./build/eth-ejector start --keys_dir /home/stafi/eth2.0/validator_keys --consensus_endpoint https://beacon.zhejiang.ethpandaops.io  --execution_endpoint https://rpc.zhejiang.ethpandaops.io
+```
