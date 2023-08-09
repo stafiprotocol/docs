@@ -148,8 +148,10 @@ We welcome contributions from anyone. Here's how you can contribute:
     
 - **Submit a Pull Request:** Once you've made your changes, commit them and submit a pull request. Your changes will be reviewed and, if approved, merged into the main codebase.
     
-    ![editcontent](https://i.imgur.com/rUctw9U.png)
-    
+    ![editcontent1](https://i.imgur.com/rUctw9U.png)
+    ![editcontent2](https://imgur.com/mlZZXWO.png)
+
+
 
 If you're familiar with Git, you can also fork the repository, make changes in your fork, and then submit a pull request so that they can be reviewed and potentially merged into the main codebase.
 
