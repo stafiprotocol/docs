@@ -59,6 +59,7 @@
   },
   "contract":"Contract",
   "audit":"Audit",
+  "insurance":"Insurance",
   "-- Updates": {
     "type": "separator",
     "title": "Protocol Updates"
