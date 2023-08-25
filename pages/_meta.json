@@ -32,6 +32,7 @@
     "type": "separator",
     "title": "Validator Guides"
   },
+  "dvt":"Distributed Validator",
   "ethvalidator":"ETH Staking Validator",
   "stafichainnodeoperator":"StaFi Chain Validator",
   "stafichainnominator":"StaFi Chain Nominator",
@@ -40,8 +41,8 @@
     "type": "separator",
     "title": "Developer Guides"
   },
-  "cosmosintegration":"Cosmos rToken Integration",
-  "ethintegration":"rETH Integration",
+  "ethintegration":"EVM LSD Integration",
+  "cosmosintegration":"Cosmos LSD Integration",
   "-- rDEX": {
     "type": "separator",
     "title": "rDEX Guides"

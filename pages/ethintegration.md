@@ -1,15 +1,49 @@
-# StaFi Staked ETH(rETH) integration
+# EVM LSD integration
 
-## URL
+## StaFi Staked ETH(rETH) integration
 
-If you are an Ethereum wallet provider, you can easily integrate StaFi ETH staking into both your app and website. Simply use the URL `https://m-app.stafi.io` to integrate it into your app, and use the URL `https://app.stafi.io` to integrate it into your website.
+### URL
 
-If you are interested in establishing a deeper partnership or would like to provide feedback, we encourage you to post a topic on our [forum](https://dao.stafi.io). This will allow us to better understand your needs.
+If you are an Ethereum wallet provider, you can easily integrate StaFi ETH staking into both your app and website. Simply use the URL `https://m-app.stafi.io/evm/eth` to integrate it into your app, and use the URL `https://app.stafi.io/gallery/evm/ETH` to integrate it into your website.
 
-## SDK or Component
+### SDK or Component
 
 If you are a developer looking to integrate the StaFi ETH staking component into your app using our component or SDK, please note that it is currently not supported. We are currently in the process of designing and developing this feature, and we will make an announcement when it becomes available. 
 
-## Contract
+### Contract
 
 If you want to interact with StaFi ETH staking directly, you can use [StafiUserDeposit](https://etherscan.io/address/0xc12dfb80d80d564db9b180abf61a252ee6355058#code) contract.
+
+## StaFi Staked MATIC(rMATIC) integration
+
+### URL
+
+If you are an Ethereum wallet provider, you can easily integrate StaFi ETH staking into both your app and website. Simply use the URL `https://m-app.stafi.io/evm/matic` to integrate it into your app, and use the URL `https://app.stafi.io/gallery/evm/MATIC` to integrate it into your website.
+
+
+### SDK or Component
+
+If you are a developer looking to integrate the StaFi ETH staking component into your app using our component or SDK, please note that it is currently not supported. We are currently in the process of designing and developing this feature, and we will make an announcement when it becomes available. 
+
+### Contract
+
+If you want to interact with StaFi ETH staking directly, you can use [StakeManager](https://etherscan.io/address/0x3aee3e96c9e340cbe0fffc5224db9e97949f3899) contract.
+
+## StaFi Staked BNB(rBNB) integration
+
+### URL
+
+If you are an Ethereum wallet provider, you can easily integrate StaFi ETH staking into both your app and website. Simply use the URL `https://m-app.stafi.io/evm/bnb` to integrate it into your app, and use the URL `https://app.stafi.io/gallery/evm/BNB` to integrate it into your website.
+
+
+### SDK or Component
+
+If you are a developer looking to integrate the StaFi ETH staking component into your app using our component or SDK, please note that it is currently not supported. We are currently in the process of designing and developing this feature, and we will make an announcement when it becomes available. 
+
+### Contract
+
+If you want to interact with StaFi ETH staking directly, you can use [StakeManager](https://bscscan.com/address/0x7d03c4a961867343aa1ea7cd88a24ed66ce92d3c) contract.
+
+## More
+
+If you are interested in establishing a deeper partnership or would like to provide feedback, we encourage you to post a topic on our [forum](https://dao.stafi.io). This will allow us to better understand your needs.
