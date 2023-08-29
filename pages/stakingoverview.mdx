@@ -86,6 +86,20 @@ The StaFi rToken app offers three key functionalities, enhancing the user experi
 
 8. Reach out to chat in StaFi [Discord server](https://discord.com/invite/jB77etn) if you’re still stuck!
 
+export function FAQBox({ title, children }) {
+  return (
+    <details
+      open
+      className="last-of-type:mb-0 rounded-lg bg-neutral-50 dark:bg-neutral-800 p-2 mt-4"
+    >
+      <summary>
+        <strong className="text-lg">{title}</strong>
+      </summary>
+      <div className="nx-p-2">{children}</div>
+    </details>
+  )
+}
+
 ## Known Issues
 
 <FAQBox title="Adblockers/Pop-Up blockers conflict with browser wallets">
