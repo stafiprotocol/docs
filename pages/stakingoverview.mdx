@@ -44,6 +44,98 @@ To use WalletConnect, users simply need to scan a QR code or click a link genera
 
 WalletConnect is a secure and convenient way for users to connect their wallets to DApps. It is widely supported by a variety of wallets, including MetaMask, Coinbase Wallet, and Trust Wallet.
 
+### Wallet Download
+
+**EVM Wallet**
+
+- [Metamask](https://metamask.io/download/)
+- [WalletConnect](https://walletconnect.com/products)
+- [Rabby Wallet](https://rabby.io/)
+- [Ledger Live](https://www.ledger.com/ledger-live)
+
+**Solana Wallet**
+
+- [Solana Wallet](https://phantom.app/download)
+- [WalletConnect](https://walletconnect.com/products)
+- [Ledger Live](https://www.ledger.com/ledger-live)
+
+**Cosmos Wallet**
+
+- [Keplr](https://www.keplr.app/)
+- [Ledger Live](https://www.ledger.com/ledger-live)
+
+**Polkadot Wallet**
+
+- [Polkadot.js](https://polkadot.js.org/extension/)
+- [Ledger Live](https://www.ledger.com/ledger-live)
+
+### Wallet Connection Issues
+
+- Uninstall and reinstall your wallet browser extension.
+- [Clear your cache and cookies](https://its.uiowa.edu/support/article/719) and restart your browser.
+- Set your wallet to Ethereum Mainnet, with no ad blocker extensions running. 
+- Turn off all other browser extensions except for the wallet you want to connect.
+- Make sure you're running the latest version of your browser.
+- Try connecting with a different browser (Chrome, FireFox, Edge, Brave)
+- Check out our list of known issues below.
+- Reach out to chat in StaFi [Discord server](https://discord.com/invite/jB77etn) if you’re still stuck!
+
+export function FAQBox({ title, children }) {
+  return (
+    <details
+      open
+      className="last-of-type:mb-0 rounded-lg bg-neutral-50 dark:bg-neutral-800 p-2 mt-4"
+    >
+      <summary>
+        <strong className="text-lg">{title}</strong>
+      </summary>
+      <div className="nx-p-2">{children}</div>
+    </details>
+  )
+}
+
+### FAQ
+
+<FAQBox title="Adblockers/Pop-Up blockers conflict with browser wallets">
+If you are using any Adblockers or Pop-Up blockers in your browser, this may impact your ability to connect to Immutable X, we recommend you [disable these types of extensions](https://www.computerhope.com/issues/ch001411.htm) and then try connecting again.
+</FAQBox>
+
+<FAQBox title="Ledger Live Hardware wallet">
+You may need to activate Ledger Live to bridge your ledger and StaFi rToken Ap before you can sign transaction requests. Try going into Metamask Settings > Advanced > Ledger Live and then setting the Preferred Ledger Connection Type to **Ledger Live**.
+</FAQBox>
+
+<FAQBox title="Firefox Security Settings">
+If you’re using Firefox you may need to change your security settings to allow your wallet to connect. To do this:Click on the hamburger icon on the far right, then click on Settings then click on Privacy and Security and ensure that Standard is selected. Then try connecting again via the [StaFi rToken App](https://app.stafi.io/).
+</FAQBox>
+
+<FAQBox title="Brave Browser Default Web3 Wallet">
+Please switch off the built-in browser as your default wallet if you use a browser-based extension wallet like MetaMask in the Brave browser.
+
+Follow the steps below:
+- Select “Preferences” from the Brave dropdown
+- Select “Web3” from the sidebar
+- Change the “Default Ethereum wallet” setting to “Brave Wallet (Prefer extensions)”
+
+![Wallet Connect Troubleshooting](/image/wallet-connect-troubleshoot1.png)
+</FAQBox>
+
+<FAQBox title="Multiple Wallets Installed">
+Many times if you have multiple wallets installed on your browser maybe there will be a collision in the space that the dapps use to detect the wallets and in some occasions, only one wallet will be available.
+
+To address this issue:
+
+- Users should navigate to their browser's extension settings (within Chrome browser it is: chrome://extensions/ or you can click the puzzle piece in the extension row)
+
+![Wallet Connect Troubleshooting](/image/wallet-connect-troubleshoot2.png)
+
+- Ensure that all other browser wallets are disabled (or not set to be the default web3 wallet) and your target wallet is enabled:
+
+![Wallet Connect Troubleshooting](/image/wallet-connect-troubleshoot3.png)
+
+StaFi has been running securely for more than two years, with all of its code being open source. Furthermore, it has undergone security audits by reputable organizations, and [detailed information is available for review](/audit).
+- After completing these steps, **refreshing the browser** should give the dapp access to the desired wallet.
+</FAQBox>
+
 ## Security
 
 StaFi has been running securely for more than two years, with all of its code being open source. Furthermore, it has undergone security audits by reputable organizations, and [detailed information is available for review](/audit).
