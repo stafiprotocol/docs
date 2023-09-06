@@ -17,6 +17,7 @@
     "title": "User Staking Guides"
   },
   "stakingoverview":"Overview",
+  "bridge":"Bridge",
   "stakingeth":"Staking ETH with StaFi",
   "stakingmatic":"Staking MATIC with StaFi",
   "stakingbnb":"Staking BNB with StaFi",
