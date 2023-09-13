@@ -1,0 +1,33 @@
+# Redelegation Guide for Staked ATOM
+
+1.****Go to Staking Page****
+
+Visit the [rToken App](https://app.stafi.io/gallery/all) and click the "Stake" button.
+
+![Untitled](Redelegation%20Guide%20for%20Stake%20ATOM%201ab4b07606c14981a8c92403c85e7c18/Untitled.png)
+
+2.****Connect Wallet****
+
+To import a Cosmos account that has previously staked ATOM, you can import it into the [Keplr wallet](https://www.keplr.app/) and connect the Keplr wallet to the StaFi rToken App. Once connected, the available amount of staked ATOM will be automatically displayed.
+
+![Untitled](Redelegation%20Guide%20for%20Stake%20ATOM%201ab4b07606c14981a8c92403c85e7c18/Untitled%201.png)
+
+3.****Input Redelegation Amount****
+
+On the "Redelegate" page, select "Staked ATOM" and enter the amount of staked ATOM you want to redelegate. Then click on "Redelegate".
+
+![Untitled](Redelegation%20Guide%20for%20Stake%20ATOM%201ab4b07606c14981a8c92403c85e7c18/Untitled%202.png)
+
+4.****Confirm transaction and await for confirmations****
+
+Upon clicking “Redelegate”, you will be redirected to your Keplr wallet. Remember to confirm the transaction details. To proceed, click on the "Approve" button to sign the transaction. Wait for the transaction to be confirmed and the redelegation operation to be completed successfully.
+
+Note: Do not edit the memo shown on the Keplr transaction. Editing the memo will cause the transaction to fail.
+
+![Untitled](Redelegation%20Guide%20for%20Stake%20ATOM%201ab4b07606c14981a8c92403c85e7c18/Untitled%203.png)
+
+5.****Track Rewards****
+
+Monitor your staked ATOM and its rewards by visiting your [Profile](https://app.stafi.io/profile/cosmos).
+
+![Untitled](Redelegation%20Guide%20for%20Stake%20ATOM%201ab4b07606c14981a8c92403c85e7c18/Untitled%204.png)
