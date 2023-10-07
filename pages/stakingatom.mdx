@@ -50,7 +50,7 @@ Monitor your staked ATOM and its rewards by visiting your [Profile](https://app.
 
 </Steps>
 
-## Convert your staked ATOM into rATOM
+## Liquid Staking Guide for Staked ATOM / LSM ATOM (Staked ATOM shares)
 
 This feature is implemented using the Cosmos Liquid Staking Module(LSM) module.
 
@@ -64,25 +64,29 @@ Visit the [rToken App](https://app.stafi.io) and click the "Stake" button.
 
 ### Connect Wallet
 
-To import a Cosmos account that has previously staked ATOM, you can import it into the [Keplr wallet](https://www.keplr.app/) and connect the Keplr wallet to the StaFi rToken App. Once connected, the available amount of staked ATOM will be automatically displayed.
+To import a Cosmos account that has previously staked ATOM / LSM ATOM, you can import it into the [Keplr wallet](https://www.keplr.app/) and connect the Keplr wallet to the StaFi rToken App. Once connected, the available amount of staked ATOM / LSM ATOM will be automatically displayed.
 
-![StaFi Stake ATOM](/image/stakingunstakingcosmosatom_11.png)
+![StaFi Stake ATOM](/image/stakingunstakingcosmosatom_11-2.png)
 
-### Input amount
+### Input the Amount of staked ATOM / LSM ATOM
 
-On the "Redelegate" page, select "Staked ATOM" and enter the amount of staked ATOM you want to redelegate. Then click on "Redelegate".
+On the "Liquid Stake" page, select "Staked ATOM" or "LSM ATOM" from the dropdown menu.
 
-![StaFi Stake ATOM](/image/stakingunstakingcosmosatom_12.png)
+![StaFi Stake ATOM](/image/stakingunstakingcosmosatom_12-2-2.png)
+
+Enter the amount of Staked ATOM / LSM ATOM you would like to liquid stake. Then click on "Liquid stake 5 Staked ATOM" button to proceed.
+
+![StaFi Stake ATOM](/image/stakingunstakingcosmosatom_12-2.png)
 
 ### Confirm transaction and await for confirmations
 
-Upon clicking “Redelegate”, you will be redirected to your Keplr wallet. Remember to confirm the transaction details. To proceed, click on the "Approve" button to sign the transaction. Wait for the transaction to be confirmed and the redelegation operation to be completed successfully.
+Upon clicking “Liquid Stake”, you will be redirected to your Keplr wallet. Remember to confirm the transaction details. To proceed, click on the "Approve" button to sign the transaction. Wait for the transaction to be confirmed and the operation to be completed successfully.
 
 <Callout type="info">
 Do not edit the memo shown on the Keplr transaction. Editing the memo will cause the transaction to fail.
 </Callout>
 
-![StaFi Stake ATOM](/image/stakingunstakingcosmosatom_13.png)
+![StaFi Stake ATOM](/image/stakingunstakingcosmosatom_13-2.png)
 
 ### Track Rewards
 
@@ -91,6 +95,28 @@ Monitor your staked ATOM and its rewards by visiting your [Profile](https://app
 ![StaFi Stake ATOM](/image/stakingunstakingcosmosatom_14.png)
 
 </Steps>
+
+export function FAQBox({ title, children }) {
+  return (
+    <details
+      open
+      className="last-of-type:mb-0 rounded-lg bg-neutral-50 dark:bg-neutral-800 p-2 mt-4"
+    >
+      <summary>
+        <strong className="text-lg">{title}</strong>
+      </summary>
+      <div className="nx-p-2">{children}</div>
+    </details>
+  )
+}
+
+## FAQ
+
+<FAQBox title="What are the differences between staked ATOM and LSM ATOM?">
+**Staked ATOM:** The ATOM staked in Cosmos Hub.
+
+**LSM ATOM:** The ATOM that are transferred into tokenized delegations, the liquid staking process is initiated with the Liquid Staking Module tokenizing existing staked ATOM delegations and converting them into NFTs (tokenized delegations) with attributes like reward address, validator, etc.
+</FAQBox>
 
 
 ## The rATOM Token
