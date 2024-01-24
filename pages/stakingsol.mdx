@@ -1,91 +1,107 @@
-# Staking SOL with StaFi
+# How to Stake SOL with StaFi
 
-import { Callout } from 'nextra-theme-docs'
-import { Steps } from 'nextra-theme-docs'
+## ****Required Wallet****
 
-## How to Stake SOL with StaFi
+Download Phantom Wallet: [https://phantom.app/](https://phantom.app/)
 
-### Required Wallets
+## 1.Go to Staking Page
 
-**Phantom**:
+Visit the [rToken App](https://app.stafi.io/gallery/all/) and click the "Stake" button.
 
-- Download Phantom from the [Phantom Website](https://phantom.app/).
-- Once installed, follow the instructions to import an existing wallet or create a new one.
+![Untitled](/image/rsolstake1.png)
 
-<Steps>
-
-### Go to SOL staking page
-
-![StaFi Staked SOL](/image/stakingunstakingothersol_1.png)
-
-### Connect Wallet
+## 2.****Connect Wallet****
 
 Click on the “Connect Wallet” button to connect your Phantom wallet.
 
-![StaFi Staked SOL](/image/stakingunstakingothersol_2.png)
+![Untitled](/image/rsolstake2.png)
 
-### Input staking amount
+## 3.****Input staking amount****
 
 Enter the amount of SOL you would like to stake. Review the amount of rSOL you will receive and the Annual Percentage Rate (APR) for staking. Click the "Stake" button to proceed.
 
-<Callout type="info">
-Note: The minimum staking amount required is 0.005 SOL.
-</Callout>
+![Untitled](/image/rsolstake3.png)
 
-![StaFi Staked SOL](/image/stakingunstakingothersol_3.png)
+## 4.****Confirm transaction and await for confirmations****
 
-### Confirm transaction and await for confirmations
+Upon clicking “Stake”, you will be redirected to your Phantom wallet. Confirm the transaction details, including gas fees. To proceed, click on the "Confirm" button to sign the transaction. Wait for the transaction to be confirmed and the staking operation to be completed successfully.
 
-Upon clicking “Stake”, you will be redirected to your Phantom wallet. Review the transaction details, including gas fees. To proceed, click on the "Confirm" button to sign the transaction. Wait for the transaction to be confirmed and the staking operation to be completed successfully.
+![Untitled](/image/rsolstake4.png)
 
-![StaFi Staked SOL](/image/stakingunstakingothersol_4.jpg)
+## 5.Track Rewards
 
-### Track Rewards
+Monitor your staked SOL and its rewards by visiting your [Profile](https://app.stafi.io/profile/solana/).
 
-Monitor your staked SOL and its rewards by visiting your [Profile](https://app.stafi.io/profile/solana).
+![Untitled](/image/rsoltrackrewards1.png)
 
-![StaFi Staked SOL](/image/stakingunstakingothersol_5.jpg)
+# Commission Fee
 
-</Steps>
+10% of SOL staking rewards will be allocated to StaFi DAO.
 
-## Commission Fee
+# How to Unstake
 
-10% of SOL staking rewards and 0.2% redemption fee will be allocated to StaFi DAO.
+Note: The rSOL token has been updated to the Solana chain, allowing for unstaking directly on Solana chain without the need to bridge to the StaFi Chain.
 
-## Unstake
+## 1.****Visit SOL Unstaking Page****
 
-<Callout type="info">
-rSOL mint and burn in StaFi Chain, if you want to unstake
-</Callout>
+Visit the SOL [unstaking page](https://app.stafi.io/gallery/solana/SOL/?tab=unstake), and proceed by clicking on the "Unstake" tab.
 
-<Steps>
+![Untitled](/image/rsolunstake1.png)
 
-### Go to SOL unstaking page
-
-Visit the [SOL unstaking page](https://app.stafi.io/gallery/solana/SOL?tab=unstake), and proceed by clicking on the "Unstake" tab.
-
-![StaFi Staked SOL](/image/stakingunstakingothersol_6.png)
-
-### Input unstaking amount
+## 2.****Input unstaking amount****
 
 Enter the desired amount of rSOL you would like to unstake, and proceed by clicking on the "Unstake" button.
 
-![StaFi Staked SOL](/image/stakingunstakingothersol_7.png)
+![Untitled](/image/rsolunstake2.png)
 
-### Confirm transaction and wait for confirmations
+## 3.****Confirm transaction and wait for confirmations****
 
 After clicking "Unstake," you will be redirected to your Phantom wallet.
 
-Confirm the transaction details, including gas fees. Click the "Confirm" button to sign the transaction. 
+Confirm the transaction details, including gas fees. Click the "Confirm" button to sign the transaction.
 
 Wait for the transaction to be confirmed and the unstaking process to be completed successfully.
 
-<Callout type="info">
-Note: Unbonding rSOL takes 5 days. SOL will be sent to your wallet after the unbonding period has ended.
-</Callout>
+*Note: Unbonding rSOL takes 5 days before it can be withdrawn.*
 
-![StaFi Staked SOL](/image/stakingunstakingothersol_8.png)
+![Untitled](/image/rsolunstake3.png)
 
-</Steps>
+## 4.****Withdraw unstaked tokens****
+
+rSOL will need to be manually withdrawn from the Withdraw Tab on the rSOL Dashboard once the unbonding period has ended. Click on “Withdraw” button to proceed.
+
+![Untitled](/image/rsolunstake4.png)
+
+## 5.****Receive tokens****
+
+Verify the transaction on your Phantom wallet. To proceed, click on the "Confirm" button to sign the transaction. Upon confirmation of the transaction, SOL tokens will be withdrawn and sent to your wallet.
+
+![Untitled](/image/rsolunstake5.png)
+
+# rSOL Migration from StaFi Chain to Solana Chain
+
+## 1.Go to Bridge page
+
+Go to [Bridge](https://app.stafi.io/gallery/solana/SOL/?tab=bridge&srcTokenStandard=Native&dstTokenStandard=SPL&tokenName=rSOL) page, then select bridge and token as follow:
+
+![Untitled](/image/rsolmigration1.png)
+
+## 2.****Enter Amount****
+
+Enter the rSOL amount you would like to bridge.
+
+![Untitled](/image/rsolmigration2.png)
+
+## 3.****Confirm transaction and await for confirmations****
+
+Upon clicking “Bridge”, you will be redirected to your PolkadotJS Extension wallet. Review the transaction details, and click on the "Approve" button to sign the transaction. Wait for the transaction to be confirmed and the staking operation to be completed successfully.
+
+![Untitled](/image/rsolmigration3.png)
+
+## 4.**Track rSOL amount**
+
+Monitor your rSOL and its rewards by visiting your [Profile](https://app.stafi.io/profile/solana/).
+
+![Untitled](/image/rsolmigration4.png)
 
 
