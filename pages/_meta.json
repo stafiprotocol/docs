@@ -55,6 +55,7 @@
     "title": "Governance"
   },
   "proposal": "Proposal",
+  "treasury":"Treasury",
   "-- Security": {
     "type": "separator",
     "title": "Security"
