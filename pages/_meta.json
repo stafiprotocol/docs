@@ -81,5 +81,11 @@
     "type": "page",
     "href": "https://app.stafi.io/",
     "newWindow": true
+  },
+  "lsaas": {
+    "title": "LSaaS Doc ↗",
+    "type": "page",
+    "href": "https://lsaas-docs.stafi.io/",
+    "newWindow": true
   }
 }
