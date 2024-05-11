@@ -208,6 +208,25 @@ If you need to start from the beginning. You should clean your db.
 ### Testnet
 ./target/release/stafi purge-chain --chain=testnet
 ```
+
+#### Database Snapshot
+
+If you start a node for the first time, it will start building from the genesis block. This process can take a while depending on the database size. To make this process faster, snapshots can be used. Snapshots are compressed backups of the database directory of StaFi nodes, containing the whole chain. 
+
+```shell copy
+### Mainnet
+cd ~
+wget https://snapshot.wetez.io/snapshot/stafi-snapshot.tar.gz
+tar -xf stafi-snapshot.tar.gz
+
+### Assuming you are using the default directory
+mkdir -p $HOME/.local/share/stafi/chains/stafi_mainnet
+
+mv db $HOME/.local/share/stafi/chains/stafi_mainnet
+```
+
+Then restart your node.
+
 ## Become a Validator
 
 <Callout type="info">
