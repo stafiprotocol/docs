@@ -12,7 +12,7 @@ const withNextra = nextra({
  
 export default withNextra({
   reactStrictMode: true,
-  
+  output: 'export'
 })
  
 // If you have other Next.js configurations, you can pass them as the parameter:

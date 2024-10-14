@@ -1,6 +1,6 @@
 {
-  "name": "docs",
-  "author": "Shu Ding",
+  "name": "stafidocs",
+  "author": "0xsignal",
   "license": "MIT",
   "private": true,
   "scripts": {
