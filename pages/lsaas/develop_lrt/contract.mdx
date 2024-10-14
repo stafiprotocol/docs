@@ -173,9 +173,9 @@ Platforms inevitably have their own parameters. We've compiled a list of the mos
 
 |  config | description  | recommended value |
 |---|---|---|
-| address<br>owner    | an account who administers the whole network | we suggest platform use multi-sig account for security reason |
-| uint256<br>rateChangeLimit      | a number represents the numerator in rate and the denominator is 1e18.<br>the exchange rate between ETH and LrdToken is vital for the system, to prevent accidental or violent changes, we introduce `rateChangeLimit` to keep the system safe | default is 11e14 (=0.11%) |
-| uint256<br>unbondingDuration     | a number represents how many `eras` unstakes must take to be withdrawable | default 8 |
-| uint256<br>protocolFeeCommission   | a number represents the numerator in rate and the denominator is 1e18.<br>this value configures the proportion of the platform rewards | 1e17 (denotes 1e17/1e18=10%)<br>(platform commission = <br>total rewards * 10%)  |
-| uint256<br>factoryCommissionRate    | a number represents the numerator in rate and the denominator is 1e18.<br>*it is a proportion of factoryCommission to platformCommission*<br>the value of parameter should be determined after consulting with 61 Lab | 1e17 (denotes 1e17/1e18=10%)<br>(factory commission = <br>platform commission * 10%)   |
-| address<br>lsdManagerAddress    | LsdManager by default provided by 61Lab, considering stability this contract is not upgradeable. As EigenLayer may support new LST, then a new LsdManager will be deployed. Keep an eye on 61Lab for updates |  |
+| address <br/> owner    | an account who administers the whole network | we suggest platform use multi-sig account for security reason |
+| uint256 <br/> rateChangeLimit      | a number represents the numerator in rate and the denominator is 1e18. <br/> the exchange rate between ETH and LrdToken is vital for the system, to prevent accidental or violent changes, we introduce `rateChangeLimit` to keep the system safe | default is 11e14 (=0.11%) |
+| uint256 <br/> unbondingDuration     | a number represents how many `eras` unstakes must take to be withdrawable | default 8 |
+| uint256 <br/> protocolFeeCommission   | a number represents the numerator in rate and the denominator is 1e18. <br/> this value configures the proportion of the platform rewards | 1e17 (denotes 1e17/1e18=10%) <br/> (platform commission = <br/> total rewards * 10%)  |
+| uint256 <br/> factoryCommissionRate    | a number represents the numerator in rate and the denominator is 1e18. <br/> *it is a proportion of factoryCommission to platformCommission* <br/> the value of parameter should be determined after consulting with 61 Lab | 1e17 (denotes 1e17/1e18=10%) <br/> (factory commission = <br/> platform commission * 10%)   |
+| address <br/> lsdManagerAddress    | LsdManager by default provided by 61Lab, considering stability this contract is not upgradeable. As EigenLayer may support new LST, then a new LsdManager will be deployed. Keep an eye on 61Lab for updates |  |
