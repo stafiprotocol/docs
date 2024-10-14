@@ -1,0 +1,132 @@
+# Staking POL(ex-MATIC) with StaFi
+
+<Callout type="info">
+On September 4th, MATIC will transition to POL. In the initial phase, POL will replace MATIC as the native gas and staking token for Polygon PoS, with subsequent phases expanding POL’s role in the AggLayer. For more information, please refer to this [post](https://x.com/0xPolygon/status/1717134336104038580?s=20).
+</Callout>
+
+Notes regarding the Polygon network upgrade from MATIC to POL
+
+- rMATIC holders on StaFi rToken App don't need to take any action.
+- Please make sure that you have completed the upgrade for the MATIC on Ethereum to POL before staking via StaFi rToken App.
+
+Upgrade Portal Interface: [https://portal.polygon.technology/pol-upgrade](http://users%20with%20matic%20on%20ethereum%20can%20upgrade%20today%20via%20the%20polygon%20portal%20interface:%20https//portal.polygon.technology/pol-upgrade)
+
+- The staked POL is still named as rMATIC after the Polygon network upgrade.
+- rMATIC holders will receive POL after unstaking and withdrawal.
+
+More details: https://polygon.technology/blog/save-the-date-matic-pol-migration-coming-september-4th-everything-you-need-to-know?utm_source=twitter&utm_medium=social&utm_campaign=blog
+
+import { Callout } from 'nextra/components'
+import { Steps } from 'nextra/components'
+
+## How to Stake POL with StaFi
+
+### Related Wallets
+
+**Metamask**:
+
+- Download Metamask from the [Metamask Website](https://metamask.io/).
+- Once installed, follow the instructions to import an existing wallet or create a new one.
+
+<Steps>
+
+### Go to POL staking page
+
+Visit the [POL staking page](https://app.stafi.io/gallery/all) and click the "Stake" button.
+
+![StaFi Stake MATIC](/image/stakingunstakingevmmatic_1-new.png)
+
+### Connect wallet
+
+Click on the “Connect Wallet” button to connect your Metamask wallet.
+
+![StaFi Stake MATIC](/image/stakingunstakingevmmatic_2-new.png)
+
+### Input staking amount
+
+Enter the amount of POL you would like to stake. Review the amount of rBNB you will receive and the Annual Percentage Rate (APR) for staking. Click the "Stake" button to proceed.
+
+![StaFi Stake MATIC](/image/stakingunstakingevmmatic_3.png)
+
+### Confirm transaction and await for confirmations
+
+Upon clicking “Stake”, you will be redirected to your Metamask wallet. Confirm the transaction details, including gas fees. To proceed, click on the "Confirm" button to sign the transaction. Wait for the transaction to be confirmed and the staking operation to be completed successfully.
+
+![StaFi Stake MATIC](/image/stakingunstakingevmmatic_4.png)
+
+### Add rMATIC to your wallet
+
+Navigate to the [rMATIC Dashboard](https://app.stafi.io/gallery/evm/MATIC?net=ERC20) and click on the "Add rMATIC to Wallet" button. A Metamask prompt will appear, select "Add token" to include rMATIC in your wallet.
+
+![StaFi Stake MATIC](/image/stakingunstakingevmmatic_5.png)
+
+### Track rewards
+
+Monitor your staked POL and its rewards by visiting your [Profile](https://app.stafi.io/profile/evm?net=ERC20).
+
+![StaFi Stake MATIC](/image/stakingunstakingevmmatic_6.png)
+
+</Steps>
+
+## The rMATIC Token
+
+The following are the addresses where rMATIC has been issued on different chains:
+
+- Polygon: [0x9f28e2455f9ffcfac9ebd6084853417362bc5dbb](https://polygonscan.com/token/0x9f28e2455f9ffcfac9ebd6084853417362bc5dbb)
+- Ethereum: [0x3dbb00c9be5a327e25caf4f650844c5dba81e34b](https://etherscan.io/token/0x3dbb00c9be5a327e25caf4f650844c5dba81e34b)
+
+Additionally, rMATIC holders can participate in liquidity mining. To learn more about this opportunity, please [visit this page](https://app.stafi.io/pool/evm?net=ERC20).
+
+If you need to bridge rMATIC, you can check the [bridge guide](/bridge).
+
+## Commission Fee
+
+10% of POL staking rewards will be allocated to StaFi DAO.
+
+## Unstake
+
+<Callout type="info">
+The rMATIC token has been updated to the EVM LSD architecture, allowing for unstaking directly on Ethereum without the need to bridge to the StaFi Chain.
+</Callout>
+
+<Steps>
+
+### Go to MATIC unstaking page
+
+Visit the [POL unstaking page](https://app.stafi.io/gallery/evm/MATIC?net=ERC20&tab=unstake), and proceed by clicking on the "Unstake" tab.
+
+![StaFi Stake MATIC](/image/stakingunstakingevmmatic_7.png)
+
+### Input unstaking amount
+
+Enter the desired amount of rMATIC you would like to unstake, and proceed by clicking on the "Unstake" button.
+
+![StaFi Stake MATIC](/image/stakingunstakingevmmatic_8.png)
+
+### Confirm transaction and wait for confirmations
+
+After clicking "Unstake," you will be redirected to your Metamask wallet. Confirm the spending cap of MATIC and approve it.
+
+Once confirmed, a second transaction pop-up for staking will appear. Confirm the transaction details, including gas fees. Click the "Confirm" button to sign the transaction.
+
+Wait for the transaction to be confirmed and the unstaking process to be completed successfully.
+
+<Callout type="info">
+Unbonding rMATIC takes 3-4 days before it can be withdrawn.
+</Callout>
+
+![StaFi Stake MATIC](/image/stakingunstakingevmmatic_9.png)
+
+### Withdraw unstaked tokens
+
+rMATIC will need to be manually withdrawn from the Withdraw Tab on the rMATIC Dashboard once the unbonding period has ended. Click on “Withdraw” button to proceed.
+
+![StaFi Stake MATIC](/image/stakingunstakingevmmatic_10.png)
+
+### Receive tokens
+
+Verify the transaction and the associated Gas fees on your Metamask Wallet. To proceed, click on the "Confirm" button to sign the transaction. Upon confirmation of the transaction, POL tokens will be withdrawn and sent to your wallet.
+
+![StaFi Stake MATIC](/image/stakingunstakingevmmatic_11.png)
+
+</Steps>

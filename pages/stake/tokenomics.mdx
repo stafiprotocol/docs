@@ -1,0 +1,97 @@
+---
+title: Tokenomics V2
+---
+
+import { Callout } from 'nextra/components'
+
+<Callout type="info">
+You can find more information on the Tokenomics V1 by visiting the [link](/stafichain/tokenomics).
+</Callout>
+
+## Introduction
+
+As the rToken solution extends across numerous ecosystems - including Layer1s, sidechains, Cosmos appchains, and beyond - the tokenomics of StaFi are confronted with challenges that need to support this expansion. These challenges consist of balancing the value of rTokens with chain security, incentivizing validators in StaFi appchains, and establishing a robust on-chain voting system for governance. The issues at hand largely center around the complex nature of the intertwined tokenomics, which include FIS tokenomics, rTokenomics, and appchain tokenomics.
+
+StaFi is progressing towards becoming a leading liquid staking infrastructure provider, aiming to offer solutions for the majority of PoS chains. Consequently, ensuring our tokenomics are sustainably updated is essential. Moreover, the rToken solution has been extensively developed for nearly two years, with the staked value in StaFi reaching $60 million. As the native token of the StaFi Protocol, FIS should bear the responsibility of capturing value alongside the growth of rTokens.
+
+This proposal is aimed to provide a comprehensive explanation of our plan to update StaFi’s tokenomics. By offering a detailed outline of the process, StaFi can better engage with the community and receive valuable feedback. Additionally, we aim to utilize this opportunity to ensure the delivery of a high-quality product by StaFi.
+
+## Why Adopt StaFi Tokenomic V2
+
+The LSD market is experiencing rapid changes, demanding scalable and secure rToken solutions to keep up with this trend. In response to these changes, StaFi is actively developing an open LSD infrastructure for the market. The goal is to create a product that can not only address current challenges in Layer1 tokens, but also effectively tackle future issues that may arise. StaFi’s commitment to enhancing competitiveness revolves around a deep understanding of the PoS mechanism, which will serve as a crucial feature for other LSD providers to emulate.
+
+To grasp the urgency of the impending shift, we must first comprehend the existing landscape. The fast-paced expansion of rTokens across various rToken appchains has led to a complex tokenomic structure. Presently, StaFi operates two distinct appchains, with the prospect of additional ones in the future. While FIS staking in StaFiChain is permissionless, staking in StaFiHub is yet to be community-led and is currently managed by a trusted validator set. The incentive for these validators stems from the treasury of StaFiChain. As explained in rTokenomic V1 2, running two staking mechanisms simultaneously is untenable. Moreover, there may be concerns about centralization and chain security if the value staked in rTokens issued on StaFiHub grows significantly. Inflation-induced FIS rewards from the treasury contribute to FIS supply dilution, but this is a necessary expenditure to maintain an appchain.
+
+StaFi has proposed launching more Appchains, such as the StaFi Subnet on Avalanche, StaFi Paratime on Oasis, StaFi Supernet on Polygon, and others. However, the introduction of multiple Appchains further complicates StaFi’s Tokenomics and puts its security and decentralization at risk.
+
+To put it simply, FIS cannot concurrently serve as the native token for multiple appchains, as its inflated value would be insufficient to safeguard the staked value of rTokens.
+
+For StaFi to achieve enhanced scalability, it’s crucial to disassociate the security of rTokens from that of the appchains. The rTokenomics need to be adequately protected, receiving inherent security from the target chain. There are two main strategies currently available: issuing rTokens in the target chain or adopting a shared consensus mechanism.
+
+In essence, StaFi Tokenomic V2 is an upgrade to the tokenomic structure, offering the StaFi community a comprehensive understanding of how various systems operate in tandem. As an asset management platform and an open LSD infrastructure, rTokens are issued on appchains, and appchains with consensus adhere to a distinct tokenomic model. Concurrently, FIS acts as a behind-the-scenes facilitator, transferring value within these appchains. This triadic structure might appear perplexing to the community, and even the first iterations of StaFi Tokenomic and rTokenomic didn’t fully consider LSD extensions. Tokenomics V2 is purposefully designed to navigate the intricate relationships amongst these StaFi participants, with the aim of making it more accessible and sustainable. This implies upcoming changes in StaFi’s tokenomics.
+
+In conclusion, these new modifications will facilitate the sustainable growth and governance of StaFi, create value for FIS, substantially bolster rToken security, and ensure the scalability of the rToken solution for prospective expansion.
+
+## Specifications
+
+This proposal is designed to revamp the tokenomics of FIS, rTokens, and StaFi appchains. The following updates will adhere to the following principles:
+
+- Keep the tokenomics as simple as possible.
+- Ensure that the StaFi protocol remains sustainable, interoperable, and scalable.
+- Enhance the value and governance roles of FIS for its holders in tandem with the ecosystem’s growth.
+
+These principles will profoundly influence the StaFi tokenomics. The primary proposed changes include:
+
+- FIS Tokenomics: FIS will remain the primary token of StaFiChain (deployed on Polkadot Substrate), and it will continue to be bridgeable to Ethereum (ERC20), StaFiHub (deployed on Cosmos SDK, ICS20), and more among other chains. Governance voting will be exclusively performed on StaFiChain, and subsequent aspects can be finalized, including burn strategy, inflation strategy, and treasury usage, among others.
+- rTokenomics: Apart from rFIS, rTokens will be decoupled from the security of StaFi appchains. This would result in the staked value being safeguarded by the target chain instead of StaFi. The rToken issuance contract will be deployed on the target chains, thereby enhancing rTokens’ interoperability.
+- Appchain Tokenomics: The security provider for the StaFi appchains will be determined based on usage. The FIS appchain will rely on staked FIS for security. EVM rTokens will utilize the security of the target chains, while Cosmos rTokens can acquire security from ATOM stakers via the ICS module. EVM LSD’s and Cosmos LSD’s can address the majority of situations in the PoS chains space, and additional infrastructures may be provided to new Layer1 tokens as a supplement , such as Move LSD infrastructure.
+
+The proposed alterations require updates to two open LSD infrastructures: previously issued rTokens, such as rBNB and rMATIC, that were deployed on StaFiChain, will be migrated and re-deployed on the target chain. rTokens issued on StaFiHub, like rATOM and rIRIS will remain the same, but the consensus will be updated to incorporate the ICS security module. Future rTokens will employ either the EVM LSD or Cosmos LSD solution for mainnet launches.
+
+Post-update, the security of StaFiChain will be ensured by staked FIS. There will be no TVL in StaFiChain apart from rFIS TVL. Regarding the ICS integration, StaFi will distribute FIS from its treasury to incentivize Cosmos security providers. Security will be anchored on staked ATOM but will be related to FIS.
+
+There are no significant changes to the utility of FIS in Tokenomic V2. However, the utilities are now more distinct and easier to comprehend. Primary utilities include:
+
+- Staking: Staking FIS provides security to the chain, yielding rewards and gaining voting power in return.
+- Governance: FIS holders are owners of StaFi and can stake FIS to govern both StaFi and rToken solutions.
+- Value Capture: FIS holders can capitalize on the value generated by the rToken solutions.
+
+FIS’s inflation and burn mechanisms will follow the same rules 3 set in V1. Parts of the inflated FIS goes to the Treasury, which depends on the staking ratio of FIS. The burn mechanism can be activated if the FIS in the Treasury has not been used in a certain period of time. The period is a timer set in the genesis. Even the inflation can be updated in the governance. The Treasury is an engine that bootstraps and keeps StaFi sustainable in the long run.
+
+StaFi charges a commission ranging from 5% to 10% from different rToken solutions, and an additional redemption fee may apply. These fees are sent to the treasury pool. As more fees are generated from rToken solutions, FIS holders have the right to decide how to utilize these rewards. They can be distributed among FIS holders, remain in the Treasury, or be used for the buy-back-burn strategy.
+
+All the parameters mentioned above can be voted on-chain and updated by the community. Governance proposals will be raised on StaFiChain, and staked FIS and rFIS (backed by staked FIS) holders can gain voting power. They have the right to govern the direction of StaFi.
+
+## Roadmap
+
+To achieve the roadmap of an open LSD infrastructure, progressive steps need to be taken. The first milestone or priority should be the adoption of shared/replicated security. After that, appchain security should be decoupled from StaFiChain, and then rTokens solution can be decoupled from the appchains. This means that rTokens should be redeployed on the target chains. In this process, it would be possible to form an LSD infrastructure to be a LSD middleware, which means a more generalized structure, even an LSD SDK.
+
+There will be challenges. ICS integration would need to be voted on and passed by the Cosmos governance. Abstracting a LSD middleware as an infrastructure may face a generalized issue. Even a LSD SDK may not be applicable for the market as it changes rapidly. However, with the update of the Tokenomics of StaFi, StaFi has more possibilities in the staking industry.
+
+### ICS integration
+StaFi proposes ICS integration as a means to decouple security between chains and total value locked (TVL). Considering that Cosmos has a larger staked value and consequently a higher market cap, ICS can offer enhanced security to other chains with LSDs. StaFiHub is pushing for ICS integration to unlock more possibilities for future LSDs. The success of Neutron 1, the first consumer chain to utilize ICS, provides a compelling case for this integration. By leveraging security from Cosmos, Neutron has positioned itself as a DeFi hub within the Cosmos ecosystem. Following this model, StaFi aims to replicate this security through Cosmos ICS, with a formal proposal set to follow.
+
+### rToken decoupling
+The decoupling of rTokens comprises two components. First, it involves the adoption of ICS for rTokens within StaFiHub, which will separate rToken security from StaFiHub. The second component is related to rTokens within StaFiChain. Apart from rFIS, all rTokens will gradually shift towards either the EVM LSD solution or the VM LSD solution. As part of this transition, these rTokens will be redeployed on their respective target chains, a process which will require time for development and audits. The abstraction of LSD infra will occur simultaneously. Once completed, the rToken solution will be scalable.
+
+### Governance
+StaFiChain is set to activate its governance in the near future. In this new arrangement, appchains will no longer carry the prefix “StaFi-xx.” Instead, they will be referred to by their deployment in the target chain system. For instance, StaFiHub will be renamed as “StaFi deployed on Cosmos,” and StaFi Subnet will become “StaFi deployed on Avalanche.” FIS staked in StaFi deployments using the Substrate framework will govern all solutions.
+
+Proposals can be raised on a variety of subjects, such as Treasury usage, inflation rate, rToken commission, and rToken deployment. Further details about on-chain voting, including FIS voting, the voting system, and the voting quorum, will be clarified through a governance proposal. This proposal will outline the governance process for the future.
+
+### Tools
+There will be a variety of tools available to display statistics related to rTokens, governance, integrations, liquidity, transparency, and more. Additionally, the integration of third-party tools will be crucial for establishing a complete LSD infrastructure. For instance, Dune, Defillama and Token Terminal have already been integrated to display rToken-related statistics. These tools keep track of the visualizations of token performance, market related trends and data, and trading volumes across multiple exchanges. As the LSD infrastructure expands and evolves, the range of tools and integrations will also grow, offering users more ways to engage with the platform and refine their trading strategies.
+
+### Benefits
+The proposed changes offer clear advantages. By decoupling StaFi’s Tokenomics from the security of rTokens, the protocol will enjoy enhanced scalability, leading to a more decentralized and transparent future. As we transition towards a Decentralized Autonomous Organization (DAO), we will see the elimination of permissioned Appchains, no constraints on growing staked value, and a strategic progression of StaFi in the right direction.
+
+However, these changes also bring potential drawbacks, particularly concerning FIS tokenomics. Questions arise, such as how to capture value growth when rTokens and appchains are decoupled from StaFi. Although the utility of the FIS token hasn’t dramatically changed, its role has evolved more towards that of a governance token. With voting power tied to staking, FIS stakers can determine treasury usage and govern protocol updates. Despite decoupling, FIS remains a key driver of the protocol and community. The implications for FIS tokenomics will become clearer as development progresses.
+
+### Risk
+- Smart Contracts: These form the backbone of any decentralized finance (DeFi) system, including StaFi. However, as with any cryptographic application, they carry inherent risks such as coding vulnerabilities or potential hacking.
+- Decoupled Migration: The proposed strategy involves redeploying rTokens to a different chain. This necessitates a migration process where assets are transferred from StaFi appchains to the target chain. This process could introduce risks associated with redeployment and asset migration.
+- Integration Failure: StaFiHub is exploring integration with the Inter-Blockchain Communication (ICS) protocol. However, this endeavor could fail if Cosmos stakers deny access, disrupting the planned expansion.
+
+As with any major change, there may be unforeseen risks associated with the proposed modifications. We encourage community members to share their insights and concerns.
+
+This is an open forum for discussion. None of the proposed changes will be implemented before a thorough community discourse has taken place. If no substantial feedback is received, the core team will initiate the proposed changes on the mainnet in the near future. Subsequently, the roadmap will guide governance voting and the activation of an on-chain proposal system for the community.

@@ -1,0 +1,11 @@
+---
+title: Multi Chain Overview
+---
+
+StaFi supports multiple chains, including Ethereum, Polygon, BSC, Solana, COSMOS, Polkadot, and other ecosystems. 
+
+In its initial design, StaFi chose the appchain technology route. This means that rTokens are minted and burned on the StaFi Chain, and FIS is also issued on the StaFi Chain. This ensures the security and scalability of assets.Later, in the COSMOS ecosystem, StaFi Hub was also built using the appchain approach, and FIS will also be on StaFi Hub. 
+
+However, with the development and improvement of the EVM ecosystem, the previous appchain design has brought some problems to the user experience. This is because the rToken obtained after the user pledges the token on the original chain is on the StaFi Chain. If users want to participate in DeFi on the original chain, they need to cross-chain rToken to the original chain, which will incur additional gas fees.
+
+Therefore, StaFi proposed an [EVM-compatible solution](https://dao.stafi.io/t/sip-1-lst-for-evm-compatible-chains/69) to optimize EVM chains. With this solution, rTokens will be issued directly on the target chains. This will make rTokens more secure and composable. It will also eliminate the need for multiple wallets and transactions, reduce gas and security risks, and enable rTokens to interact with more DeFi protocols on target chains.

@@ -1,0 +1,164 @@
+---
+title: Cosmos LSD App
+---
+
+Cosmos LSD App is a user interface where users can stake, unstake and get latest information about the project. As a convention in web3 all API users interact with are directly from the RPC configured in wallet, so the app is a pure DApp.
+
+![Cosmos LSD App Homepage](/image/cosmos_lsd/app_homepage.png 'Cosmos LSD APP Homepage')
+
+![Cosmos LSD App Notification Page](/image/cosmos_lsd/app_notification_page.png 'Cosmos LSD APP Notification Page')
+
+## Build your own LSD App
+
+### Setup Node.js env
+
+1. Fork [code on GitHub](https://github.com/stafiprotocol/neutron-lsd-app)
+1. Install [Node.js >=v16](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs)
+1. Install yarn via npm: `npm install --global yarn`
+1. Enter project root directory then install all dependencies via terminal: `yarn`
+1. Start app by: `yarn dev`
+
+### Config your app
+
+- Change branding links and text here: `config/appConf/app.json`
+
+```json
+// here are some config examples in app.json
+{
+  "appTitle": "ETH LSD App", // title of this app
+  "chain": {
+    // supported chains
+    "supportChains": ["Neutron"]
+  },
+  "icons": {
+    "tokenImg": "/images/token/token_green.svg", // icon of token
+    "lsdTokenImg": "/images/token/lsdToken.svg", // icon of lsd token
+    "chainImg": "/images/neutron_chain.png" // icon of chain
+  },
+  "detailedInfo": {
+    // audit info in Detail Info section
+    "audit": {
+      "nameList": ["Peckshield", "Blocksec"],
+      "link": "https://github.com/stafiprotocol/security/blob/main/audits/202304_BlockSec_StaFi-ETHWithdraw/blocksec_stafi_v1.0-signed.pdf"
+    },
+    "listedIns": [
+      {
+        "name": "Coingecko",
+        "link": "https://www.coingecko.com/en/coins/stafi-staked-eth"
+      }
+    ]
+  },
+  "auditList": [
+    // by which the lsd contracts are audited
+    {
+      "name": "PeckShield", // name and icon are shown on the top of the app
+      "icon": "/images/audit/peck_shield.svg",
+      "iconDark": "/images/audit/peck_shield_dark.svg"
+    }
+  ],
+  "faqList": [
+    // FAQs list
+    {
+      "title": "What are the factors that affect the staking rewards?", // question title
+      "contents": [
+        // answer of the question, it's comprised of a list of pure texts and links
+        {
+          "type": "text",
+          "content": "To learn more about how staking rewards are calculated, please read:\n"
+        },
+        {
+          "type": "link",
+          "content": "https://docs.stafi.io/rtoken/#rtoken-exchange-rate\n",
+          "link": "https://docs.stafi.io/rtoken/#rtoken-exchange-rate"
+        }
+      ]
+    }
+  ],
+  "externalLinkList": [
+    // external links related to the app which shown in the setting drawer
+    {
+      "name": "Docs",
+      "link": "https://docs.stafi.io/"
+    }
+  ],
+  "contactList": [
+    // media list shown in the setting drawer
+    {
+      "type": "Twitter",
+      "link": "https://twitter.com/Stafi_Protocol"
+    }
+  ],
+  "tokenPriceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=cosmos,neutron-3&vs_currencies=usd" // api to query token price
+}
+```
+
+- Set your pool address and lsd configs on Testnet here: `config/appConf/dev.json`
+- Set your pool address and lsd configs on Mainnet here: `config/appConf/prod.json`
+
+```json
+// config structures are identical in dev.json and prod.json
+// dev.json will be used when you build with `yarn build:dev`
+// prod.json will be used when you build with 'yarn build`
+{
+  "stakeManagerContract": "neutron1humx752uqvxn2jfenh5524md0ta23usm8m2lesaxw47fps28yx5syztnk5", // address of stake manager contract
+  "poolAddress": "cosmos193sx2unjy8u8kyrg247k7evcanmcktk88shv934066wlhm7aqljsng9593", // address of pool contract
+  "chains": {
+    "neutron": {
+      // chain config of neutron
+      "chainName": "Neutron Testnet",
+      "chainId": "pion-1",
+      "rpc": "https://neutron-testnet-rpc.polkachu.com",
+      "restEndpoint": "https://neutron-testnet-rpc.polkachu.com",
+      "denom": "untrn",
+      "coinDenom": "NTRN",
+      "decimals": 6,
+      "bech32Config": {
+        "bech32PrefixAccAddr": "neutron",
+        "bech32PrefixAccPub": "neutronpub",
+        "bech32PrefixValAddr": "neutronvaloper",
+        "bech32PrefixValPub": "neutronvaloperpub",
+        "bech32PrefixConsAddr": "neutronvalcons",
+        "bech32PrefixConsPub": "neutronvalconspub"
+      },
+      "explorerUrl": "https://www.mintscan.io/neutron-testnet",
+      "gasLimit": "80000",
+      "isNativeKeplrChain": false
+    },
+    "lsdTokenChain": {
+      // chain config of lsd token
+      "chainName": "Cosmos-Testnet",
+      "chainId": "cosmos-stafi-1",
+      "lsdTokenName": "rATOM",
+      "rpc": "https://test-cosmos-rpc1.stafihub.io",
+      "restEndpoint": "https://test-cosmos-rest1.stafihub.io",
+      "denom": "uatom",
+      "coinDenom": "ATOM",
+      "decimals": 6,
+      "bech32Config": {
+        "bech32PrefixAccAddr": "cosmos",
+        "bech32PrefixAccPub": "cosmospub",
+        "bech32PrefixValAddr": "cosmosvaloper",
+        "bech32PrefixValPub": "cosmosvaloperpub",
+        "bech32PrefixConsAddr": "cosmosvalcons",
+        "bech32PrefixConsPub": "cosmosvalconspub"
+      },
+      "explorerUrl": "https://testnet-explorer.stafihub.io/cosmos-testnet",
+      "defaultApr": "28", // default apr of lsd token
+      "stakeReserveAmount": 0.05, // amount of balance which will be reserved when staking
+      "gasLimit": "80000",
+      "isNativeKeplrChain": false,
+      "stakeIbcChannel": "channel-11"
+    }
+  }
+}
+```
+
+### Customize Theme
+
+You can change color config in `tailwind.config.js`, each color has light & dark versions(i.e text1 & text1Dark).
+
+![Customize Theme](/image/ethlsd/customize_theme.png 'Customize Theme')
+
+### Build and deploy
+
+Run `yarn build` or `yarn build:dev` to build your app, the static files will be placed in `out` folder. Upload those files to any static web hosting services you like.

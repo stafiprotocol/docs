@@ -1,0 +1,99 @@
+---
+title: Nomination
+---
+
+## How to nominate?
+
+import { Callout } from 'nextra/components'
+import { Steps } from 'nextra/components'
+
+There are 2 methods to nominate validator, bond FIS and then nominate validator, or combine bond and nominate operations together. It is recommended to follow the 2nd method.
+
+<Callout type="info">
+Differences: Operational Fee will be charged form Stash account by following the 2nd method, while fees charged are separated on the 1st method. Bond fees will be charged from your Stash account, and a nominate fee will be charged from the Controller account. You will be notified of these fees when you are nominating.
+</Callout>
+
+
+## Nomination Guide 2 (Recommended)
+
+1.Select Staking on the upper menu's Network's submenu, then select Nominator on Account actions.
+
+![StaFi Chain Nomination](/image/nomination_1.png)
+
+2.Select Stash Account and Controller account on setup nominator pop up page, then fill in Bond amount, and click Next.
+
+![StaFi Chain Nomination](/image/nomination_2.png)
+
+| Select list  | Explanation |
+| :------------ | :--------- |
+| Stash account (increase the amount at stake):  | Rewards received will be compounded towards nominating the validator|
+| Stash account (do not increase the amount at stake) | Rewards received will add towards the balance of the Stash account |
+| Controller account | The rewards are distributed to the Controller account | 
+
+3.You can select up to 16 validators. Validators can be selected through addresses, names or click them directly in validator list. When you finish selecting, click Nominate
+
+![StaFi Chain Nomination](/image/nomination_3.png)
+
+4.Confirm the transaction fee, fill in  password, then click Sign and Submit to submit info.
+
+![StaFi Chain Nomination](/image/nomination_5.png)
+
+5.The red box below shows that the nomination is successfully completed.
+
+![StaFi Chain Nomination](/image/nomination_6.png)
+
+## Nomination Guide 1
+
+1.Click Network and select Staking in the box to jump to the 'Staking' page. Then select Account actions. At the beginning, setup Stash and Controller account by clicking Stash.
+
+![StaFi Chain Nomination](/image/nomination_14.png)
+
+2.Select Stash and Controller account on ‘Bond Preferences’ page, then enter the Bond amount, and click Bond.
+
+![StaFi Chain Nomination](/image/nomination_7.png)
+
+| Select list  | Explanation |
+| :------------ | :--------- |
+| Stash account (increase the amount at stake):  | Rewards received will be compounded towards nominating the validator |
+| Stash account (do not increase the amount at stake) | Rewards received will add towards the balance of the Stash account |
+| Controller account | The rewards are distributed to the Controller account | 
+
+3. Confirm all info, then click Sign and Submit.
+
+Note: The transaction fee will be deducted from the Stash account for the Bond operation is executed through that account instead of the other.
+
+![StaFi Chain Nomination](/image/nomination_8.png)
+
+4.Once Bond action succeeded, your page will be like below. To the next step, click Nominate to start the nomination. 
+
+![StaFi Chain Nomination](/image/nomination_9.png)
+
+5.You can select up to 16 validators. Validators can be selected through  addresses, names or click them directly in validator list. When you finish selecting, click Nominate
+
+![StaFi Chain Nomination](/image/nomination_10.png)
+
+6.Confirm the transaction fee on 'authorize transaction' page, and fill in Controller account and password and click Sign and Submit.
+
+![StaFi Chain Nomination](/image/nomination_12.png)
+
+7.If you successfully nominated, the waiting nominations will be shown in the red box below.
+
+![StaFi Chain Nomination](/image/nomination_13.png)
+
+## More to Know
+
+### Stash and Controller
+
+The Stash account and Controller account can be the same account, however, for security concerns, it is recommended to set 2 different accounts respectively.
+
+<Callout type="info">
+Note: When the Stash account and the Controller account are set to different accounts, the Controller account balance cannot be 0, and a small amount of FIS must be sent to the Controller account in advance as a fee for the nomination cost. Otherwise the nomination transaction will fail.
+</Callout>
+
+### When does nomination take effect
+
+If you nominate validators during the first 45 minutes of 5th Epoch in a Era, and the nominated validators has been listed by the `(N+1)th Era`, then the rewards will be generated at the `(N+1)th Era`, while reward can be claimed at `(N+1+1)th Era`.
+
+In the Last 15 minutes of the 5th Epoch in the `Nth Era`, all data will be freezed temporarily. Nominations are not allowed during this period.
+
+If you nominate validator during the 6th Epoch of the `Nth Er`a, all validators of the `(N+1)th Era` have already been elected, so your nomination and rewards will not take effect until the `(N+1+1)th Era`. That is to say, you can claim the rewards in the `(N+1+1+1)th Era`.

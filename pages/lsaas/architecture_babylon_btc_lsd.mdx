@@ -1,0 +1,33 @@
+---
+title: BTC LSD Stack
+---
+
+StaFi BTC LSD Stack is devoted to help developers building Bitcoin liquid staking project with Babylon, a staking solution that integrates Bitcoin with Proof of Stake blockchains, and designed to provide a comprehensive set of solutions related to commission fee management, finality provider set management, and user operations: stake, unstake and withdraw.
+
+## Contracts
+
+Contracts plays a vital role in a LSD project. It stores the ratio between LST and BTC, as well as the user receipts of staking and other managerial states. The Stack consists of three contracts: Factory, LsdToken and StakeManager.
+
+- StakeManager: a manager contract which contains users staking/unstaking, rate updating and parameters management etc
+- LsdToken: a CW20 compatible derived token which is issued as a receipt of users' staking and burnt when users redeem their BTC
+- Factory: a helper for quickly deploying a LSD contracts
+
+## User Stake Flow
+
+The staking flow is a transaction on Bitcoin chain with two utxos: a transfer utxo with staking amount to pool address managed by MPC or multi-sig; and a declaration of LST recipient address on Babylon.
+
+![User Stake Flow](/image/btclsd/btc_staking_flow.png 'User Stake Flow')
+
+## User Unstake Flow
+
+Users can unstake their LST on Babylon chain, any LST holders are valid users, and can unstake their LSTs in exchange for BTC.
+
+![User Unstake Flow](/image/btclsd/btc_unstaking_flow.png 'User Unstake Flow')
+
+## MPC integration
+
+Given the limitation of Bitcoin, it is impossible to deploy a Turing complete contract, so an EOA account is required. StaFi BTC LSD Stack offers high security by integrating MPC algorithm, such as Cobo, Fireblocks etc.
+
+## Relay Service
+
+Relay service is an off-chain service, it mainly acts as a pool. It receives BTCs from stakers and delegate them to Babylon. In the meantime it operates StakeManager contract to store states, mint LSTs, burn LST and update rate etc.

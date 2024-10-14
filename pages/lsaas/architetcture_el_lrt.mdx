@@ -1,0 +1,43 @@
+---
+title: LRT Stack
+---
+
+StaFi LRT Stack is a simple, scalable and open-source development stack that powers EigenLayer LRT providers. Developers can launch a LRT based on it. 
+
+## Smart contracts
+
+- LrdToken: an ERC-20 compatible derived token. Users receive this token as a receipt for staking LST. And it will be burnt after unstaking.
+- StakePool: do delegation stuff with EigenLayer and will be bound to the chosen operator.
+- StakeManager: keep track of pools' states, interact with restakers, and do other routine works
+
+![StaFi LRT Architecture](/image/el_lrt/overview.png 'StaFi LRT Architecture')
+
+## Stakers flows
+
+### Stake Flow
+
+Users can stake ETH directly or any LSTs. For ETH stakers, they should call StakeManager.`stakeETH` with the amount of ETH they are willing to stake. For LST stakers, they should call StakeManager.`stake` with LST token and the amount of the token. They will receive LRT in return no matter which LST or ETH they deposited.
+
+- Scenario 1: Staking LST
+
+![Scenario 1: Staking LST](/image/el_lrt/stake_lst.png 'Scenario 1: Staking LST')
+
+- Scenario 2: Staking ETH
+
+![Scenario 2: Staking ETH](/image/el_lrt/stake_eth.png 'Scenario 2: Staking ETH')
+
+### Unstake & Withdraw Flow
+Any LRT holders are valid users, and can unstake their tokens in exchange for LSTs. 
+- Firstly, choose which pool supported LSTs they are willing to receive.
+- Secondly, approve StakeManager to spend their LRT tokens.
+- Thirdly, call StakeManager.unstake method with selected LSTs.
+- Lastly, call StakeManager.withdraw to claim their LSTs after unbonding period.
+
+![Unstake & Withdraw Flow](/image/el_lrt/user_unstake_flow.png 'Unstake & Withdraw Flow')
+
+## Relay Service
+
+Due to the limitation of smart contract, it could not launch an execution. So StaFi LRT Stack introduces Relay service. It will trigger StakeManager, at a certain interval, to collect and calculate users' reward, distribute it to the project and users.
+
+
+![Relay Service](/image/el_lrt/relay_service_new_era_flow.png 'Relay Service')

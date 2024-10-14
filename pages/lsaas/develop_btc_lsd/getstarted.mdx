@@ -1,0 +1,19 @@
+---
+title: Get Started
+---
+
+StaFi BTC LSD Stack is devoted to help developers building Bitcoin liquid staking project with Babylon, a staking solution that integrates Bitcoin with Proof of Stake blockchains, and designed to provide a comprehensive set of solutions related to commission fee management, finality provider set management, and user operations: stake, unstake and withdraw.
+
+## Contracts
+
+Contracts plays a vital role in a LSD project. It stores the ratio between LST and BTC, the user receipts of staking and other managerial states. Begin by deploying the contracts because other services, such as relay service, rely on these contract addresses and logic.
+
+## LSD Relay Service
+
+After deploying the contracts, you'll need to deploy the relay service. The relay service operates off-chain and requires contract addresses and events to respond correctly.
+    
+It provides functionality to generate related key pairs based on account private keys. It automates functions like tracking user staking, issuing LSD token, interacting with Babylon, distributing withdrawals and fees, and more.
+
+## MPC integration
+
+Given the limitation of Bitcoin, it is impossible to deploy a Turing complete contract, so an EOA account is required. StaFi BTC LSD Stack offers high security by integrating MPC algorithm, such as Cobo, Fireblocks etc.

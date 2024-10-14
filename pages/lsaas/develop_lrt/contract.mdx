@@ -1,0 +1,181 @@
+---
+title: Contracts
+---
+
+## LrdToken.sol
+An ERC20-compatible token used to store and manage LRD Tokens. When users deposit ETH or LSTs they will receive equivalent LRD tokens in return.
+
+## StakeManager.sol
+
+StakeManager contract holds managerial and users staking related functionalities.
+
+### Users
+
+- `stake()`: users can stake LST which is in supportedLSTs set to StakeManager and get LRD Token.
+
+- `stakeEth()`: users can directly stake ETH to StakeManager, it will be converted to a LST internally, then users will receive LRD Token.
+
+- `unstake()`: anyone who owns LRD Token can call this function, LRD Token will be burnt and users have to wait unbonding period of time to withdraw their assets. Users should choose which LSTs they are willing to receive before unstaking.
+
+- `withdraw()`: users can withdraw their LSTs they choose
+
+### Project party
+
+- `poolInitOperator()`: init pool's operator
+- `poolChangeOperator()`: undelegate with current operator, and delegate to another one. all assets will experience 7-day escrow period, then will be automatically delegated to the new one by `newEra` process
+- `setUnbondingDuration()`: set unbonding duration in eras, after how many era users can withdraw their unstaked assets, the product of *unbondingPeriod* and *eraSeconds* equivalent time must be greater than EigenLayer 7-day escrow period
+- `setLsdManagerAddress()`: LsdManager by default provided by 61Lab, considering stability this contract is not upgradeable. As EigenLayer may support new LST, then a new LsdManager will be deployed and project party can choose to upgrade or not
+- `addLst()`: support LST if it is supported by LsdManager
+- `removeLst()`: remove LST if project party do not want to support it
+- `setLstForStakeEth()`: set which LST will be mint when ETH is staked 
+
+### Relay service
+
+- `newEra()`: a permissionless method, it allows anyone to trigger to generate an era if it meets its turn. 
+
+  - Marking Time Periods: The era serves as a marker for time periods within the contract, each era representing a specific time cycle.
+  - Reward and Fee Calculation: At the beginning of the era, the contract calculates and distributes new rewards.
+  - Handling Delegation and Undelegation: In each new era process, the contract checks the delegation(*bond*) and undelegation(*unbond*) statuses of each pool of each LST and performs corresponding delegation or undelegation operations accordingly.
+  - Updating Pool States: In each new era process, the contract updates the status of each pool, including active funds (*active*), delegated funds(*bond*), and undelegated funds(*unbond*), reflecting the latest status of each pool in the new era.
+  - Updating Interest Rates: The contract calculates new interest rates based on the total amount of active funds and the total supply of LRD tokens in each era.
+
+## LsdManager.sol
+
+- `getLsdTokenRate()`: get rate between LST and ETH
+- `getSharesByTokenAmount()`: get shares by token amount since some LSTs are rebased token—the amount changes periodically
+- `getTokenAmountByShares()`: get token amount by shares
+- `getSupportedLstAddresses()`: get supported LST addresses
+- `isSupportedLst()`: check whether the LST token is supported
+- `mintLsdToken()`: mint LSD token by ETH
+- `strategyOf()`: get EigenLayer strategy contract of the LST token
+
+## StakePool.sol
+
+- `initOperator()`: delegate all assets to an operator
+- `changeOperator()`: undelegate with current operator, and delegate to another one. all assets will experience 7-day escrow period, then will be automatically delegated to the new one by `newEra` process
+- `isInRedelegatingPeriod()`: return whether pool is experience redelegation period
+- `operatorAddress()`: return the operator the pool delegated to
+- `queueWithdrawals()`: undelegate a fraction amounts of LSTs from EigenLayer
+- `stake()`: deposit staked LSTs to EigenLayer
+- `tryCompleteWithdrawals()`: withdraw all queued withdrawals which are mature
+- `withdrawFor()`: transfer LST to unstaker account
+
+## LrdNetworkFactory.sol
+An utility contract for launching new LRT networks with ease. Instead of deploying multiple contracts manually, you can just call `createLrdNetwork()` to deploy your own LSD network.
+
+- `createLrdNetwork()`
+create a new LRD network with an owner account
+
+It is a straightforward setup, full control over the network with a specified owner address, but lacks the security layer of timelock mechanism.
+
+`event LrdNetwork()` will be emitted with the following struct, `NetworkContracts`.
+
+**Parameters**:
+
+- Provide the desired name and symbol for your LRD token.
+- Specify the network owner's address.
+- Specify operator address.
+
+```solidity
+function createLrdNetwork(
+    string memory _lrdTokenName,
+    string memory _lrdTokenSymbol,
+    address _operator,
+    address _networkOwner
+)
+
+struct NetworkContracts {
+    address _stakeManager;
+    address _stakePool;
+    address _lrdToken;
+    uint256 _block;
+}
+```
+
+- `createLrdNetworkWithLrdToken()`
+create a new LRT network with a specified LRD Token implementation
+
+This function gives platforms more flexibility to create their preferred flavor of LRT network. To prevent malicious LrdToken which may be harmful to the users, we introduce `authorizedLrdToken` concept, so only authorized LrdToken can be used.
+
+```solidity
+createLrdNetworkWithLrdToken(
+    address _lrdToken,
+    address _operator,
+    address _networkOwner
+)
+```
+
+- `createLrdNetworkWithTimelock()`
+create a new LRT network with a special owner `Timelock`
+
+All functionality is as same as `createLrdNetwork` with TimeLock enabled. Changes and proposals will have a delay before they can be executed, preventing malicious activities, moreover it allows for a more decentralized setup with multiple proposers.
+
+**Parameters**:
+
+- Provide the desired name and symbol for your LRD token.
+- Specify operator address.
+- Define the minimum delay for the timelock.
+- Specify the proposer addresses.
+
+```solidity
+function createLrdNetworkWithTimelock(
+    string memory _lrdTokenName,
+    string memory _lrdTokenSymbol,
+    address _operator,
+    uint256 minDelay,
+    address[] memory proposers
+)
+```
+
+- `lsdTokensOfCreator()`
+retrieve all LSD tokens created by the creator
+
+```solidity
+lsdTokensOfCreator(address _creator) public view returns (address[] memory)
+```
+
+- `networkContractsOfLrdToken()`
+retrieve NetworkContracts info of the LrdToken
+
+```solidity
+networkContractsOfLrdToken(address _lrdToken) public view
+    returns (struct NetworkContracts {
+        address _stakeManager;
+        address _stakePool;
+        address _lrdToken;
+        uint256 _block;
+    })
+```
+
+## Timelock.sol
+It acts as a time-locked controller. When set as the owner of the ownable smart contract, it enforces a time lock on all `onlyOwner` maintenance operations. This provides users of the controlled contract with time to exit before potentially dangerous maintenance operations are applied.
+
+`Timelock` is a tool that provides time-locking functionality for smart contracts. It ensures that critical operations (such as contract upgrades or parameter changes) have a predetermined waiting period before execution, giving users ample time to respond. This increases the transparency and security of the contract, as users can take action before potential adverse changes take effect.
+
+The `Timelock` contract inherits from the `TimelockController` contract and utilizes the constructor of the `TimelockController`. Here are the parameters of the `TimelockController` constructor and their purposes:
+
+- **`minDelay`**:
+    - Type: `uint256`
+    - Purpose: Represents the minimum delay (in seconds) required for an operation to become executable after it has been proposed. This ensures that there's ample time for users or other stakeholders of the contract to react before a potentially harmful operation gets executed.
+- **`proposers`**:
+    - Type: `address[] memory`
+    - Purpose: This is an array of addresses that will be granted the proposer (`PROPOSER_ROLE`) and canceller (`CANCELLER_ROLE`) roles. Proposers can propose new operations, while cancellers can cancel operations that haven't been executed yet.
+- **`executors`**:
+    - Type: `address[] memory`
+    - Purpose: This is an array of addresses that will be granted the executor (`EXECUTOR_ROLE`) role. Executors can execute operations that have passed their delay period.
+- **`admin`**:
+    - Type: `address`
+    - Purpose: This is an optional address that will be granted the admin (`TIMELOCK_ADMIN_ROLE`) role. The admin can change role permissions and other advanced settings. If set to a non-zero address, this address will have admin privileges. However, for security reasons, it's recommended to renounce this role after contract deployment, ensuring all administrative tasks must go through the timelock process
+
+## Notable Parameters
+
+Platforms inevitably have their own parameters. We've compiled a list of the most significant ones that you might consider adjusting.
+
+|  config | description  | recommended value |
+|---|---|---|
+| address<br>owner    | an account who administers the whole network | we suggest platform use multi-sig account for security reason |
+| uint256<br>rateChangeLimit      | a number represents the numerator in rate and the denominator is 1e18.<br>the exchange rate between ETH and LrdToken is vital for the system, to prevent accidental or violent changes, we introduce `rateChangeLimit` to keep the system safe | default is 11e14 (=0.11%) |
+| uint256<br>unbondingDuration     | a number represents how many `eras` unstakes must take to be withdrawable | default 8 |
+| uint256<br>protocolFeeCommission   | a number represents the numerator in rate and the denominator is 1e18.<br>this value configures the proportion of the platform rewards | 1e17 (denotes 1e17/1e18=10%)<br>(platform commission = <br>total rewards * 10%)  |
+| uint256<br>factoryCommissionRate    | a number represents the numerator in rate and the denominator is 1e18.<br>*it is a proportion of factoryCommission to platformCommission*<br>the value of parameter should be determined after consulting with 61 Lab | 1e17 (denotes 1e17/1e18=10%)<br>(factory commission = <br>platform commission * 10%)   |
+| address<br>lsdManagerAddress    | LsdManager by default provided by 61Lab, considering stability this contract is not upgradeable. As EigenLayer may support new LST, then a new LsdManager will be deployed. Keep an eye on 61Lab for updates |  |

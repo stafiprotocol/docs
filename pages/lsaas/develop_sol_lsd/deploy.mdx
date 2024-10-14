@@ -1,0 +1,51 @@
+---
+title: How to deploy Solana LSD stack
+---
+
+This guide provides a step-by-step script to deploy the Solana LSD stack, without knowing details about contracts and services. Read the documentation for comprehensive understandings of these components.
+
+
+## Step1. Deploy your LSD network contracts
+
+61 Lab have made [StaFi LSAAS](https://stack-app.stafi.io/) for project parties to deploy their LSD network contracts.
+
+![](/image/cosmos_lsd/choose-lsd-token-page.png "Launchpad Homepage")
+
+
+### Parameter Tips
+
+Owner Address: sets the owner of the LSD network being created.
+
+Owner Permissions:
+- Manage validators
+- Change balancer account
+- Adjust commission fee
+- Adjust unbonding duration
+- Adjust the minimum stake amount
+
+Validator Address: `Vote Account` of the validator
+
+### Rewards Distribution
+
+Rewards distribution is crucial to project parties. Commission fee of users is set default as 10% and StaFi Stack fee is 10% of the project income. for example, if `100Token` rewards received from the chain, the distribution will be:
+
+| Role | Amount(Token) | Formula |
+|---------------|--------|-------|
+|  Users        |  90 | 100*(1-0.1)  |
+|  Project      |  9  | (100-90)*(1-0.1)  |
+|  StaFi Stack  |  1  | 100-90-9  |
+
+### Save all the information generated
+
+The lsd network has a set of accounts, so you should save all the information which you will interact frequently with, such as Solana LSD App and Relay service.
+
+- Owner address
+- LST address
+- Stack Contract address
+- Stake Manager address
+
+## Step2. Run relay service
+[Follow this doc to run relay service](relay.html)
+
+## Step3. Deploy your own LSD App
+<a href="lsd_app.html" target="_blank">Follow our doc to deploy your own LSD App</a>

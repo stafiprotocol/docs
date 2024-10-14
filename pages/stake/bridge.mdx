@@ -1,0 +1,224 @@
+---
+title: Bridge
+---
+
+The StaFi Bridge facilitates token transfers between the supported networks. This guide outlines the process of bridging StaFi's rTokens using the StaFi Bridge.
+
+## StaFi Bridge
+
+### Supported Tokens
+
+- FIS / rFIS: StaFi Chain, StaFi Hub, BSC Chain, Ethereum, Solana, Polygon, Layer2(Arbitrum, Optimism)
+- rETH: Ethereum, Layer2(Arbitrum, Optimism)
+- rMATIC: Ethereum, Polygon
+- rBNB: BSC Chain
+- rDOT: StaFi Chain
+- ATOM / rATOM: StaFi Hub, Cosmos Hub, IRISnet Hub, Chihuahua
+- IRIS / rIRIS: StaFi Hub, Cosmos Hub, IRISnet Hub, Chihuahua
+- HUAHUA / rHUAHUA: StaFi Hub, Cosmos Hub, IRISnet Hub, Chihuahua
+- rDOT: StaFi Chain
+- rKSM: StaFi Chain
+- rSOL: StaFi Chain, Solana
+
+import { Steps } from 'nextra/components'
+
+### Guide
+
+**Prerequisites**
+
+- Metamask Wallet or Wallet Connect for EVM Ecosystem Tokens
+- Keplr Wallet for Cosmos Ecosystem Tokens
+- Polkadot.js Extension Wallet for Polkadot Ecosystem Tokens
+- Phantom Wallet for the Solana Token
+
+<Steps>
+
+### Access the rToken App
+
+Go to [StaFi rToken App](https://app.stafi.io).
+
+### Select Token
+
+Choose the preferred token that you would like to bridge.
+
+![StaFi Bridge](/image/bridge_1.png)
+
+### Select Bridge
+
+Select on the “bridge” tab
+
+![StaFi Bridge](/image/bridge_2.png)
+
+### Bridge Routes
+
+Choose the origin and destination for your tokens using the provided dropdown boxes. Ensure you possess sufficient tokens to cover transaction fees.
+
+![StaFi Bridge](/image/bridge_3.png)
+
+### Enter Amount
+
+Enter the amount of tokens you would like to bridge.
+
+![StaFi Bridge](/image/bridge_4.png)
+
+### Connect Wallet
+
+Click on the “Connect Wallet” button to connect both wallets relevant to your bridge routes. After a successful connection, your Receiving Address will automatically update to match the address of the linked wallet.
+
+![StaFi Bridge](/image/bridge_5.png)
+
+### Bridge Tokens
+
+Upon clicking “Bridge”, you will be redirected to your connected wallet. Confirm the transaction details, including gas fees. To proceed, click on the "Confirm" button to sign the transaction. Wait for the transaction to be confirmed and the staking operation to be completed successfully.
+
+![StaFi Bridge](/image/bridge_6.png)
+
+### Receive Bridged Tokens
+
+After the successful confirmation of your transaction, a notification will appear, accompanied by a link directing you to the explorer for transaction details. You can then view the bridged tokens in your wallet.
+
+![StaFi Bridge](/image/bridge_7.png)
+
+</Steps>
+
+## Arbitrum Bridge
+
+The Arbitrum bridge allows for seamless token transfers between the Ethereum mainnet and the Arbitrum Rollup chain. This guide will walk you through the process of bridging FIS and rETH tokens using the Arbitrum bridge.
+
+<Steps>
+
+### Connect to Ethereum Mainnet
+
+Ensure your web3 wallet (e.g., MetaMask) is connected to the Ethereum mainnet.
+
+### Visit the Arbitrum Bridge Portal
+
+Navigate to the [official Arbitrum Bridge](https://bridge.arbitrum.io/).
+
+![StaFi Bridge](/image/bridge_8.png)
+
+### Select Token
+
+Choose your preferred token from the dropdown, depending on which token you want to bridge.
+
+![StaFi Bridge](/image/bridge_9.png)
+
+### Enter Amount 
+
+Specify the amount of the selected token you wish to transfer to the Arbitrum network.
+
+![StaFi Bridge](/image/bridge_10.png)
+
+### Initiate Transfer 
+
+Click "Deposit" to begin the bridging process, which will lock your tokens on Ethereum and mint the equivalent on Arbitrum.
+
+### Confirm Transaction
+
+Confirm the transaction in your web3 wallet. Ensure you have enough ETH for gas fees.
+
+### Switch to Arbitrum Network
+
+In your web3 wallet, switch to the Arbitrum network to view and use your bridged tokens.
+
+### Returning to Ethereum Mainnet 
+
+To move tokens back to Ethereum, use the Arbitrum Bridge Portal, select the token, and initiate a withdrawal.
+
+</Steps>
+
+## Optimism Bridge
+
+The Optimism bridge allows users to transfer tokens between the Ethereum mainnet and the Optimistic Ethereum (OE) network. This guide will walk you through the process of bridging FIS and rETH tokens using the Optimism bridge.
+
+<Steps>
+
+### Connect to Ethereum Mainnet
+
+Ensure your web3 wallet (e.g., MetaMask) is connected to the Ethereum mainnet.
+
+### Visit the Arbitrum Bridge Portal
+
+Navigate to the official [Optimism Bridge](https://app.optimism.io/bridge/deposit).
+
+![StaFi Bridge](/image/bridge_11.png)
+
+### Select Token
+
+From the dropdown menu, select either FIS or rETH, depending on which token you want to bridge.
+
+![StaFi Bridge](/image/bridge_12.png)
+
+### Enter Amount 
+
+Input the amount of FIS or rETH you wish to transfer to the Optimistic Ethereum network.
+
+![StaFi Bridge](/image/bridge_13.png)
+
+### Initiate Transfer 
+
+Click on the "Deposit" or "Transfer" button. This will initiate the process of locking your tokens on the Ethereum mainnet and minting the equivalent amount on the OP network.
+
+### Confirm Transaction
+
+Confirm the transaction in your web3 wallet. Ensure you have enough ETH for gas fees.
+
+### Wait for Completion 
+
+The bridging process might take some time. Once completed, you'll receive the equivalent amount of FIS or rETH on the Optimistic Ethereum network.
+
+### Switch to Optimistic Ethereum Network
+
+In your web3 wallet, switch to the Optimistic Ethereum network to view and use your bridged FIS or rETH tokens.
+
+</Steps>
+
+## Polygon / Polygon zkEVM Bridge
+
+The Polygon bridge facilitates token transfers between the Ethereum mainnet and the Polygon (Matic) network. This guide outlines the process of bridging FIS, rFIS, and rETH tokens using the Polygon bridge.
+
+<Steps>
+
+### Connect to Ethereum Mainnet
+
+Ensure your web3 wallet (e.g., MetaMask) is connected to the Ethereum mainnet.
+
+### Visit the Polygon Wallet
+
+Navigate to the [official Polygon Wallet](https://wallet.polygon.technology/).
+
+### Select Chain
+
+Select to bridge either to Polygon or Polygon ZkEVM from the tabs shown.
+
+![StaFi Bridge](/image/bridge_14.png)
+
+### Select Token
+
+Choose your preferred token, depending on which token you want to bridge.
+
+![StaFi Bridge](/image/bridge_15.png)
+
+### Enter Amount
+
+Specify the amount of the selected token you wish to transfer to the Polygon network.
+
+![StaFi Bridge](/image/bridge_16.png)
+
+### Initiate Transfer
+
+Click "Transfer" to start the bridging process, locking your tokens on Ethereum and minting the equivalent on Polygon.
+
+### Confirm Transaction
+
+Confirm the transaction in your web3 wallet. Ensure you have enough ETH for gas fees.
+
+### Switch to Polygon Network
+
+In your wallet, switch to the Polygon network to view and use your bridged tokens.
+
+</Steps>
+
+## Keplr IBC Transfer
+
+Cosmos rToken and FIS bridge, we recommend using the IBC functionality of the Keplr wallet. StaFi Hub has been successfully integrated into the Keplr wallet. You can check the [Kpler help doc](https://help.keplr.app/articles/ibc-transfers).

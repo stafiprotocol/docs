@@ -1,0 +1,137 @@
+# Staking ETH with StaFi
+
+This document is intended for users and developers who want to learn more about StaFi Staked ETH and how to stake ETH using StaFi.
+
+## How Ethereum staking works
+
+The Ethereum network comprises two blockchains in parallel since the Merge on September 15th, 2022: the Execution layer (formerly ETH1), which contains all of Ethereum's transaction data, and the Consensus layer (Beacon Chain), which consists of a network of validators that collectively determine the validity of each transaction and each block broadcast to the network.
+
+Staking is the process of creating and maintaining one (or more) of these validators on the Beacon Chain to help the network maintain the consistency and security of the Ethereum blockchain. Validators do this by:
+
+- Listening for transactions and new block proposals.
+- Attesting that the proposed block contains legal, valid transactions by doing some number crunching and verification behind the scenes.
+- Occasionally, proposing new blocks themselves.
+
+To ensure the network is resilient to malicious validators who lie about the current state, each validator must lock up 32 ETH as a stake in the network. They must also fulfill their duties, agree with other validators, and produce blocks to receive rewards. If they misbehave or attack the network, a certain amount of money will be deducted from their locked 32 ETH.
+
+Unlike Proof of Work (PoW), where validators must perform complex computations to receive rewards, Proof of Stake (PoS) allows validators to earn slow and steady income by correctly fulfilling their duties.
+
+Initially, validator rewards accumulated on the beacon chain as rewards for each validator, and their operators could not receive rewards. Starting from the "Shapella" hard fork, validator rewards typically "skip over" to the execution layer address defined by the validator's withdrawal credentials.
+
+## How StaFi Staked ETH works
+
+StaFi allows anyone to participate in ETH staking, regardless of the amount of ETH they hold. This is unlike solo validators, which require a minimum stake of 32 ETH. Additionally, StaFi users do not need to own a node to participate in staking.
+
+StaFi currently supports two types of validators:
+- **Trust validators**: These validators can run nodes without staking ETH.
+- **Solo validators**: Anyone can participate in solo validators, but they must stake 12 ETH for security purposes.
+
+In the future, StaFi will introduce DVT (Decentralized Validator Tool), which will further enhance overall security and decentralization.
+
+## How to stake ETH with StaFi
+
+import { Cards, Callout } from 'nextra/components'
+
+Check out the How to stake ETH with StaFi section for more information:
+
+<br/>
+
+<Cards.Card
+  icon={
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="h-6 w-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"
+      />
+    </svg>
+  }
+  title="How to stake ETH with StaFi"
+  href="/stakingeth/howtostake/"
+/>
+
+## The rETH token
+
+The following are the addresses where rETH has been issued on different chains:
+
+- Ethereum: [0x9559aaa82d9649c7a7b220e7c461d2e74c9a3593](https://etherscan.io/address/0x9559aaa82d9649c7a7b220e7c461d2e74c9a3593)
+- Polygon: [0x5736df66b4f8401d639ffa915a46b4c548c09ac1](https://polygonscan.com/token/0x5736df66b4f8401d639ffa915a46b4c548c09ac1)
+- Arbitrum(L2): [0x6cda1d3d092811b2d48f7476adb59a6239ca9b95](https://arbiscan.io/token/0x6cda1d3d092811b2d48f7476adb59a6239ca9b95)
+- Optimism(L2): [0x6c2f7b6110a37b3b0fbdd811876be368df02e8b0](https://optimistic.etherscan.io/token/0x6c2f7b6110a37b3b0fbdd811876be368df02e8b0)
+
+Additionally, rETH holders can participate in liquidity mining. To learn more about this opportunity, please [visit this page](/stakingeth/liquidity).
+
+<Callout type="info">
+Mining rETH is currently only supported on Ethereum Layer1. If you wish to participate in liquidity mining or other on-chain activities on layer2, you will need to bridge your rETH from Layer1 to Layer2. You can check the [bridge guides](/bridge).
+</Callout>
+
+![StaFi rPool](/image/stakingoverview_1.png)
+
+## Unstake
+
+Check out the Unstake section for more information:
+
+<br/>
+
+<Cards.Card
+  icon={
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="h-6 w-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"
+      />
+    </svg>
+  }
+  title="Unstake"
+  href="/stakingeth/unstake/"
+/>
+
+## Commission Fee
+
+As part of the staking rewards distribution, 5% will be allocated to the StaFi DAO, 5% will be allocated to validators, while the remaining portion will be allocated to users.
+
+## Staking via DEX
+
+Users have the option to swap their ETH to rETH using decentralized exchanges other than the StaFi rToken App. However, it's important to pay close attention to the exchange rate.
+
+When users stake or unstake rETH through a DEX, the exchange rate is determined by the pool balance and may not be the same as the rate on the chain. Prior to the ETH Shanghai upgrade, users were unable to withdraw ETH from the deposit contract, which meant that when unstaking rETH, they could only swap rETH to ETH on the DEX. This caused the rETH/ETH rate on the DEX to be lower than the rate on the chain. Similarly, when staking ETH, the rETH/ETH exchange rate on the DEX might be lower than the rate on the chain. **In this situation, it would be more advantageous to swap ETH to rETH on the DEX, resulting in receiving more rETH than staking ETH on the StaFi app**. This swap would also cause the rETH/ETH exchange rate on the DEX to increase, further contributing to the non-linear nature of the exchange rate graph.
+
+It's worth noting that now, StaFi ETH staking supports ETH withdrawal with a limit of 100 ETH per day. If a user wants to unstake rETH and receive an amount of ETH greater than 100 in one transaction, this is not supported on the StaFi rToken app. However, they could swap rETH to ETH on the DEX in one transaction. This would result in the user receiving an amount of ETH less than on the StaFi rToken app and cause the rETH/ETH rate on the DEX to be lower than the rate on the chain.
+
+## Liquidity Mining
+
+<Cards.Card
+  icon={
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="h-6 w-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"
+      />
+    </svg>
+  }
+  title="Liquidity Mining"
+  href="/stakingeth/liquidity/"
+/>

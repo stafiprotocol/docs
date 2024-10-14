@@ -1,0 +1,115 @@
+---
+title: Contract
+---
+
+The core part of StaFi EVM LSD Stack is a set of smart contracts, which are divided into two parts: PlatformContract - [Factory](https://github.com/stafiprotocol/babylon-lsd-contracts/tree/main/contracts/factory), a platform contract managed by 61 Lab, and ProjectContracts, [StakeManager](https://github.com/stafiprotocol/babylon-lsd-contracts/tree/main/contracts/stake_manager) and [LSD token](https://github.com/stafiprotocol/babylon-lsd-contracts/tree/main/contracts/lsd_token), which belong to different projects. The smart contracts are implemented in Rust and can be deployed to any chains which support CosmWasm.
+
+## Factory contract
+
+Factory contract is a platform contract which is common dependency for all projects. Via platform contract, developers or start-up projects can easily deploy and initialize their project contracts. 
+
+- `create_lsd_network`: deploy LSD Token and Stake Manager contracts for project by parameters
+
+```rust
+// params  
+pub struct CreateLsdNetworkParams {
+    pub btc_addr: String,
+    pub bbn_addr: String,
+    pub validator_pubkeys: Vec<String>,
+    pub lsd_token_name: String,
+    pub lsd_token_symbol: String,
+    pub minimal_user_stake: Uint128,
+    pub minimal_pool_stake: Uint128,
+    pub network_admin: String,
+    pub lsd_token_code_id: Option<u64>,
+    pub platform_fee_commission: Option<Uint128>,
+}
+```
+
+## LsdToken contract
+
+an CW20 compatible derived token which is issued as a receipt of users' staking and burnt when users redeem their BTC.
+
+## StakeManager contract
+
+a manager contract which contains users staking/unstaking, rate updating and parameters management etc
+
+### Users
+- `stake`: mint LSTs to stakers after their staking
+
+⚠️This method is called by relay service on behalf of *pool_bbn_addr* when staked BTC received from stakers
+
+```rust
+pub struct Stake {
+    tx_hash: String,
+    staker_bbn_addr: Addr,
+    stake_amount: Uint128,
+}
+```
+
+- `unstake`: all LSD token holders are valid stakers, and can call this method to redeem BTC
+
+ ```rust
+pub struct Unstake {
+    lsd_token_amount: Uint128,
+    staker_btc_address: String,
+}
+```
+
+### Manager
+
+- `config_stake_manager`: config stake manager parameters
+
+```rust
+pub struct ConfigStakeManagerParams {
+    minimal_user_stake: Option<Uint128>,
+    minimal_pool_stake: Option<Uint128>,
+    unstake_times_era_limit: Option<u64>,
+    platform_fee_commission: Option<Uint128>,
+    era_seconds: Option<u64>,
+    paused: Option<bool>,
+    lsm_support: Option<bool>,
+    lsm_pending_limit: Option<u64>,
+    rate_change_limit: Option<Uint128>,
+    new_admin: Option<Addr>,
+}
+```
+
+- `rm_validator`: remove a validator
+
+```rust
+pub struct RmValidator {
+    validator_addr: String,
+}
+```
+
+- `add_validator`: add a new validator
+
+```rust
+pub struct AddValidator {
+    validator_addr: String,
+}
+```
+
+- `update_validator`: update a validator, 
+
+The old validator must exist on the StakeManager and the new validator must not.
+
+```rust
+UpdateValidator {
+    old_validator: String,
+    new_validator: String,
+},
+```
+
+### New era
+
+
+Era is a concept defined how often the pool interacts with native staking module, the rates will be updated and the rewards will be collected and distributed. Most of the time, an era is 24 hours long. The new era process consists of 4 steps: 
+
+⚠️Methods below are called by relay service on behalf of *pool_bbn_addr*.
+
+1. `era_update`: take a snapshot of the stake manager and mark the beginning of the new era process
+2. `bond_report`: do delegation or undelegation with babylon and call this method to record the result
+3. `active_report`: update rate and distribute rewards to platform and project parties
+4. `transfer_report`: transfer BTC to unstakers according to unstaking requests

@@ -1,0 +1,54 @@
+---
+title: LST for EVM compatible chains
+---
+
+> The StaFi staking contract layer dedicated for EVM ecosystem rTokens
+
+## Problem
+
+- When users stake EVM Network tokens such as BNB or MATIC, they need to connect two wallets and sign multiple transactions to complete the staking process.
+- When users interact with decentralized exchanges (DEX) on Ethereum, BSC, or Polygon using rTokens, if the rToken is on StaFi Chain, they will need to pay additional gas fees to bridge the rToken to the target chain.
+
+## Motivation
+
+The EVM Network has become one of the most popular and influential blockchain networks. However, using the current approach to build LST on these chains would result in high costs and a poor user experience for users, as well as limited scalability for StaFi, requiring significant development effort. This SIP provides a solution that can reduce transaction costs and usage barriers for users while maintaining scalability as a general architecture.
+
+## Specification
+
+### Overview
+
+The newly proposed EVM LST solution is redesigned for security and composability. Differing from the current solution, the main feature of the new solution is that rToken will be directly issued on the target chain. This eliminates the need for cross-chain communication when users obtain rTokens, and enables easy integration of rToken into DeFis on the target chain, given the same token standard.
+
+The primary difference between the two solutions lies in the ecosystem of the chain on which rToken issuance depends. To promote composability, target chains should have a variety of use cases for rTokens, including DEXes, Lendings, Options, Index, and more. This will facilitate widespread adoption of rToken. If such use cases are not available on the target chain, we would suggest issuing rToken on StaFi Chain, as rDEX will be able to serve as the DEX for rToken trading on that platform.
+
+Preconditions for the new solution:
+- The target chain should have a contract layer
+- The staking model is built within the contract layer
+
+As the solution is mainly built for EVM LSD, the contract layer should also be EVM compatible. While it is theoretically possible to implement the solution on all VMs, evaluation would need to be performed for VMs with different sets.
+
+If the preconditions are not met, the development process will be costly and time-consuming, and there may not be a feasible solution for the chain. On the other hand, the benefits of the new EVM LSD solution are obvious, offering high-level security and composability. Additionally, an EVM-compatible chain with a staking model would be similar to StaFi’s, making the integration process straightforward and simple, potentially only requiring a copy-paste approach.
+
+### Architecture
+
+The current architecture
+
+![StaFi EVM LST](/image/lstevm-1.png)
+
+The new architecture
+
+![StaFi EVM LST](/image/lstevm-2.png)
+
+- **Target Chain**: The chain intends to support LSTs, such as rETH on Ethereum.
+- **Staking Contracts**: On-chain processing logic for StaFi staking.
+- **Original Staking Contract**: The original staking contract is a smart contract that allows users to stake their tokens in order to participate in the network’s consensus mechanism and earn rewards, such as deposit contract on Ethereum.
+- **rToken Relay**: Listens for events, handles numerical computations, votes to the staking contracts, and processes staking data once per era.
+- **rToken**: Only support the target chain’s token standard, such as ERC20 on Ethereum.
+
+### Interface and Integration
+
+We have previously studied [multi-wallet components](https://dao.stafi.io/t/research-exploring-multi-wallet-components-for-integration-with-stafi/36) that currently only support EVM Network. We plan to integrate these components into the frontend and also integrate more EVM Network services for data analysis and security.
+
+## Security Considerations
+- Security module: The migration process involves shifting the security module from chain security to contract security, which presents potential security vulnerabilities that must be carefully monitored and addressed.
+- Contract layer: The migration from rust-solidity also poses potential risks to the contract layer, which must be assessed and managed to ensure the overall integrity and security of the solution.

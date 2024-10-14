@@ -1,0 +1,151 @@
+---
+title: How to run ICQ relay Service?
+---
+
+ICQ is an abbreviation for Interchain Queries which allow smart contract to make queries to a remote chain. An ICQ Relayer is a required component for making them possible. It acts as a facilitator between the Neutron chain and a querying chain, gathering queries that are needed to be performed from the Neutron, actually performing them, and eventually making the results available for the Neutron's smart contracts.  [Read full ICQ relayer documentation here](https://docs.neutron.org/relaying/icq-relayer)
+
+## Install requirements
+### Essentials
+
+Install `make`, `gcc` and `git` 
+
+```bash
+sudo apt update
+sudo apt install -y make gcc git build-essential
+```
+
+### Golang
+Install `go` by following the [official docs](https://golang.org/doc/install). Remember to set your `$PATH` environment variable, for example:
+
+```bash
+cd $HOME
+wget -O go1.21.8.linux-amd64.tar.gz https://go.dev/dl/go1.21.8.linux-amd64.tar.gz
+rm -rf /usr/local/go && tar -C /usr/local -xzf go1.21.8.linux-amd64.tar.gz && rm go1.21.8.linux-amd64.tar.gz
+echo 'export GOROOT=/usr/local/go' >> $HOME/.bashrc
+echo 'export GOPATH=$HOME/go' >> $HOME/.bashrc
+echo 'export GO111MODULE=on' >> $HOME/.bashrc
+echo 'export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin' >> $HOME/.bashrc && . $HOME/.bashrc
+go version
+```
+
+### Docker
+If you have any problem with installing docker, please check out [docker official documentation](https://docs.docker.com/engine/install/).
+```bash
+sudo apt update
+sudo apt-get install ca-certificates curl
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo docker run hello-world
+```
+
+## Build docker image
+
+By default Relayer handles all queries in a smart contract. That's not LSD project party intent as the more queries relayer handles to more gas fee they pay. StaFi protocol extend the relayer to specify which query ids they would like to relay. So that they just pay gas fee for their pool query ids. This is a very useful feature, we have planed to submit changes to Neutron.
+
+```bash
+git clone https://github.com/stafiprotocol/neutron-query-relayer
+cd neutron-query-relayer
+make build-docker
+```
+
+## Build `neutrond`
+
+```bash
+git clone -b v3.0.0 --depth=1 https://github.com/neutron-org/neutron.git
+cd neutron
+make install
+neutrond version
+3.0.0
+```
+
+## Add account
+
+Remember to transfer some neutron(NTRN) to the account generated or imported as it needs gas fee to relay transactions.
+
+```bash
+neutrond keys add icq-relayer \
+  --keyring-dir=/home/neutron/keys --keyring-backend=test
+
+- address: neutron1wdxufavkkr9x5a9fga5ur2p8em9r0mjjf6pnjy
+  name: icq-relayer
+  pubkey: '{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"AzlrtWTpIynQ0/MxJjteC2LMuYlPEutNhPeHQ9KGjKcR"}'
+  type: local
+
+
+**Important** write this mnemonic phrase in a safe place.
+It is the only way to recover your account if you ever forget your password.
+
+```
+
+## Config parameters
+
+[Read full documentation of configuration](https://github.com/neutron-org/neutron-query-relayer/blob/main/README.md#configuration)
+
+Additional environments provided by StaFi protocol:
+- `RELAYER_REGISTRY_QUERY_IDS`: A list of query ids separated by comma.
+Go <a href="https://neutron.celat.one/pion-1/query?contract=neutron1humx752uqvxn2jfenh5524md0ta23usm8m2lesaxw47fps28yx5syztnk5" target="_blank">Neutron Explorer</a> to get pool query ids.
+![Get Pool Query IDs](/public/image/cosmos_lsd/get_pool_query_ids.png)
+
+| Key                                              | type              | description                                                                                                                                                                | Example |
+|--------------------------------------------------|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
+| `RELAYER_REGISTRY_QUERY_IDS`        | `string`    | Query ids  | 91,92,93,94 |
+
+```bash
+cp .env.example .env-test
+vim .env-test
+
+## This is an example env configuration for running the relayer in Docker
+
+RELAYER_NEUTRON_CHAIN_RPC_ADDR=https://rpc-falcron.pion-1.ntrn.tech:443
+RELAYER_NEUTRON_CHAIN_REST_ADDR=https://rest-falcron.pion-1.ntrn.tech
+RELAYER_NEUTRON_CHAIN_HOME_DIR=/keyring
+RELAYER_NEUTRON_CHAIN_SIGN_KEY_NAME=icq-relayer
+RELAYER_NEUTRON_CHAIN_TIMEOUT=10s
+RELAYER_NEUTRON_CHAIN_GAS_PRICES=0.025untrn
+RELAYER_NEUTRON_CHAIN_GAS_LIMIT=10000000
+RELAYER_NEUTRON_CHAIN_GAS_ADJUSTMENT=2.0
+RELAYER_NEUTRON_CHAIN_CONNECTION_ID=connection-175
+RELAYER_NEUTRON_CHAIN_DEBUG=true
+RELAYER_NEUTRON_CHAIN_KEYRING_BACKEND=test
+RELAYER_NEUTRON_CHAIN_OUTPUT_FORMAT=json
+RELAYER_NEUTRON_CHAIN_SIGN_MODE_STR=direct
+
+RELAYER_TARGET_CHAIN_RPC_ADDR=https://test-cosmos-rpc1.stafihub.io:443
+RELAYER_TARGET_CHAIN_ACCOUNT_PREFIX=cosmos
+RELAYER_TARGET_CHAIN_VALIDATOR_ACCOUNT_PREFIX=cosmosvaloper
+RELAYER_TARGET_CHAIN_TIMEOUT=10s
+RELAYER_TARGET_CHAIN_DEBUG=true
+RELAYER_TARGET_CHAIN_OUTPUT_FORMAT=json
+
+RELAYER_REGISTRY_ADDRESSES=neutron1humx752uqvxn2jfenh5524md0ta23usm8m2lesaxw47fps28yx5syztnk5
+RELAYER_REGISTRY_QUERY_IDS=91,92,93,94
+
+RELAYER_ALLOW_TX_QUERIES=true
+RELAYER_ALLOW_KV_CALLBACKS=true
+RELAYER_MIN_KV_UPDATE_PERIOD=1
+RELAYER_STORAGE_PATH=storage/leveldb
+RELAYER_QUERIES_TASK_QUEUE_CAPACITY=10000
+RELAYER_CHECK_SUBMITTED_TX_STATUS_DELAY=10s
+RELAYER_INITIAL_TX_SEARCH_OFFSET=0
+RELAYER_WEBSERVER_PORT=127.0.0.1:9999
+RELAYER_IGNORE_ERRORS_REGEX=(execute wasm contract failed|failed to build tx query string)
+
+#LOGGER_LEVEL=debug
+#LOGGER_OUTPUTPATHS=stdout, /tmp/logs
+#LOGGER_ERROROUTPUTPATHS=stderr
+```
+
+## Run
+
+```bash
+docker run --env-file .env-test  -v /home/neutron/keys:/keyring -p 9999:9999 neutron-org/neutron-query-relayer
+```
