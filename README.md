@@ -103,7 +103,7 @@ Nextra components like steps, tabs, and callouts can also be used to structure t
 ### Steps
 
 ```
-import { Steps } from 'nextra-theme-docs'
+import { Steps } from 'nextra/components'
  
 <Steps>
  
@@ -121,7 +121,7 @@ Contents for step 2.
 ### Tabs
 
 ```
-import { Tab, Tabs } from 'nextra-theme-docs'
+import { Tab, Tabs } from 'nextra/components'
  
 <Tabs items={['pnpm', 'npm', 'yarn']} defaultIndex="1">
   ...
