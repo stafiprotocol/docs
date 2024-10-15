@@ -1,0 +1,57 @@
+---
+title: Contract
+---
+
+## Ton Contracts
+
+Smart contracts form the core of the TON LSD Stack. The system comprises several key contracts, each serving a specific purpose in the liquid staking ecosystem. Here's an overview of the main contracts:
+
+### StakePool
+
+The StakePool contract manages individual liquid staking pools. Each pool represents a project party and handles staking, unstaking, and reward distribution.
+
+Key functions:
+- `stake`: Allows users to stake TON coins and receive LSD tokens
+- `request_loan`: Validators(borrowers) can request loans for staking
+- `allocate_loan`: Allocates loans to validators
+- `update_round`: Updates the round status and handles data changes
+- `finish_loan`: Completes the loan process and distributes rewards
+
+### StakePod
+
+StakePod contracts are created for each validator participating in the system. They manage the interaction between validators and the Elector contract.
+
+Key functions:
+- `proxy_new_stake`: Proxies new stake requests to the Elector
+- `proxy_recover_stake`: Recovers stakes from the Elector
+
+### LsdTokenMaster
+
+The LsdTokenMaster contract manages the issuance and overall supply of LSD tokens.
+
+Key functions:
+- `proxy_mint_tokens`: Mints new LSD tokens
+- `proxy_request_unstake`: Handles unstaking requests
+- `proxy_request_withdraw`: Processes withdrawal requests
+
+### LsdTokenWallet
+
+LsdTokenWallet contracts represent individual user wallets for LSD tokens.
+
+Key functions:
+- `send_tokens`: Sends LSD tokens to another address
+- `receive_tokens`: Receives LSD tokens
+- `unstake`: Initiates the unstaking process
+- `withdraw`: Withdraws unstaked TON coins
+
+## System Characteristics
+
+- **Permissionless Operations**: Many key operations, such as starting new rounds and allocating loans, are permissionless. This design enhances the decentralized nature of the TON LSD Stack.
+
+- **Round-based Processing**: The system operates in rounds, with each round having different statuses (Open, Allocating, Allocated, Staking, Held, Finishing, Finished). This structure ensures orderly processing of stakes, loans, and rewards.
+
+- **Flexible Commission Structure**: The system supports configurable commission rates for both the platform and the stack, allowing for adaptable fee structures.
+
+- **Validator Management**: The system includes mechanisms for adding, removing, and updating validators, providing flexibility in managing the validator set.
+
+This contract structure allows for a comprehensive, flexible, and secure liquid staking system on the TON blockchain, catering to various participants including stakers, validators, and project administrators.

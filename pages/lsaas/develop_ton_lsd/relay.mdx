@@ -1,0 +1,45 @@
+---
+title: Relay
+---
+
+The Relay Service is a crucial off-chain component of the TON LSD Stack. It interacts with the on-chain smart contracts to facilitate various operations in the liquid staking system. This service is responsible for monitoring and triggering key processes in the stake pools.
+
+## Key Features
+
+1. Continuous Monitoring: The relay service runs continuously, checking the state of stake pools at regular intervals (every 30 seconds).
+2. Round Management: It manages different stages of staking rounds, including allocation, updating, and finishing.
+3. Smart Contract Interaction: The service sends external messages to the stake pool smart contract to trigger various operations.
+
+## Main Operations
+
+The relay service performs three primary operations based on the current round status:
+
+1. Allocate Loan (opAllocateLoan):
+
+Triggered when a round is in "Open" or "Allocating" status.
+Initiates the loan allocation process for validators.
+
+
+2. Update Round (opUpdateRound):
+
+Executed when a round is in "Allocated" or "Staking" status.
+Updates the round information when the validator set has changed.
+
+
+3. Finish Loan (opFinishLoan):
+
+Activated when a round is in "Held" or "Finishing" status and the stake holding period has ended.
+Completes the loan process and handles reward distribution.
+
+
+## Technical Details
+
+1. Connection: Uses liteclient to establish a connection with the TON network.
+2. Smart Contract Interaction: Utilizes the tonutils-go library for sending external messages to smart contracts.
+3. State Monitoring: Regularly checks the stake pool state and blockchain configuration.
+
+## Configuration
+The relay service requires two main configuration parameters:
+
+* stakePool: The address of the stake pool contract.
+* globalConfigUrl: The URL for the TON network configuration.
