@@ -20,6 +20,7 @@ export default{
   architetcture__evmlsd:"EVM LSD",
   architetcture_cosmoslsd:"Cosmos LSD",
   architetcture__solana_lsd:"Solana LSD",
+  architetcture_ton_lsd:"Ton LSD",
   "-- develop": {
     type: "separator",
     title: "Develop"
@@ -30,6 +31,7 @@ export default{
   develop_evm_lsd:"EVM LSD",
   develop_cosmos_lsd:"Cosmos LSD",
   develop_sol_lsd:"Solana LSD",
+  develop_ton_lsd:"Ton LSD",
   modules:"Modules",
   "-- security": {
     type: "separator",
