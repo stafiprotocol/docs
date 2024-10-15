@@ -27,12 +27,19 @@ Key functions:
 
 ### LsdTokenMaster
 
-The LsdTokenMaster contract manages the issuance and overall supply of LSD tokens.
+The LsdTokenMaster contract manages the issuance and overall supply of LSD tokens. It acts as an intermediary between token holders and the stake pool, handling various proxy operations.
+General proxy function behavior:
+
+Receives requests from authorized sources (stake pool or token wallets)
+Validates incoming requests
+Forwards valid requests to appropriate contracts for execution
+Ensures operations are carried out through proper channels
 
 Key functions:
-- `proxy_mint_tokens`: Mints new LSD tokens
-- `proxy_request_unstake`: Handles unstaking requests
-- `proxy_request_withdraw`: Processes withdrawal requests
+
+- `proxy_mint_tokens`: Mints new LSD tokens and sends them to specified recipient wallets.
+- `proxy_request_unstake`: Handles unstaking requests from token holders.
+- `proxy_request_withdraw`: Processes withdrawal requests for unstaked funds.
 
 ### LsdTokenWallet
 
