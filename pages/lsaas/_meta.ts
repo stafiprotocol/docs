@@ -12,15 +12,15 @@ export default{
     type: "separator",
     title: "Architecture"
   },
-  architetcture_overview:"Overview",
-  architetcture_designprinciples:"Design Principle",
-  architetcture__ethlsd:"ETH LSD",
+  architecture_overview:"Overview",
+  architecture_design_principles:"Design Principle",
+  architecture_eth_lsd:"ETH LSD",
   architecture_babylon_btc_lsd:"BaBylon LSD",
-  architetcture_el_lrt:"EigenLayer LRT",
-  architetcture__evmlsd:"EVM LSD",
-  architetcture_cosmoslsd:"Cosmos LSD",
-  architetcture__solana_lsd:"Solana LSD",
-  architetcture_ton_lsd:"Ton LSD",
+  architecture_el_lrt:"EigenLayer LRT",
+  architecture_evm_lsd:"EVM LSD",
+  architecture_cosmos_lsd:"Cosmos LSD",
+  architecture_solana_lsd:"Solana LSD",
+  architecture_ton_lsd:"Ton LSD",
   "-- develop": {
     type: "separator",
     title: "Develop"
