@@ -9,6 +9,7 @@ The Relay Service is a crucial off-chain component of the TON LSD Stack. It inte
 1. Continuous Monitoring: The relay service runs continuously, checking the state of stake pools at regular intervals (every 30 seconds).
 2. Round Management: It manages different stages of staking rounds, including allocation, updating, and finishing.
 3. Smart Contract Interaction: The service sends external messages to the stake pool smart contract to trigger various operations.
+4. Gas-Free Relay Operations: The relay functions without requiring private keys or mnemonics. All transaction gas fees are automatically covered by the TON balance within the StakePool contract, eliminating the need for additional gas provision.
 
 ## Main Operations
 

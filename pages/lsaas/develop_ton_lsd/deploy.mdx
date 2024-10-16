@@ -9,7 +9,7 @@ This guide provides a step-by-step script to deploy the Ton LSD stack, without k
 
 61 Lab have made [StaFi LSAAS](https://stack-app.stafi.io/) for project parties to deploy their LSD network contracts.
 
-Link to your wallet, such as Tonkepper, for follow-up actions 
+Link to your wallet, such as Tonkeeper, for follow-up actions
 
 ![image-20241015153325385](./assets/image-20241015152245555.png)
 ![image-20241015153325385](./assets/image-20241015153325385.png)
@@ -22,6 +22,24 @@ Token Name: sets the name of the LSD token.
 Token Symbol: sets the symbol of the LSD token.
 
 Owner Address: sets the owner of the LSD network being created.
+
+### Rewards Distribution
+
+Rewards distribution is crucial to project parties. Commission fee of users is set default as 10% and StaFi Stack fee is 10% of the project income. for example, if `100Ton` rewards received from the chain, the distribution will be:
+
+| Role | Amount | Formula |
+|---------------|--------|-------|
+|  Users        |  90 | 100*(1-0.1)  |
+|  Project      |  9  | (100-90)*(1-0.1)  |
+|  StaFi Stack  |  1  | 100-90-9  |
+
+### Save all the information generated
+
+The lsd network has a set of accounts, so you should save all the information which you will interact frequently with, such as Solana LSD App and Relay service.
+
+- Owner address
+- LSD Token Address
+- Stake Pool Address
 
 ## Step2. Run relay service
 
@@ -57,9 +75,11 @@ $ make install
 
 #### Start relay services
 
+Take testnet as an example
+
 ```bash
-$ ton-lsd-relay start --global_config_url=https://ton.org/testnet-global.config.json --stake_pool=kQBIEjXuvFC0CEnE_69iM7DiPOspfcX25pJxPKERKs8k8xvJ
-StakePool: kQBIEjXuvFC0CEnE_69iM7DiPOspfcX25pJxPKERKs8k8xvJ
+$ ton-lsd-relay start --global_config_url=https://ton.org/testnet-global.config.json --stake_pool={StakePool Address}
+StakePool: {StakePool Address}
 Global config url: https://ton.org/testnet-global.config.json
 Log level : info
 
@@ -68,5 +88,3 @@ y
 INFO[2024-10-15T13:24:15+08:00] start success
 ```
 
-## Step3. Deploy your own LSD App
-<a href="lsd_app.html" target="_blank">Follow our doc to deploy your own LSD App</a>
