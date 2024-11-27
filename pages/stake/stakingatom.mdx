@@ -50,6 +50,12 @@ Monitor your staked ATOM and its rewards by visiting your [Profile](https://app.
 
 </Steps>
 
+## rATOM Migration
+
+The rATOM token has been relaunched on Neutron, and its liquidity will also be managed on Neutron. With StaFi Hub scheduled to be decommissioned, users will need to migrate their rATOM tokens from StaFi Hub to Neutron. For detailed migration instructions, please refer to the information shared on [Mirror](https://mirror.xyz/0xBABf7e6b5bcE0BD749FD3C527374bEf8919cC7A9/LLgygQd55Niz3htde7yIaBQ1_5I3XU9_igwOD0CBtQ4).
+
+![StaFi Stake ATOM](/image/stakingunstakingcosmosatom_19.png)
+
 ## Liquid Staking Guide for Staked ATOM / LSM ATOM (Staked ATOM shares)
 
 This feature is implemented using the Cosmos Liquid Staking Module(LSM) module.
@@ -118,14 +124,32 @@ export function FAQBox({ title, children }) {
 **LSM ATOM:** The ATOM that are transferred into tokenized delegations, the liquid staking process is initiated with the Liquid Staking Module tokenizing existing staked ATOM delegations and converting them into NFTs (tokenized delegations) with attributes like reward address, validator, etc.
 </FAQBox>
 
-
 ## The rATOM Token
 
-rATOM: https://www.mintscan.io/stafi/assets
+rATOM (Issued on Neutron): https://www.mintscan.io/neutron/wasm/contract/neutron12nqfqdlj3mc3amheq5m80mxnwrnqzp64rhrwfxerqkjwtqg7j7kqs2qz6n
 
 Additionally, rATOM holders can participate in liquidity mining. To learn more about this opportunity, please [visit this page](https://app.stafi.io/pool/cosmos).
 
 If you need to bridge rATOM, you can check the [bridge guide](/bridge).
+
+## Add rATOM to your Keplr wallet
+
+![StaFi Stake ATOM](/image/stakingunstakingcosmosatom_15.png)
+
+### Navigate to the “Manage Token List” section under the “Settings” page.
+
+![StaFi Stake ATOM](/image/stakingunstakingcosmosatom_16.png)
+
+### Select “Neutron” and click “Add Token”.
+
+![StaFi Stake ATOM](/image/stakingunstakingcosmosatom_17.png)
+
+### Enter the rATOM contract address on Neutron and click “Confirm”.
+
+rATOM Contract Address on Neutron:
+neutron12nqfqdlj3mc3amheq5m80mxnwrnqzp64rhrwfxerqkjwtqg7j7kqs2qz6n
+
+![StaFi Stake ATOM](/image/stakingunstakingcosmosatom_18.png)
 
 ## Commission Fee
 
@@ -151,7 +175,7 @@ Enter the desired amount of rATOM you would like to unstake, and proceed by clic
 
 After clicking "Unstake," you will be redirected to your Keplr wallet. Confirm the spending cap of ATOM and approve it.
 
-Once confirmed, a second transaction pop-up for staking will appear. Confirm the transaction details, including gas fees. Click the "Confirm" button to sign the transaction. 
+Once confirmed, a second transaction pop-up for staking will appear. Confirm the transaction details, including gas fees. Click the "Confirm" button to sign the transaction.
 
 Wait for the transaction to be confirmed and the unstaking process to be completed successfully.
 
