@@ -1,0 +1,55 @@
+---
+title: Technical Guide
+---
+
+This document serves as a technical guide for the Hackathon. The project can be categorized into: developing a new LSaaS, developing a module, developing automation tools and developing a monitoring and alerting system. For each of them we have provide a general approach which we usually take, that would be helpful for your invention.
+
+## Develop a new LSaaS for other Ecosystems, e.g., Move
+
+Before starting development, research is necessary to determine if the ecosystem supports Smart Contract, Stake, and Unstake functionalities. If these are supported, LSaaS can be implemented. Additional support for Delegate and Partial Undelegate can make implementation even easier.
+
+After completing the research, proceed with the contract architecture design. Typically, a Factory Contract is needed to act as the management platform, enabling quick creation of tenant instances (i.e., contracts related to LSD). It also manages platform functions such as permissions, billing methods, and whether tenants are allowed to entrust their relays to the platform.
+
+An LSD requires a token contract, typically ERC20/CW20/SPL, to represent users' staking rights. A StakeManager Contract is also needed to delegate/stake users' tokens to the corresponding chain. This is the simplest model and can reference [EVM LSD Contracts](https://github.com/stafiprotocol/evm-lsd-contracts/tree/main/contracts/matic).
+
+If the chain does not support delegation, logic for validator operation, monitoring, and exit will need to be developed, referencing [the ETH LSD Architecture](/lsaas/architecture_eth_lsd/).
+
+Some newer chains support scheduled tasks, allowing contracts to initiate calls proactively. In this case, a relay may not be needed. However, most chains do not allow contracts to initiate transactions or set timed tasks. For such cases, a relay is required. Contract design should follow best practices to ensure the relay is as permissionless as possible, fundamentally ensuring the security of the LSD network.
+
+In addition to contracts, relays, and validator-related programs, a front-end application must be developed for users. This application will enable users to stake, unstake, withdraw, view rates, and access the latest project updates. Refer to [ETH Stake App](/lsaas/develop_eth_lsd/ethlsdapp/) for inspiration.
+
+## Develop a Module for Integration into an Existing LSaaS System
+
+Module development involves the following steps:
+
+1. Register the module to the system.
+2. Develop the module’s functionality.
+3. Enable or disable the module through the system.
+
+Currently, LSaaS does not have Registry function, so module developers need to implement this themselves. See [the LSaaS Modules Documentation](/lsaas/modules/introduction) for development.
+
+## Automation Tools for One-Click Deployment of LSD on LSaaS
+
+Currently, deploying an LSD requires tenants to manually complete the following steps: create through the Factory, deploy Relay, and set up the Frontend. Automation tools should streamline this process, allowing users to specify necessary parameters in the first step and automatically deploy the related services.
+
+Example workflow:
+
+1. Let users to select the ecosystem, the chain, for deploying the LSD.
+2. Ask users to input the required parameters.
+3. Ask users to review the configuration.
+4. Create the contract.
+5. Deploy the relay (users can choose to deploy locally or remotely).
+6. Deploy the frontend (local or remote options).
+7. Generate a deployment report with contract addresses, relay information, and frontend details.
+
+The goal is to enable users to deploy an LSD system within 5 minutes.
+
+## LSaaS Health Monitoring and Alert System
+
+The health of an LSD network can be assessed from multiple perspectives:
+- Contract Status: Check for abnormal status, such as unusual changes in rates or event frequencies.
+- Historical Records: Log historical states and event frequencies for anomaly detection.
+- Relay Service Health: Ensure relay services are operating correctly, such as syncing block status, how long do a task take.
+- Validator Ejector Service: Verify the ejector services is working properly (e.g., Ethereum's ejector services).
+
+If any error of the above services happen or likely to happen, the system should notify administrators via Email, Discord, Telegram or other communication channels.

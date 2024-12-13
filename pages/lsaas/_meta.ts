@@ -33,6 +33,7 @@ export default{
   develop_sol_lsd:"Solana LSD",
   develop_ton_lsd:"Ton LSD",
   modules:"Modules",
+  hackathon:"Hackathon",
   "-- security": {
     type: "separator",
     title: "Security"
