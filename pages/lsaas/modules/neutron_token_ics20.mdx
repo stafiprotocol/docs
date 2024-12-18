@@ -44,13 +44,19 @@ ics20_contract_address=$(neutrond tx wasm instantiate "$ics_code_id" "$init_ics2
 echo "CW20 ICS20 Contract address: $ics20_contract_address"
 ```
 
+#### Parameter Description
+1. default_gas_limit: If set, contracts off the allowlist will run with this gas limit. If unset, will refuse to accept any contract off the allow list.
+2. default_timeout: Default timeout for ics20 packets, specified in seconds
+3. gov_contract: who can allow more contracts
+4. allowlist.gas_limit: setting a usable Gas limit for the execution of target chain SubMsg.
+
 ### 2. Create IBC Channel
 
 After deploying the contract, create an IBC channel between Neutron and the target chain. Use the Hermes binary with the following command:
 
 ```bash
 # Replace variables with your specific values
-CW20_ICS20_PORT="wasm:<your-cw20-ics20-contract-address>"
+CW20_ICS20_PORT="wasm.<your-cw20-ics20-contract-address>"
 
 hermes --config $<your-config-dir> create channel \
     --order unordered \
@@ -109,12 +115,12 @@ lsd_token_send_msg=$(printf '{
 
 ### 5. Token Flow
 
-#### Neutron → Target Chain)
+#### Neutron → Target Chain
 
 1. LSD tokens are locked in the CW20-ICS20 contract on Neutron
 2. Recipient receives IBC-wrapped tokens (like ibc/E4061FDF70B906A3DE1A8F3B1334329C86DA7C90C96AF1AFCAE81BB72D0E8C89) on the target chain
 
-#### Target Chain → Neutron)
+#### Target Chain → Neutron
 
 1. Use standard IBC transfer to send IBC tokens back to Neutron
 2. The CW20-ICS20 contract will:
