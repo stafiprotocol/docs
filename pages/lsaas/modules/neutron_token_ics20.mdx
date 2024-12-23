@@ -20,7 +20,7 @@ You can find the CW20-ICS20 contract in [Cosmos wasm contracts](https://github.c
 
 CW20_ICS0_CONTRACT_PATH="{your-path}/cw20-ics20.wasm"
 
-echo "----------------------------- store cw20 ics20 contract -------------------------------"
+echo "----------------------------- store cw20-ics20 contract -------------------------------"
 
 ics_code_id="$(neutrond tx wasm store "$CW20_ICS0_CONTRACT_PATH" \
     --from "$<your-address>" --gas 50000000 --chain-id neutron-1 \
@@ -30,9 +30,9 @@ ics_code_id="$(neutrond tx wasm store "$CW20_ICS0_CONTRACT_PATH" \
     wait_tx | jq -r '.events[] | select(.type == "store_code").attributes[] | select(.key == "code_id").value')"
 echo "ics_code_id: $ics_code_id"
 
-init_ics20_msg='{"default_timeout":1000,"gov_contract":"'$<your-address>'","allowlist":[{"contract":"'$<your-lsd-token-address>'","gas_limit": 10000000}],"default_gas_limit": 10000000}'
+init_ics20_msg='{"default_timeout":1000,"gov_contract":"'$<your-address>'","allowlist":[{"contract":"'$<your-lsd-token-address>'","gas_limit": 100000}]}'
 
-echo "----------------------------- init cw20 ics20 contract -------------------------------"
+echo "----------------------------- init cw20-ics20 contract -------------------------------"
 
 ics20_contract_address=$(neutrond tx wasm instantiate "$ics_code_id" "$init_ics20_msg" \
     --from "$<your-address>" --admin "$ADMIN" -y --chain-id neutron-1 \
@@ -69,6 +69,17 @@ hermes --config $<your-config-dir> create channel \
 
 Make note of the channel ID that is created, as it will be needed for token transfers.
 
+Note: After creation, make sure that the corresponding channel has been added to the whitelist in your Hermes config file
+
+For example:
+```toml
+[chain.packet_filter]
+policy = 'allow'
+list = [
+ ['wasm.neutron...',"*"]
+]
+```
+
 ### 3. Configure Token Allowlist
 
 Add your CW20 token (LSD token) to the allowlist using the CW20-ICS20 contract's Allow method:
@@ -85,6 +96,9 @@ neutrond tx wasm execute "$ics20_contract_address" \
     --broadcast-mode=sync --gas-prices 0.0025untrn -y \
     --output json --home "$<your-home-path>" \
 ```
+
+- You can also use the [blockchain explorer](https://neutron.celat.one/) to initialize and add to the allow list:
+![neutron_isc20_allow](./assets/neutron_isc20_allow.png)
 
 ### 4. Initiate Token Transfer
 
@@ -112,6 +126,8 @@ lsd_token_send_msg=$(printf '{
 
 # Execute the send operation on your LSD token contract
 ```
+
+![send-cw20](./assets/neutron_cw20_send.png)
 
 ### 5. Token Flow
 
