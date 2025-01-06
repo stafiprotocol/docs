@@ -6,7 +6,11 @@ This guide provides a step-by-step script to deploy the Cosmos LSD stack, withou
 
 ## Neutron(ICS-27) LSD Stack
 
-### Step1. Deploy your LSD network contracts
+### Step1. Run IBC Relay
+
+The goal of the first step is to have a connection identifier between target chain and Neutron, e.g. `connection-0`. We can browse current mainnet [Neutron Relayers](https://www.mintscan.io/neutron/relayers). If the IBC is already exist we can retrieve its connection id from [Cosmos Chain Registry Repository](https://github.com/cosmos/chain-registry/tree/master/_IBC). But if it doesn't we need run IBC Relayer by following the doc: [Neutron Run IBC Relayer](https://docs.neutron.org/relaying/ibc-relayer).
+
+### Step2. Deploy your LSD network contracts
 
 61 Lab have made [StaFi LSAAS](https://stack-app.stafi.io/) for project parties to deploy their LSD network contracts.
 
@@ -90,10 +94,10 @@ Project parties can use admin account to update parameters by sending transactio
 | rate_change_limit | the limit for exchange rate changes from Token to rToken <br/ >optional|
 | new_admin | transfer admin role to new address <br/> optional|
 
-### Step2. Run ICQ relay service
-<a href="icq_relay.html" target="_blank">Follow our doc to run ICQ relay service</a>
+### Step3. Run ICQ relay service
+<a href="../icq_relay/" target="_blank">Follow our doc to run ICQ relay service</a>
 
-### Step3. Run relay service
+### Step4. Run LSD relay service
 
 #### Install Build Tools
 
@@ -205,7 +209,7 @@ INFO[2024-02-23T12:02:36+08:00] start handlers
 INFO[2024-02-23T12:02:36+08:00] success                                       action=NewEraUpdate newEra=84 pool=cosmos1hvuhdvwnsuj487xdcsv4yntn3hlxsmlmp602z4jkq95c20fsp3cshuzjhg targetEra=4647 txHash=010C675FFB313F7FD8B986D1A49688D510C61E9F3D804F4D2D5FF94AFCD13447
 ```
 
-### Step4. Deploy your own LSD App
+### Step5. Deploy your own LSD App
 <a href="app.html" target="_blank">Follow our doc to deploy your own LSD App</a>
 
 ### Optional Steps: Enable Cross-Chain Token Transfers
@@ -215,7 +219,7 @@ After deploying your Cosmos LSD stack, you might want to enable cross-chain tran
 To set up cross-chain token transfers:
 1. Check out our [Neutron Token ICS20 guide](../modules/neutron_token_ics20) for detailed instructions
 2. Learn how to deploy the CW20-ICS20 contract
-3. Configure IBC channels and token allowlists
+3. Run and config your own IBC Relayers with channels and your token in allowlists
 4. Enable secure cross-chain token transfers for your LSD tokens
 
 ## Native CosmWasm LSD Stack

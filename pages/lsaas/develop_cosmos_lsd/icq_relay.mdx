@@ -149,3 +149,5 @@ RELAYER_IGNORE_ERRORS_REGEX=(execute wasm contract failed|failed to build tx que
 ```bash
 docker run --env-file .env-test  -v /home/neutron/keys:/keyring -p 9999:9999 neutron-org/neutron-query-relayer
 ```
+
+**Tip:** ICQ relay service might not report errors, so if you encounter any issues, try restarting the service first.
