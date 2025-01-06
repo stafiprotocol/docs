@@ -3,5 +3,5 @@ export default{
   contract:"Contract",
   relay:"Relay",
   app:"Stake App",
-  deploy:"Deloy",
+  deploy:"Deploy",
 }

@@ -6,5 +6,5 @@ export default{
   ejector:"Ejector",
   ethlsdapp:"Stake App",
   ethlsd_validator_app:"Validator App",
-  deploy:"Deloy",
+  deploy:"Deploy",
 }
