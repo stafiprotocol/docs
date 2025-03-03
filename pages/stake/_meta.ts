@@ -49,6 +49,7 @@ export default{
   },
   proposal: "Proposal",
   treasury: "Treasury",
+  subdao: "SubDAOs",
   "-- Security": {
     type: "separator",
     title: "Security"
