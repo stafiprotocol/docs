@@ -1,0 +1,147 @@
+---
+title: Contract
+---
+
+# Contract
+
+The stack for ULST consists of four contracts: 1. LsdNetworkFactory, an utility contract which deploys project contracts by a single call; 2. LsdToken, an ERC20-compatible token which represents users' receipt of their staking; 3. StakePool, delegates stablecoin assets to Ondo Finance for RWA token subscription; 4. StakeManager, manages project internal and external states and interacts with users.
+
+The ULST system integrates with Real World Assets (RWA) through Ondo Finance, enabling users to deposit stablecoins and receive liquid staking derivative tokens that generate yield through RWA investments.
+
+## LsdNetworkFactory.sol
+
+The `LsdNetworkFactory` is a utility contract that simplifies the deployment of new LSD networks. Instead of manually deploying multiple contracts, you can use the factory to create a complete LSD network with a single transaction.
+
+Network Contracts Structure
+
+```solidity
+struct NetworkContracts {
+    address _stakeManager;
+    address _stakePool;
+    address _lsdToken;
+    uint256 _block;
+}
+```
+
+Events
+
+```solidity
+event LsdNetwork(NetworkContracts contracts);
+```
+
+### createLsdNetwork()
+
+Creates a new LSD network with immediate admin control.
+
+```solidity
+function createLsdNetwork(
+    string memory _lsdTokenName,
+    string memory _lsdTokenSymbol,
+    address _govInstantManagerAddress,
+    address _govOracleAddress,
+    address[] memory _stablecoins
+) external
+```
+
+**Parameters:**
+- `_lsdTokenName` - Name of the LSD token (e.g., "StaFi rULST")
+- `_lsdTokenSymbol` - Symbol of the LSD token (e.g., "rULST")
+- `_govInstantManagerAddress` - Ondo Instant Manager contract address for RWA operations
+- `_govOracleAddress` - Ondo Oracle contract address for RWA price feeds
+- `_stablecoins` - Array of supported stablecoin addresses (USDC, PYUSD, etc.)
+
+### createLsdNetworkWithTimelock()
+
+Creates a new LSD network with timelock governance for enhanced security.
+
+```solidity
+function createLsdNetworkWithTimelock(
+    string memory _lsdTokenName,
+    string memory _lsdTokenSymbol,
+    address _govInstantManagerAddress,
+    address _govOracleAddress,
+    address[] memory _stablecoins,
+    uint256 minDelay,
+    address[] memory proposers
+) external
+```
+
+**Additional Parameters:**
+- `minDelay` - Minimum delay for timelock operations (in seconds)
+- `proposers` - Array of addresses who can submit timelock proposals
+
+## StakeManager.sol
+
+The `StakeManager` is the main orchestration contract that manages the entire staking lifecycle and coordinates between users and the underlying RWA protocols.
+
+### Stakers methods
+
+`stake`: Allows users to deposit stablecoins and receive LSD tokens.
+
+- `stablecoin` - Address of the stablecoin to stake (USDC, PYUSD)
+- `amount` - Amount of stablecoin to stake
+
+```solidity
+function stake(address _stablecoin, uint256 _amount)
+```
+
+`unstake`: Allows users to initiate unstaking by burning LSD tokens.
+
+- `_stablecoin` - Address of the stablecoin to unstake (USDC, PYUSD)
+- `_lsdTokenAmount` - Amount of LSD tokens to unstake
+
+```solidity
+function unstake(address _stablecoin, uint256 _lsdTokenAmount)
+```
+
+
+`withdraw`: Allows users to withdraw stablecoins after the unbonding period.
+
+```solidity
+function withdraw() external
+```
+
+### Administrative methods
+
+- `addStablecoin` - Add a new supported stablecoin to the system
+- `rmStablecoin` - Remove a stablecoin from the supported list
+- `setIsUnstakePaused` - Pause or resume unstaking operations
+- `addStakePool` - Add a new stake pool to the network
+- `withdrawProtocolFee` - Withdraw accumulated protocol fees
+
+### Parameters adjustment methods
+
+- `setProtocolFeeCommission` - Set the protocol fee rate for reward distribution
+- `setFactoryFeeCommission` - Set the factory fee rate for protocol fees
+- `setEraParams` - Configure era duration and timing parameters
+- `setRateChangeLimit` - Set maximum allowed exchange rate change per era
+- `setMinStakeAmount` - Set minimum stake amount threshold
+- `setUnbondingDuration` - Set unbonding period duration in eras
+- `setUnstakeFee` - Set fee rate for unstaking operations
+
+
+### Era Method
+
+Triggers era progression and processes pending operations. This is a permissionless function that can be called by anyone once sufficient time has elapsed.
+
+The `newEra()` function executes a multi-phase pipeline that processes all bonded pools in the network:
+
+1. Era Validation: Calculates next era number and validates sufficient time has passed
+2. Delegation Processing: Delegates accumulated stablecoins to Ondo Finance for RWA token subscription
+3. Undelegation Processing: Redeems RWA tokens back to stablecoins for pending withdrawals
+4. Reward Calculation: Calculates rewards from RWA token appreciation
+5. Rate Updates: Updates exchange rates based on total RWA value vs LSD supply
+6. Protocol Fee Distribution: Distributes protocol fees from newly earned rewards
+
+**Rate Calculation:**
+```
+if (totalLst == 0 || totalActive < totalLst):
+    return 1e18
+else:
+    calRate = (totalActive * 1e18) / totalLst
+```
+
+**Events Emitted:**
+- `ExecuteNewEra(uint256 indexed era, uint256 rate)` - Era transition and new exchange rate
+- `NewReward(address poolAddress, uint256 newReward)` - Rewards earned by each pool
+- `GovRedeemFee(address pool, address stablecoin, uint256 amount)` - Ondo redemption fees

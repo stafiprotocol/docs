@@ -1,0 +1,82 @@
+---
+title: Stablecoin LST Architecture
+---
+
+# ULST (USD Liquid Staking Token) Architecture
+
+## Overview
+
+The ULST (USD Liquid Staking Token) system is a multi-network liquid staking protocol that enables users to deposit stablecoins (USDC, PYUSD, etc) and receive liquid staking derivative tokens (LSD tokens) in return. The system generates yield by integrating with Ondo Finance's Real World Asset (RWA) protocols, where deposited stablecoins are used to subscribe to yield-bearing RWA tokens.
+
+The ULST system uses an era-based state machine to batch operations, ensuring efficient multi-user processing and clear state boundaries. It supports multiple independent networks through a factory pattern, enabling isolated deployments with independent governance.
+
+## System Architecture
+
+The ULST system implements a multi-network liquid staking protocol where:
+
+1. Users deposit stablecoins through the `StakeManager` and receive LSD tokens at the current exchange rate
+2. Funds are delegated to Ondo via the `StakePool`, which subscribes to RWA tokens
+3. Exchange rates update through `newEra` method to reflect accrued rewards
+4. Users can unstake to initiate withdrawal, subject to an unbonding period
+5. Multiple independent networks can be deployed using the `LsdNetworkFactory`
+
+## User Flows
+
+### Staking Flow
+
+1. User deposits stablecoins to the StakeManager contract
+2. StakeManager calculates LSD amount based on current exchange rate:
+   ```
+   lstAmount = stakingAmount * (1e18 / currentRate)
+   ```
+3. LSD tokens are minted to the user's address
+4. Stablecoins are transferred to StakePool for custody
+5. Funds are queued for delegation to Ondo RWA protocols
+
+
+### Unstaking Flow
+
+1. User initiates unstake by calling unstake function with LSD amount
+2. LSD tokens are burned from user's balance
+3. Unstake request is queued in the unbonding system
+4. Request waits for unbonding period (configurable number of eras)
+5. After unbonding period, user can withdraw stablecoins
+
+
+### Withdrawal Flow
+
+1. User calls withdraw after unbonding period expires
+2. System checks if sufficient stablecoins are available in pool
+3. If available: Stablecoins are transferred immediately to user
+4. If insufficient: RWA tokens are redeemed from Ondo to fulfill withdrawal
+
+
+## Era Management
+
+The ULST system uses an era-based state machine for efficient batch processing:
+
+### Era Progression
+
+- Era Duration: Configurable time period (default: 1 day)
+- Era Progression: Triggered by `newEra()` function calls
+- Batch Operations: All pending operations are processed during era transitions
+
+### Era Operations
+
+During each era progression:
+
+1. Process pending delegations - Convert queued stablecoins to RWA tokens
+2. Process pending undelegations - Convert RWA tokens back to stablecoins
+3. Update exchange rates - Calculate new rates based on RWA performance
+4. Distribute rewards - Allocate yield to users, protocol, and fees
+5. Process unbonding - Move eligible unstake requests to withdrawable state
+
+## Ondo Protocol Integration
+
+The ULST system integrates with Ondo Finance through well-defined interfaces:
+
+### Critical External Calls
+
+- `IOndoInstantManager.subscribe(stablecoin, amount, minimumDepositAmount)` - Convert stablecoin to RWA
+- `IOndoInstantManager.redeem(rwaToken, amount, minimumRedemptionAmount)` - Convert RWA to stablecoin  
+- `IOndoOracle.getAssetPrice(asset)` - Get current RWA/USD price for rate calculations

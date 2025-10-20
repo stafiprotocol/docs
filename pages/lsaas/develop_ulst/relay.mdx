@@ -1,0 +1,92 @@
+# ULST Relay Service
+
+Given the limitation of smart contracts, they are not self-executing, and require an external force to trigger their functions. Relay is a service to drive the network to properly process its own internal states, such as dealing with delegating, undelegating, distributing rewards and calculating the rate between LST and StakingToken. We introduce era concept to define how often the smart contract should be called. Most of the time, an era is 24 hours long.
+
+Security is the our first priority when developing Stack, We are thrilled to say that the new era process is permissionless, showcasing the decentralized nature of the StaFi EVM LSD Stack, allowing anyone to trigger the beginning of a new era.
+
+## Install Build Tools
+
+Install `make`, `gcc` and `git`
+
+```bash
+sudo apt update
+sudo apt install -y make gcc git build-essential
+```
+
+Install `go` by following the [official docs](https://golang.org/doc/install). Remember to set your `$PATH` environment variable, for example:
+
+```bash
+cd $HOME
+wget -O go1.23.12.linux-amd64.tar.gz https://go.dev/dl/go1.23.12.linux-amd64.tar.gz
+rm -rf /usr/local/go && tar -C /usr/local -xzf go1.23.12.linux-amd64.tar.gz && rm go1.23.12.linux-amd64.tar.gz
+echo 'export GOROOT=/usr/local/go' >> $HOME/.bashrc
+echo 'export GOPATH=$HOME/go' >> $HOME/.bashrc
+echo 'export GO111MODULE=on' >> $HOME/.bashrc
+echo 'export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin' >> $HOME/.bashrc && . $HOME/.bashrc
+go version
+```
+
+## Install relay service
+
+```bash
+$ git clone https://github.com/stafiprotocol/ulst-relay.git
+$ cd ulst-relay
+$ make install
+```
+
+## Add or Import account
+
+You can import an exist account
+
+```bash
+$ ulst-relay import-account 
+config home: /home/ubuntu/.stafi/ulst
+keystore path: /home/ubuntu/.stafi/ulst/keystore
+Enter private key:
+> 
+password for key:
+> 
+INFO[2025-10-18T18:24:35+08:00] key imported                                  address=0xa9b8af5C53E6282fB469297091A33B08B5AC40B7 file=/home/ubuntu/.stafi/ulst/keystore/0xa9b8af5C53E6282fB469297091A33B08B5AC40B7.key
+```
+
+or you can create a new account
+
+```bash
+$ ulst-relay add-account 
+config home: /home/ubuntu/.stafi/ulst
+keystore path: /home/ubuntu/.stafi/ulst/keystore
+password for key:
+> 
+INFO[2025-10-18T18:25:55+08:00] key added                                     address=0x05E76e817E25472C4B6F61F1df3588947eB31B76 file=/home/ubuntu/.stafi/ulst/keystore/0x05E76e817E25472C4B6F61F1df3588947eB31B76.key
+```
+
+⚠️Please make sure the account have enough gas funds, since relay will send transactions to StakeManager contract periodically.
+
+## Start relay services
+
+```bash
+$ ulst-relay start \
+  --account 0xa9b8af5C53E6282fB469297091A33B08B5AC40B7 \
+  --endpoint 'http://127.0.0.1:8545' \
+  --stake_manager 0x64C2E857d478882B2A39eDc447b652438E96bCB8
+
+config home: /home/ubuntu/.stafi/ulst
+log level: info
+all logs are output in the /home/ubuntu/.stafi/ulst/log_data directory
+INFO[2025-10-18T18:28:08+08:00] cfg {StakeMangerAddress:0x00e5435f50F9541Df435C187159877b1aB9fCbE8 RpcEndpoint:http://localhost:8545 Account:0xa9b8af5C53E6282fB469297091A33B08B5AC40B7 GasLimit:2000000 MaxGasPrice:600000000000 LogFilePath:/home/ubuntu/.stafi/ulst/log_data KeystorePath:/home/ubuntu/.stafi/ulst/keystore} 
+Enter password for key /home/ubuntu/.stafi/ulst/keystore/0xa9b8af5C53E6282fB469297091A33B08B5AC40B7.key:
+> 
+INFO[2025-10-18T18:28:12+08:00] task starting... 
+```
+
+## Options
+
+| option | description | example value |
+| --- | --- | --- |
+| account | the account that has been added or imported | 0xa9b8af5C53E6282fB469297091A33B08B5AC40B7 |
+| endpoint | RPC endpoint of the chain | http://127.0.0.1:8545 |
+| stake_manager | the address of StakeManager contract | 0x64C2E857d478882B2A39eDc447b652438E96bCB8 |
+| home | Home path (default "$HOME/.stafi/ulst") |  |
+| gas_limit | Gas limit (default "2000000") |  |
+| max_gas_price | Max gas price (default "600000000000") |  |
+| log_level | The logging level (trace\|debug\|info\|warn\|error\|fatal\|panic) |  info |

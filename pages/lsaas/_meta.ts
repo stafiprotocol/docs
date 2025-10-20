@@ -21,6 +21,7 @@ export default{
   architecture_cosmos_lsd:"Cosmos LSD",
   architecture_solana_lsd:"Solana LSD",
   architecture_ton_lsd:"Ton LSD",
+  architecture_ulst:"Stablecoin LSD",
   "-- develop": {
     type: "separator",
     title: "Develop"
@@ -32,6 +33,7 @@ export default{
   develop_cosmos_lsd:"Cosmos LSD",
   develop_sol_lsd:"Solana LSD",
   develop_ton_lsd:"Ton LSD",
+  develop_ulst:"Stablecoin LSD",
   modules:"Modules",
   hackathon:"Hackathon",
   "-- security": {

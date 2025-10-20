@@ -1,0 +1,51 @@
+# How to deploy an ULST stack
+
+This guide provides a step-by-step script to deploy an ULST project, without deep understanding of contracts and services. Read the documentation for comprehensive understandings of these components.
+
+## Step1. Deploy your LSD network contracts
+
+61 Lab have made [StaFi LSaaS](https://stack-app.stafi.io/) for project parties to deploy their LSD network contracts. Click ULST icon to deploy your ULST network.
+
+![](/image/ulst/stack-app-homepage.png "Stack App Homepage")
+
+## Parameter Tips
+
+Owner Address: sets the owner of the LSD network being created.
+
+Owner Permissions:
+- Upgrade contracts
+- Adjust commission fee
+- Adjust duration of era
+- Pause or unpause unstake operation
+- Manage stablecoins
+
+Stable Coins: Stablecoins the network will support. You can add or remove stablecoin via StakeManager contract later with Owner permission.
+
+- USDC
+- PYUSD
+
+## Rewards Distribution
+
+Rewards distribution is crucial to project parties. Commission fee of users is set default as 10% and StaFi Stack fee is 10% of the project income. for example, if `100Token` rewards received from the chain, the distribution will be:
+
+| Role | Amount(Token) | Formula |
+|---------------|--------|-------|
+|  Users        |  90 | 100*(1-0.1)  |
+|  Project      |  9  | (100-90)*(1-0.1)  |
+|  StaFi Stack  |  1  | 100-90-9  |
+
+## Save all the information generated
+
+The LSD network has a set of smart contracts, so you should save all the information which you will interact frequently with, such as LSD App, and Relay service.
+
+- LSD Network Factory address
+- Owner address
+- LSD Token address
+- Stake Manager address
+- Stake Pool address
+
+## Step2. Run relay service
+[Follow this doc to run relay service](./relay/)
+
+## Step3. Deploy your own LSD App
+[Follow this doc to deploy your own LSD App](./app/)
