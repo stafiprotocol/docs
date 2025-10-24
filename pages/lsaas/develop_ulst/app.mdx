@@ -2,4 +2,174 @@
 title: Stake App
 ---
 
-TBD
+ULST App is a user interface where users can stake, unstake and get latest information about the project. As a convention in web3 all API users interact with are directly from the RPC configured in wallet, so the app is a pure DApp.
+
+![ULST App Homepage](/image/ulst/ulst_app_homepage.png 'ULST APP Homepage')
+
+## Build your own LSD App
+
+### Setup Node.js env
+
+1. Fork [code on GitHub](https://github.com/stafiprotocol/ulst-app)
+1. Install [Node.js >=v16](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs)
+1. Install yarn via npm: `npm install --global yarn`
+1. Enter project root directory then install all dependencies via terminal: `yarn`
+1. Start app by: `yarn dev`
+
+### Configure your app
+
+> In normal case you do not need update ABI files, but if you modify the contracts then you probably want to update abi files which are in `config/abi` folder.
+
+- Change branding links and text here: `config/appConf/app.json`
+
+```json
+// here are some config examples in app.json
+{
+  "appTitle": "ULST App",
+  "token": {
+    "lsdTokenName": "rUSD",
+    "lsdTokenDecimals": 6,
+    "supportChains": ["Ethereum"],
+    "tokenStandard": "ERC20",
+    "tokenChainName": "Ethereum",
+    "tokenImg": "/images/token/token.svg",
+    "lsdTokenImg": "/images/token/lsdToken.svg",
+    "chainImg": "/images/bsc_chain.svg"
+  },
+  "unstake": {
+    "lockTipLink": "https://docs.stafi.io"
+  },
+  "apr": 5,
+  "needRelayFee": false,
+  "detailedInfo": {
+    "audit": {
+      "nameList": ["Blocksec"],
+      "link": "https://github.com/stafiprotocol/security/tree/main/audits/202306_BlockSec_StaFi-BNBStaking"
+    },
+    "listedIns": [
+      {
+        "name": "CoinGecko",
+        "link": "https://www.coingecko.com/en/coins/stafi-staked-bnb"
+      },
+      {
+        "name": "CoinMarketCap",
+        "link": "https://coinmarketcap.com/currencies/stafi-staked-bnb/"
+      }
+    ]
+  },
+  "auditList": [
+    {
+      "name": "BlockSec",
+      "icon": "/images/audit/block_sec.svg",
+      "iconDark": "/images/audit/block_sec_dark.svg"
+    }
+  ],
+  "faqList": [
+    {
+      "title": "What are the factors that affect the staking rewards?",
+      "contents": [
+        {
+          "type": "text",
+          "content": "Reward normally is updated every 24 hours.\n"
+        },
+        {
+          "type": "text",
+          "content": "rUSD liquid staking rewards are mainly decided by the staking APR, delegation strategy and the original validator's slash risks."
+        }
+      ]
+    },
+    {
+      "title": "How to calculate rUSD exchange rate?",
+      "contents": [
+        {
+          "type": "text",
+          "content": "rUSD exchange rate is recording how many USDCs could be unstaked with 1 rUSD token. It will start from 1 and gradually increase along with the staking rewards generated continuously.\n"
+        },
+        {
+          "type": "link",
+          "content": "Check more details",
+          "link": "https://docs.stafi.io/stake/rtoken/#rtoken-exchange-rate"
+        }
+      ]
+    }
+  ],
+  "externalLinkList": [
+    {
+      "name": "Docs",
+      "link": "https://docs.stafi.io"
+    },
+    {
+      "name": "Website",
+      "link": "https://www.stafi.io"
+    },
+    {
+      "name": "rUSD Listing",
+      "link": "https://docs.stafi.io/"
+    }
+  ],
+  "contactList": [
+    {
+      "type": "Twitter",
+      "link": "https://twitter.com/Stafi_Protocol"
+    },
+    {
+      "type": "Medium",
+      "link": "https://stafi-protocol.medium.com/"
+    },
+    {
+      "type": "Discord",
+      "link": "https://discord.com/invite/jB77etn"
+    },
+    {
+      "type": "Telegram",
+      "link": "https://t.me/stafi_protocol"
+    }
+  ],
+  "ethPriceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd"
+}
+```
+
+- Set your network contract address on Sepolia here: `config/appConf/dev.json`
+- Set your network contract address on Mainnet here: `config/appConf/prod.json`
+
+```json
+// config structures are identical in dev.json and prod.json
+// dev.json will be used when you build with `yarn build:dev`
+// prod.json will be used when you build with 'yarn build`
+{
+	"chain": {
+		"id": 11155111,
+		"name": "Ethereum Sepolia"
+	},
+	"rpc": "https://ethereum-sepolia-rpc.publicnode.com",
+	"explorer": "https://sepolia.etherscan.io",
+	"contracts": {
+		"lsdFactory": "0xba2ae6c8cddd628a087d7e43c1ba9844c5bf9638",
+		"lsdToken": "0x61ce3dDE69BB4Ae8fcfBAac80d61be63cE71D15e",
+		"stakeManager": "0xab71BbE2a2417687E6F2205a67edFA86f090111a",
+		"stakePool": "0xdb32F01a52cC5DEbE5859D9BBC5810469A88Fd40"
+	},
+	"stableCoins": [
+		{
+			"name": "USDC",
+			"address": "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238",
+			"icon": "/images/token/usdc.svg",
+			"decimals": 6
+		},
+		{
+			"name": "PYUSD",
+			"address": "0xCaC524BcA292aaade2DF8A05cC58F0a65B1B3bB9",
+			"icon": "/images/token/usdt.svg",
+			"decimals": 6
+		}
+	]
+}
+```
+
+### Customize Theme
+
+You can change color config in `tailwind.config.js`, each color has light & dark versions(i.e text1 & text1Dark).
+
+### Build and deploy
+
+Run `yarn build` or `yarn build:dev` to build your app, the static files will be placed in `out` folder. Upload those files to any static web hosting services you like.
