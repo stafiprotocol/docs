@@ -7,15 +7,21 @@ StaFi has taken the rSEI service offline. No further rewards will be distributed
 
 Stakers should unstake and withdraw their assets via the Sei Explorer by following these steps:
 
-Step 1: Approve
+Step 1: Query your rSEI balance
+1. Go to https://seitrace.com/address/0x9222E4A112F160e1356e4060Aa3f75419148c3C9
+2. Click "Contract" -> "Read Contract"
+3. Call `balanceOf` with:
+    - account: your account address
+
+Step 2: Approve
 1. Go to https://seitrace.com/address/0x9222E4A112F160e1356e4060Aa3f75419148c3C9
 2. Click "Contract" -> "Write Contract"
 3. Connect wallect
 4. Call `increaseAllowance` with:
     - Spender: 0xC0ff0082B0F88da6A7eDee172311C460D35090f0
-    - Amount: the total amount of rSEI you hold *(remember to multiply by 10¹⁸)*
+    - Amount: your rSEI balance
 
-Step 2: Unstake and Withdraw 
+Step 3: Unstake and Withdraw 
 1. Go to https://seitrace.com/address/0xC0ff0082B0F88da6A7eDee172311C460D35090f0
 2. Click "Contract" -> "Write Proxy"
 3. Connect wallect
