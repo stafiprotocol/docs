@@ -1,131 +1,24 @@
 # Staking SEI with StaFi
 
-This document is intended for users and developers who want to learn more about StaFi Staked SEI and how to stake SEI using StaFi.
-
 import { Callout } from 'nextra/components'
-import { Steps } from 'nextra/components'
 
-## Introduction
+<Callout type="error">
+StaFi has taken the rSEI service offline. No further rewards will be distributed.
 
-rSEI is the first LST based on EVM in the SEI eco. Developed by StaFi LSaaS Stack, rSEI addresses the challenge of balancing mainnet security and token liquidity within SEI.
+Stakers should unstake and withdraw their assets via the Sei Explorer by following these steps:
 
-## How to stake SEI with StaFi
+Step 1: Approve
+1. Go to https://seitrace.com/address/0x9222E4A112F160e1356e4060Aa3f75419148c3C9
+2. Click "Contract" -> "Write Contract"
+3. Connect wallect
+4. Call `increaseAllowance` with:
+    - Spender: 0xC0ff0082B0F88da6A7eDee172311C460D35090f0
+    - Amount: the total amount of rSEI you hold *(remember to multiply by 10¹⁸)*
 
-### Required Wallet
-
-**EVM Wallet**
-
-- Download Metamask from the [Metamask Website](https://metamask.io/).
-- Once installed, follow the instructions to import an existing wallet or create a new one.
-
-### Linking Sei and EVM / 0x Addresses
-
-<Callout type="warning" emoji="🚧">
-Make sure your SEI token is in the EVM address before staking SEI with StaFi. If not, please follow this guide to link Sei and EVM / 0x addresses.
+Step 2: Unstake and Withdraw 
+1. Go to https://seitrace.com/address/0xC0ff0082B0F88da6A7eDee172311C460D35090f0
+2. Click "Contract" -> "Write Proxy"
+3. Connect wallect
+4. Call the `unstakeAndWithdrawAll` method
+5. Your asset will be transferred to your wallet instantly
 </Callout>
-
-- Navigate to [https://app.sei.io](https://app.sei.io/) and connect to your Metamask wallet.
-
-- Click “Link Addresses” after completing captcha.
-
-![StaFi Stake SEI](/image/linksei.png)
-
-- Sign a message from your Metamask wallet.
-
-- Your addresses is linked as shown in the following picture.
-
-![StaFi Stake SEI](/image/linksei_2.png)
-
-- Transfer SEI token to the linked Sei address, then you can stake SEI on StaFi rSEI App.
-
-![StaFi Stake SEI](/image/linksei_3.png)
-
-<Steps>
-
-### Go to staking page
-
-Visit the [rToken App](https://app.stafi.io/gallery/all) and click the "Stake" button.
-
-![StaFi Stake SEI](/image/stakesei_1.png)
-
-### Connect wallet
-
-Click on the “Connect Wallet” button to connect your Metamask wallet.
-
-![StaFi Stake SEI](/image/stakesei_2.png)
-
-### Input staking amount
-
-Enter the amount of SEI you would like to stake. Review the amount of rSEI you will receive and the Annual Percentage Rate (APR) for staking. Click the "Stake" button to proceed.
-
-![StaFi Stake SEI](/image/stakesei_3.png)
-
-### Confirm transaction and await for confirmations
-
-Upon clicking “Stake”, you will be redirected to your Metamask wallet. Confirm the transaction details, including gas fees. To proceed, click on the "Confirm" button to sign the transaction. Wait for the transaction to be confirmed and the staking operation to be completed successfully.
-
-![StaFi Stake SEI](/image/stakesei_4.png)
-
-### Add rSEI to your wallet
-
-Navigate to the [rSEI Dashboard](http://app.stafi.io/gallery/evm/SEI/?net=SEI) and click on the "Add rSEI to Wallet" button. A Metamask prompt will appear, select "Add token" to include rSEI in your wallet.
-
-![StaFi Stake SEI](/image/stakesei_5.png)
-
-### Track rewards
-
-Monitor your staked SEI and its rewards by visiting your [Profile](https://app.stafi.io/profile/evm?net=ERC20).
-
-![StaFi Stake SEI](/image/stakesei_6.png)
-
-</Steps>
-
-## The rSEI Token
-
-rSEI Token Contract Address: [0x9222E4A112F160e1356e4060Aa3f75419148c3C9](https://seitrace.com/address/0x9222E4A112F160e1356e4060Aa3f75419148c3C9)
-
-Additionally, rSEI holders can participate in liquidity mining in the near future. To learn more about this opportunity, please [visit this page](https://app.stafi.io/pool/all/).
-
-## Commission Fee
-
-10% of SEI staking rewards will be allocated to StaFi DAO.
-
-## Unstake
-
-<Steps>
-
-### Go to SEI unstaking page
-
-Visit the [SEI unstaking page](https://app.stafi.io/gallery/evm/SEI/?net=SEI&tab=unstake), and proceed by clicking on the "Unstake" tab.
-
-![StaFi Stake SEI](/image/unstakesei_1.png)
-
-### Input unstaking amount
-
-Enter the desired amount of rSEI you would like to unstake, and proceed by clicking on the "Unstake" button.
-
-![StaFi Stake SEI](/image/unstakesei_2.png)
-
-### Confirm transaction and wait for confirmations
-
-After clicking "Unstake," you will be redirected to your Metamask wallet. Confirm the spending cap of SEI and approve it.
-
-Once confirmed, a second transaction pop-up for staking will appear. Confirm the transaction details, including gas fees. Click the "Confirm" button to sign the transaction.
-
-Wait for the transaction to be confirmed and the unstaking process to be completed successfully.
-
-<Callout type="warning" emoji="🚧">
-Unbonding rSEI takes 22 days before it can be withdrawn.
-</Callout>
-
-![StaFi Stake SEI](/image/unstakesei_3.png)
-
-### Withdraw
-
-rSEI will need to be manually withdrawn from the Withdraw Tab on the rSEI Dashboard once the unbonding period has ended. Click on “Withdraw” button to proceed.
-
-### Receive tokens
-
-Verify the transaction and the associated Gas fees on your Metamask Wallet. To proceed, click on the "Confirm" button to sign the transaction. Upon confirmation of the transaction, SEI tokens will be withdrawn and sent to your wallet.
-
-</Steps>
