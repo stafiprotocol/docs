@@ -24,9 +24,6 @@ export default{
   stakingbnb: "Staking BNB with StaFi",
   stakingsei: "Staking SEI with StaFi",
   stakingatom: "Staking ATOM with StaFi",
-  stakingiris: "Staking IRIS with StaFi",
-  stakingswth: "Staking SWTH with StaFi",
-  stakinghuahua: "Staking HUAHUA with StaFi",
   stakingsol: "Staking SOL with StaFi",
   "-- Validator": {
     "type": "separator",
