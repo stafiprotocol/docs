@@ -21,6 +21,7 @@ export default{
   stakingfis: "Staking FIS with StaFi",
   stakingeth: "Staking ETH with StaFi",
   stakingusdt: "Staking USDT With StaFi",
+  stakingmon: "Staking MON With StaFi",
   stakingmatic: "Staking POL(ex-MATIC) with StaFi",
   stakingbnb: "Staking BNB with StaFi",
   stakingsei: "Staking SEI with StaFi",
