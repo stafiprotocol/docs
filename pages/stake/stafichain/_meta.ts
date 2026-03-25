@@ -3,5 +3,5 @@ export default {
   "tokenomics":"Tokenomics V1",
   "polkajs":"Polka JS Library",
   "account":"Account",
-  "nomination":"Nomination"
+  "nomination":"Nomination",
 }

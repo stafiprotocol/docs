@@ -3,6 +3,7 @@ export default{
   tokenomics: "Tokenomics",
   rtoken: "rToken",
   fistoken: "FIS Token",
+  "migrate-fis-ethereum": "FIS Token Migration - ERC20",
   product: "Product",
   "-- Chain": {
     type: "separator",
