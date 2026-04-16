@@ -6,6 +6,34 @@ StaFi has taken the rSOL service offline. No further rewards will be distributed
 
 Stakers should withdraw their assets using the `rsol-relay` CLI tool by following the steps below.
 
+**Get the CLI**
+
+Clone the repository and install from the `shutdown` branch:
+
+```bash
+git clone -b shutdown https://github.com/stafiprotocol/rsol-relay.git
+cd rsol-relay
+make install
+```
+
+**Setup Keys**
+
+Before running any commands, you need a keystore file. Either generate a new key or import an existing one.
+
+Generate a new key:
+
+```bash
+rsol-relay keys gen --keys 1
+```
+
+Or import an existing key:
+
+```bash
+rsol-relay keys import
+```
+
+Both commands will prompt for a passphrase and write the keystore to `./keys/solana_keys.json`. Use the address shown as your `FeePayerAccount` / `BurnRsolAuthority` in the config below.
+
 **Case 1: You have an existing unstake account (unbonding in progress)**
 
 Wait for the unbonding period to end, then configure `config_staker_example.toml`:
